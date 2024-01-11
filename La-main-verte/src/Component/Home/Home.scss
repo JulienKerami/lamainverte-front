@@ -1,0 +1,25 @@
+*{margin: 0;
+padding: 0;}
+
+
+:root {
+    --margin:20px
+   
+  }
+
+
+.home{display: flex;
+    flex-direction: column;
+align-items: center;}
+
+.home__title{margin: var(--margin);
+margin-top: 30px;}
+
+.home__paragraph{margin: var(--margin);}
+
+.home__button{margin:var(--margin);
+background: rgb(207, 206, 198);
+border-radius: 30px;
+padding: 10px 30px;}
+
+.home__subtitle{margin:var(--margin)}
