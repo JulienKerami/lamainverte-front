@@ -37,7 +37,7 @@ function Signin(props) {
 
   const handleSubmit = async (e) => {
 
-    setFirstNameError(false)
+        setFirstNameError(false)
           setLastNameError(false)
           setEmailError(false)
           setPassword1Error(false)
@@ -62,12 +62,12 @@ function Signin(props) {
 
     const NameRegex = /^[A-Z][-a-zA-Z]+$/
 
-    const PasswordRegEx = /^(?=.[A-Z])(?=.\d).{8,}$/;
+    // const PasswordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
+   
 
 
 
-
-    // const PasswordRegEx = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+    const PasswordRegEx = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/gm;
       
 
 
@@ -83,14 +83,15 @@ function Signin(props) {
      if (NameRegex.test(e.target[1].value) === false) {
         console.log("false LastName")
        validation = false
-      }
+       setLastNameError(true)
+             }
   
-    
     
      if (EmailRegEx.test(e.target[2].value) === false) {
       
       console.log("false Email")
       validation = false
+      setEmailError(true)
      
     }
 
@@ -98,6 +99,7 @@ function Signin(props) {
     {
       console.log("password not strong enough");
       validation = false
+      setPassword1Error(true)
     }
 
 
@@ -105,6 +107,7 @@ function Signin(props) {
     {
       console.log("password not matching");
       validation = false
+      setPassword2Error(true)
     }
  
   
