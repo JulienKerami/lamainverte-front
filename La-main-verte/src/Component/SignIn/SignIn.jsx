@@ -55,19 +55,12 @@ function Signin(props) {
    
     //La regex permets d'utiliser une method nativ à nodeJS qui permets de verifier si certains caractères sont présent dans une chaîne de caractères.
 
-    //////////////////////////////////////////            REGEX   ///////////////////////////////////////////////
-
+      //REGEX  
     const EmailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
-
     const NameRegex = /^[A-Z][-a-zA-Z]+$/
-
-    // const PasswordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
-   
-
-
-
     const PasswordRegEx = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/gm;
       
+
 
     if (NameRegex.test(e.target[0].value) === false) {
       console.log("false firstName")
@@ -75,11 +68,11 @@ function Signin(props) {
       setFirstNameError(true)
     }
   
-     if (NameRegex.test(e.target[1].value) === false) {
+    if (NameRegex.test(e.target[1].value) === false) {
         console.log("false LastName")
        validation = false
        setLastNameError(true)
-       }
+     }
   
      if (EmailRegEx.test(e.target[2].value) === false) {
       
@@ -112,7 +105,6 @@ function Signin(props) {
       const user = await createUser(UserArray)
   }
    
-
     // if (user.request.status === 400) {
     //   alert(user.response.data)
     //   return
@@ -121,7 +113,7 @@ function Signin(props) {
     // alert(`Bienvenue ${UserArray.firstname}`)
   }
 
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
 
   return (
     <>
