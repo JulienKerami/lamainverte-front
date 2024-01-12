@@ -1,10 +1,8 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import Navbar from './Component/Navbar/Navbar'
 import Login from './Component/login/Login'
 import './App.css'
-import Signin from './Component/sign-up/SignIn'
+import SignIn from './Component/SignIn/SignIn'
 import Home from './Component/Home/Home'
 import {Routes, Route, Link, NavLink, Router} from 'react-router-dom'
 
@@ -19,7 +17,7 @@ function App() {
     <Navbar/>
     <Routes>
     
-      <Route path='/signin' element={<Signin/>}/>
+      <Route path='/signin' element={<SignIn/>}/>
       <Route path='/' element={<Home/>}/>
       <Route path='/login' element={<Login/>}/>
         
@@ -30,3 +28,4 @@ function App() {
 }
 
 export default App
+
