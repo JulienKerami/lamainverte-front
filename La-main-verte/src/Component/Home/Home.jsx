@@ -19,7 +19,7 @@ function Home(props) {
             Des semis à la récolte, la main verte vous aide à chaque étape
            </p>
 
-           <Link className='home__button'>Inscription</Link>
+           <Link to='/signin' className='home__button'>Inscription</Link>
 
            <h3 className='home__subtitle'>une to-do list personalisé</h3>
            <h3 className='home__subtitle'>une vue d'ensemble de votre potager</h3>
