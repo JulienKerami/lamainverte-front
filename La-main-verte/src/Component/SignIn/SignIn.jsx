@@ -10,7 +10,7 @@ function Signin(props) {
   let navigate = useNavigate()
   const [error, setError] = useState("")
   const [firstNameError, setFirstNameError] = useState(false)
-  const [LastNameError, setLastNameError] = useState(false)
+  const [lastNameError, setLastNameError] = useState(false)
   const [EmailError, setEmailError] = useState(false)
   const [Password1Error, setPassword1Error] = useState(false)
   const [Password2Error, setPassword2Error] = useState(false)
@@ -38,11 +38,11 @@ function Signin(props) {
   const handleSubmit = async (e) => {
 
     setFirstNameError(false)
-    setLastNameError(false)
-    setEmailError(false)
-    setPassword1Error(false)
-    setPassword2Error(false)
-    
+          setLastNameError(false)
+          setEmailError(false)
+          setPassword1Error(false)
+          setPassword2Error(false)
+
     let UserArray = {
       lastname: e.target[0].value,
       firstname: e.target[1].value,
@@ -131,6 +131,7 @@ function Signin(props) {
       <main className='Signin'>
 
         <form action="submit" onSubmit={(e) => {
+          
           e.preventDefault();
           handleSubmit(e)
         }}>
@@ -139,10 +140,13 @@ function Signin(props) {
           <input type="text" placeholder='Nom' />
           {firstNameError?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Veuillez rentrer un nom valide</span>:null}
           <input type="text" placeholder='Prénom' />
-
+          {lastNameError?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Veuillez rentrer un prénom valide</span>:null}
           <input type="text" placeholder='Email' />
+          {EmailError?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Veuillez rentrer un email valide</span>:null}
           <input type="password" placeholder='Mot de passe' />
+          {Password1Error?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Votre mot de passe n'est pas assez robuste</span>:null}
           <input type="password" placeholder='Confirmer mot de passe' />
+          {Password2Error?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Votre mot de passe ne correspond pas</span>:null}
           <button>Sign in</button>
         </form>
       </main>
