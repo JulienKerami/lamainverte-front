@@ -47,8 +47,7 @@ function Signin(props) {
       lastname: e.target[0].value,
       firstname: e.target[1].value,
       email: e.target[2].value,
-      password: e.target[3].value,
-      password2: e.target[4].value
+      password: e.target[3].value
     }
 
     let validation = true
@@ -70,23 +69,18 @@ function Signin(props) {
     const PasswordRegEx = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/gm;
       
 
-
- 
-
     if (NameRegex.test(e.target[0].value) === false) {
       console.log("false firstName")
       validation = false
       setFirstNameError(true)
     }
-   
   
      if (NameRegex.test(e.target[1].value) === false) {
         console.log("false LastName")
        validation = false
        setLastNameError(true)
-             }
+       }
   
-    
      if (EmailRegEx.test(e.target[2].value) === false) {
       
       console.log("false Email")
@@ -100,8 +94,8 @@ function Signin(props) {
       console.log("password not strong enough");
       validation = false
       setPassword1Error(true)
+     
     }
-
 
      if (!(e.target[3].value === e.target[4].value) )
     {
