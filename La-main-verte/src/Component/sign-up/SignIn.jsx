@@ -37,20 +37,18 @@ function Signin(props) {
         let UserArray = {
           lastname: e.target[0].value,
           firstname: e.target[1].value,
-          adress: e.target[2].value,
           email: e.target[3].value,
           password: e.target[4].value}
 
 
-     const EmailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+//La regex permets d'utiliser une method nativ a nodeJS qui permets de verifier si certains caractères sont présent dans une chaîne de caractères.
+   
+     const EmailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g         
        
-     
         if(EmailRegEx.test(e.target[3].value)=== false) {
             setEmailCheck(true)
         return}
-
         setEmailCheck(false)
-
         const user = await createUser(UserArray)
 
         if (user.request.status === 400) {
@@ -75,7 +73,7 @@ function Signin(props) {
               <input type="text" placeholder='Nom' />
               <span style={{margin:"0",padding:"0"}}></span>
               <input type="text" placeholder='Prénom' />
-              <input type="text" placeholder='adresse de livraison' />
+            
               <input type="text" placeholder='Email' />
               <input type="password" placeholder='Mot de passe'/>
               <input type="password" placeholder='Confirmer mot de passe'/>
