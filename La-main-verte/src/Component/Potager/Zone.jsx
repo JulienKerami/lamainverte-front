@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux'
 import  {addZone, editZone}  from '../store/slices/zonesSlice'
 import './Zone.scss';
@@ -10,10 +11,12 @@ function Zone(props{nom}) {
   const dispatch = useDispatch()
  
   // État pour stocker le nom actuel de la zone
+
     const [name, setName] = useState(props.nom);
 
     // État pour suivre si l'édition du nom est active ou non
     const [nameEdit, setNameEdit] = useState(false);
+
 
   // Fonction pour supprimer la zone
   const deleteZone = () => {
@@ -62,11 +65,16 @@ function Zone(props{nom}) {
   
   }, []);
 
-  // Rendu du composant
-  return (
-    <div className='zone'>
-      {/* Si l'édition est active, afficher le champ de saisie et le bouton d'enregistrement */}
-      {nameEdit ? (
+
+    // Effet secondaire (vide pour l'instant, peut contenir des nettoyages si nécessaire)
+    useEffect(() => {
+        return () => {
+            // Effectuer des nettoyages si nécessaire
+        };
+    }, []);
+
+    // Rendu du composant
+    return (
         <>
           <input
           className='EditName'
@@ -87,6 +95,10 @@ function Zone(props{nom}) {
       </button>
     </div>
   );
+
 }
 
 export default Zone;
+
+
+

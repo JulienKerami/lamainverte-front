@@ -1,4 +1,6 @@
+
 import { useState , useEffect} from 'react';
+
 import Zone from './Zone';
 import { zoneArray } from '../Data/data';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +15,7 @@ function Potager() {
   const addZone = () => {
     console.log('Une nouvelle zone a été ajoutée'); // Affiche un message dans la console (à des fins de débogage)
   };
+
 
 function Potager(props) {
     const [zones, setZone] = useState(zoneArray);
@@ -37,10 +40,14 @@ function Potager(props) {
      <>
     <h3 className='title'>Potager</h3>
 
+
+
       {/* Section pour afficher la liste des zones */}
       <section className='zone-container'>
         {/* Mapping à travers la liste des zones et rendu de chaque zone avec le composant Zone */}
+
         {zoneValue.map((zone, index) => (
+
           <Zone key={index} nom={zone.name} />
         ))}
       </section>
@@ -54,7 +61,9 @@ function Potager(props) {
       </section>
     </>
   );
-}}
+
+}
 
 // Export du composant Potager pour qu'il puisse être utilisé ailleurs dans l'application
-export default Potager
+export default Potager;
+
