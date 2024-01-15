@@ -39,9 +39,6 @@ function Potager(props) {
     <section className='zone-container'>
        <button className='zoneToAdd' onClick={()=> AddZoneHandle()}>+</button>  
     </section>
-
-
-
   </>
     )
 }
