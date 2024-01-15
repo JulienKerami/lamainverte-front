@@ -1,7 +1,14 @@
 import {useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import  {addZone, editZone}  from '../store/slices/zonesSlice'
 import './Zone.scss';
 
-function Zone() {
+function Zone({nom}) {
+
+ 
+  const zoneValue = useSelector((state)=> state.zones.value)
+  const dispatch = useDispatch()
+ 
   // État pour stocker le nom actuel de la zone
   const [name, setName] = useState("Jardin");
 
@@ -19,6 +26,7 @@ function Zone() {
   // Fonction pour activer l'édition du nom
   const changeName = () => {
     setNameEdit(true);
+    
   };
 
   // Fonction pour enregistrer le nouveau nom
@@ -26,18 +34,35 @@ function Zone() {
     setName(newName); // Mettre à jour le nom avec le nouveau nom
     setNameEdit(false); // Désactiver le mode édition
     setNewName(""); // Réinitialiser newName après l'enregistrement
+
+   
+         //
+    const NewArray = zoneValue.map(obj => {     //Création d'un nouveau tableau qui inclue la zone dont l'utilisateur a modifié le nom.
+      if (obj.name === nom) {
+          return { ...obj, name: newName };
+      }
+      return obj;
+  });
+
+  dispatch(editZone(NewArray))         // remplace le tableau des zones qui est stockés dans le store par le nouveau tableau crée.
+ console.log(zoneValue);
+    
+
+    
+    
+    
   };
+
+  // dispatch(addZone({name:newName, id:zoneValue[zoneValue.length-1].id+1}))
 
   // Fonction pour mettre à jour newName pendant l'édition
   const editName = (e) => {
-    setNewName(e.target.value);
+    setNewName(e.target.value)
   };
 
   // Effet secondaire (vide pour l'instant, peut contenir des nettoyages si nécessaire)
   useEffect(() => {
-    return () => {
-      // Effectuer des nettoyages si nécessaire
-    };
+  
   }, []);
 
   // Rendu du composant
@@ -47,16 +72,17 @@ function Zone() {
       {nameEdit ? (
         <>
           <input
+          className='EditName'
             type="text"
-            placeholder="Nouveau nom"
-            value={newName}
-            onChange={editName}
+            placeholder={nom}
+            
+            onChange={(e)=> editName(e)}
           />
           <button onClick={saveName}>Enregistrer</button>
         </>
       ) : (
         // Sinon, afficher le nom actuel et le bouton pour activer l'édition
-        <h3 onClick={changeName}>{name}</h3>
+        nom?<h3 className='title' onClick={changeName}>{nom}</h3>:<h3 className='title' onClick={changeName}>...</h3>
       )}
       {/* Bouton pour supprimer la zone */}
       <button className='zoneToDelete' onClick={deleteZone}>

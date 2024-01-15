@@ -1,4 +1,4 @@
-import  { useState} from 'react';
+import  { useState, useEffect} from 'react';
 import Zone from './Zone';
 import { zoneArray } from '../Data/data';
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,21 +10,28 @@ import "./Potager.scss"
 function Potager(props) {
     const [zones, setZone] = useState(zoneArray);
     const dispatch = useDispatch()
-    const zoneValue = useSelector((state)=> state.zones)
+    const zoneValue = useSelector((state)=> state.zones.value)
     
-    console.log(zoneValue);
- 
-    
+
+    useEffect(() => {
+      
+  
+      zones.map((e)=> {dispatch(addZone(e))})
+      console.log(zoneValue);
+    }, []);
+
+  
+
     const AddZoneHandle = () => {
       console.log('Une nouvelle zone à été ajoutée');
   }
 
     return (
      <>
-    <h3>Potager</h3>
+    <h3 className='title'>Potager</h3>
 
     <section className='zone-container'>
-        {zones.map((zone, index) => (
+        {zoneValue.map((zone, index) => (
           <Zone key={index} nom={zone.name} />
         ))}
     </section>
