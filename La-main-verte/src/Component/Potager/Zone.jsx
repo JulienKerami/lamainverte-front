@@ -1,6 +1,7 @@
 import {useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import  {addZone, editZone}  from '../store/slices/zonesSlice'
+
 import './Zone.scss';
 
 function Zone({nom}) {
