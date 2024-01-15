@@ -32,8 +32,22 @@ function Zone({nom}) {
 
   // Fonction pour enregistrer le nouveau nom
   const saveName = () => {
-    setName(newName); // Mettre à jour le nom avec le nouveau nom
+    
+    if(newName === "") {console.log("test");
+    setName(nom)}
+    else(setName(newName))
+     // Mettre à jour le nom avec le nouveau nom
     setNameEdit(false); // Désactiver le mode édition
+
+    const searchForSameName = zoneValue.find((e) => e.name === newName)
+    console.log(searchForSameName);
+    console.log(zoneValue);
+    
+    
+    if (searchForSameName) {
+      console.log("vous avez déja une zone nommé par ce nom");
+      return}
+
     setNewName(""); // Réinitialiser newName après l'enregistrement
 
    
@@ -48,13 +62,9 @@ function Zone({nom}) {
   dispatch(editZone(NewArray))         // remplace le tableau des zones qui est stockés dans le store par le nouveau tableau crée.
  console.log(zoneValue);
     
-
-    
-    
-    
   };
 
-  // dispatch(addZone({name:newName, id:zoneValue[zoneValue.length-1].id+1}))
+
 
   // Fonction pour mettre à jour newName pendant l'édition
   const editName = (e) => {

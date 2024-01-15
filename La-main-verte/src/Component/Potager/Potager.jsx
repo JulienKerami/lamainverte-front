@@ -2,7 +2,7 @@ import  { useState, useEffect} from 'react';
 import Zone from './Zone';
 import { zoneArray } from '../Data/data';
 import { useDispatch, useSelector } from 'react-redux'
-import  {addZone}  from '../store/slices/zonesSlice'
+import  {addZone, editZone}  from '../store/slices/zonesSlice'
 import "./Potager.scss"
 
 
@@ -14,10 +14,8 @@ function Potager(props) {
     
 
     useEffect(() => {
-      
-  
-      zones.map((e)=> {dispatch(addZone(e))})
-      console.log(zoneValue);
+      dispatch(editZone(zones))
+      console.log(zoneValue);              /// lorsque le composant est monté, les données de la base de données sont stockés dans redux.
     }, []);
 
   
