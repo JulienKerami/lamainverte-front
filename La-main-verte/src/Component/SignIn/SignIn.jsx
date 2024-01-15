@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios'
+import { useState, useEffect } from 'react';
+// import axios from 'axios'
 import './Signin.scss'
-import { useNavigate } from 'react-router';
+// import { useNavigate } from 'react-router';
 
 
-function Signin(props) {
-  const [user, setUser] = useState([]);
-  const [FormCheck, setFormCheck] = useState(true)
-  let navigate = useNavigate()
+function Signin() {
+  // const [user, setUser] = useState([]);
+  // const [FormCheck, setFormCheck] = useState(true)
+  // let navigate = useNavigate()
   const [error, setError] = useState("aaa")
   const [firstNameError, setFirstNameError] = useState(false)
   const [lastNameError, setLastNameError] = useState(false)
   const [EmailError, setEmailError] = useState(false)
   const [Password1Error, setPassword1Error] = useState(false)
   const [Password2Error, setPassword2Error] = useState(false)
-  const [ResetPassword, setResetPassword] = useState("Mot de passe")
 
   useEffect(() => {
     return () => {
@@ -43,27 +42,26 @@ function Signin(props) {
           setEmailError(false)
           setPassword1Error(false)
           setPassword2Error(false)
-          setResetPassword("")
+    
             
-    let UserArray = {
-      lastname: e.target[0].value,
-      firstname: e.target[1].value,
-      email: e.target[2].value,
-      password: e.target[3].value,
-      password2: e.target[4].value
-    }
+    // let UserArray = {
+    //   lastname: e.target[0].value,
+    //   firstname: e.target[1].value,
+    //   email: e.target[2].value,
+    //   password: e.target[3].value,
+    //   password2: e.target[4].value
+    // }
 
     
     let validation = true
 
   
     //La regex permets d'utiliser une method nativ à nodeJS qui permets de verifier si certains caractères sont présent dans une chaîne de caractères.
-
+    // const EmailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
       
-    const EmailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    const EmailRegEx = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g
     const NameRegex = /^[A-Z][-a-zA-Z]+$/
-    const PasswordRegEx = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/gm;
-
+    
  
     if (NameRegex.test(e.target[0].value) === false) {
       console.log("false firstName")
@@ -77,11 +75,7 @@ function Signin(props) {
        setLastNameError(true)
       }
 
-     if (EmailRegEx.test(e.target[2].value) === false) {
-      setEmailError(true)
-      console.log("false Email")
-      validation = false
-    }
+  
 
     if (e.target[3].value.length < 8) {
       console.log("doit contenir au moins 8 caractères");
@@ -118,7 +112,6 @@ function Signin(props) {
      }
   
      if (EmailRegEx.test(e.target[2].value) === false) {
-      
       console.log("false Email")
       validation = false
       setEmailError(true)
@@ -127,7 +120,6 @@ function Signin(props) {
     if (e.target[3].value.length < 8) {
       console.log("doit contenir au moins 8 caractères");
       setError("doit contenir au moins 8 caractères")
-      setResetPassword("")
     }
 
     if (!/(?=.\d)/.test(e.target[3].value)) {
@@ -153,7 +145,7 @@ function Signin(props) {
  
     if (validation === true) { 
       console.log("subscribed!");
-            const user = await createUser(UserArray)
+            // const user = await createUser(UserArray)
   }
    
 if (validation === false) {
@@ -184,11 +176,13 @@ if (validation === false) {
           <input type="text" placeholder='Nom' />
           {firstNameError?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Veuillez rentrer un nom valide</span>:null}
           <input type="text" placeholder='Prénom' />
+          {lastNameError?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Veuillez rentrer un prénom valide</span>:null}
+          <input type="text" placeholder='Email' />
           {EmailError?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Veuillez rentrer un email valide</span>:null}
           <input type="password" placeholder="Mot de passe" />
           {Password1Error?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>{error}</span>:null}
-          <input type="password" placeholder={ResetPassword} />
-          {Password2Error?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Votre mot de passe ne correspond pas</span>:null}
+          <input type="password" placeholder="Confimer mot de passe" />
+          {Password2Error?<span className='NameMessage' style={{ margin: "0", padding: "0" }} >Votre mot de passe ne correspond pas</span>:null}
           <button>Sign in</button>
         </form>
       </main>
