@@ -8,7 +8,7 @@ function Signin(props) {
   const [user, setUser] = useState([]);
   const [FormCheck, setFormCheck] = useState(true)
   let navigate = useNavigate()
-  const [error, setError] = useState("")
+  const [error, setError] = useState("aaa")
   const [firstNameError, setFirstNameError] = useState(false)
   const [lastNameError, setLastNameError] = useState(false)
   const [EmailError, setEmailError] = useState(false)
@@ -37,12 +37,12 @@ function Signin(props) {
 
   const handleSubmit = async (e) => {
 
-        setFirstNameError(false)
+          setFirstNameError(false)
           setLastNameError(false)
           setEmailError(false)
           setPassword1Error(false)
           setPassword2Error(false)
-
+            
     let UserArray = {
       lastname: e.target[0].value,
       firstname: e.target[1].value,
@@ -51,6 +51,9 @@ function Signin(props) {
     }
 
     let validation = true
+
+    
+
 
    
     //La regex permets d'utiliser une method nativ à nodeJS qui permets de verifier si certains caractères sont présent dans une chaîne de caractères.
@@ -82,12 +85,32 @@ function Signin(props) {
      
     }
 
-     if (PasswordRegEx.test(e.target[3].value) === false)
-    {
-      console.log("password not strong enough");
+    if (e.target[3].value.length < 8) {
+      console.log("doit contenir au moins 8 caractères");
       validation = false
+      setError("doit contenir au moins 8 caractères")
       setPassword1Error(true)
-     
+    }
+
+    if (!/(?=.\d)/.test(e.target[3].value)) {
+      console.log("doit contenir au moins un chiffre");
+      validation = false
+      setError("doit contenir au moins un chiffre");
+      setPassword1Error(true)
+    }
+
+    if (!/(?=.*[A-Z])/.test(e.target[3].value)) {
+      console.log("doit contenir au moins une lettre majuscule")
+      validation = false
+      setError("doit contenir au moins une lettre majuscule")
+      setPassword1Error(true)
+    }
+
+    if (!/(?=.[!@#$%^&*(),.?":{}|<>])/.test(e.target[3].value)) {
+      console.log("doit contenir au moins un caractère spécial")
+      validation = false
+      setError("doit contenir au moins un caractère spécial")
+      setPassword1Error(true)
     }
 
      if (!(e.target[3].value === e.target[4].value) )
@@ -96,14 +119,16 @@ function Signin(props) {
       validation = false
       setPassword2Error(true)
     }
- 
-  
 
     if (validation === true) { 
       console.log("subscribed!");
-      
       const user = await createUser(UserArray)
   }
+
+    if (validation === false) {
+      e.target[3].value = ""
+      e.target[4].value = ""
+    }
    
     // if (user.request.status === 400) {
     //   alert(user.response.data)
@@ -132,8 +157,8 @@ function Signin(props) {
           {lastNameError?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Veuillez rentrer un prénom valide</span>:null}
           <input type="text" placeholder='Email' />
           {EmailError?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Veuillez rentrer un email valide</span>:null}
-          <input type="password" placeholder='Mot de passe' />
-          {Password1Error?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Votre mot de passe n'est pas assez robuste</span>:null}
+          <input type="password" placeholder="Mot de passe" />
+          {Password1Error?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>{error}</span>:null}
           <input type="password" placeholder='Confirmer mot de passe' />
           {Password2Error?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Votre mot de passe ne correspond pas</span>:null}
           <button>Sign in</button>

@@ -15,8 +15,10 @@ const Navbar = () => {
           <nav className="header__nav">
 
             <Link to='/' className="header__nav__h2">Accueil</Link>
+            <Link to='/potager' className="header__nav__h2">Potager</Link>
             <Link to='/signin'className="header__nav__h2">Créer un compte </Link> 
             <Link to='/login' className="header__nav__h2">Connexion</Link>
+            
             
           </nav>
         </section>
