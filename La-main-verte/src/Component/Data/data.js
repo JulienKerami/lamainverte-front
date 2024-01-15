@@ -70,7 +70,7 @@
 
 
 
-export const zone = [
+export const zoneArray = [
     {id: 1,
     name: "jardin",
     },

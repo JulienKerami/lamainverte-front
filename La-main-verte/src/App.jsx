@@ -6,7 +6,10 @@ import './App.css'
 import SignIn from './Component/SignIn/SignIn'
 import Home from './Component/Home/Home'
 import {Routes, Route, Link, NavLink, Router} from 'react-router-dom'
-import { PotagerContext } from './Component/Context/PotagerContext'
+
+import { Provider } from 'react-redux';
+import store from './Component/store/store'
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,7 +19,7 @@ function App() {
 
     <h1>La main verte</h1>
   
-  
+    <Provider store={store}>
     <Navbar/>
     <Routes>
        <Route path='/potager' element={<Potager/>}/>
@@ -25,7 +28,7 @@ function App() {
       <Route path='/login' element={<Login/>}/>
       
     </Routes>
-   
+    </Provider>
     </>
   )
 }
