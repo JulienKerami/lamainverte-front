@@ -14,6 +14,10 @@ function Signin(props) {
   const [EmailError, setEmailError] = useState(false)
   const [Password1Error, setPassword1Error] = useState(false)
   const [Password2Error, setPassword2Error] = useState(false)
+<<<<<<< HEAD
+=======
+  const [ResetPassword, setResetPassword] = useState("Mot de passe")
+>>>>>>> f830fc93849143177906190b2e0f5dc7abbb1ee2
 
   useEffect(() => {
     return () => {
@@ -37,18 +41,31 @@ function Signin(props) {
 
   const handleSubmit = async (e) => {
 
+<<<<<<< HEAD
     setFirstNameError(false)
+=======
+          setFirstNameError(false)
+>>>>>>> f830fc93849143177906190b2e0f5dc7abbb1ee2
           setLastNameError(false)
           setEmailError(false)
           setPassword1Error(false)
           setPassword2Error(false)
+<<<<<<< HEAD
 
+=======
+          setResetPassword("")
+            
+>>>>>>> f830fc93849143177906190b2e0f5dc7abbb1ee2
     let UserArray = {
       lastname: e.target[0].value,
       firstname: e.target[1].value,
       email: e.target[2].value,
+<<<<<<< HEAD
       password: e.target[3].value,
       password2: e.target[4].value
+=======
+      password: e.target[3].value
+>>>>>>> f830fc93849143177906190b2e0f5dc7abbb1ee2
     }
 
     let validation = true
@@ -56,6 +73,7 @@ function Signin(props) {
    
     //La regex permets d'utiliser une method nativ à nodeJS qui permets de verifier si certains caractères sont présent dans une chaîne de caractères.
 
+<<<<<<< HEAD
     //////////////////////////////////////////            REGEX   ///////////////////////////////////////////////
 
     const EmailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
@@ -73,11 +91,21 @@ function Signin(props) {
 
  
 
+=======
+      //REGEX  
+    const EmailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+    const NameRegex = /^[A-Z][-a-zA-Z]+$/
+    const PasswordRegEx = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/gm;
+      
+
+
+>>>>>>> f830fc93849143177906190b2e0f5dc7abbb1ee2
     if (NameRegex.test(e.target[0].value) === false) {
       console.log("false firstName")
       validation = false
       setFirstNameError(true)
     }
+<<<<<<< HEAD
    
   
      if (NameRegex.test(e.target[1].value) === false) {
@@ -101,14 +129,56 @@ function Signin(props) {
       validation = false
     }
 
+=======
+  
+    if (NameRegex.test(e.target[1].value) === false) {
+        console.log("false LastName")
+       validation = false
+       setLastNameError(true)
+     }
+  
+     if (EmailRegEx.test(e.target[2].value) === false) {
+      
+      console.log("false Email")
+      validation = false
+      setEmailError(true)
+     
+    }
+
+    if (e.target[3].value.length < 8) {
+      console.log("doit contenir au moins 8 caractères");
+      setError("doit contenir au moins 8 caractères")
+      setResetPassword("")
+    }
+
+    if (!/(?=.\d)/.test(e.target[3].value)) {
+      console.log("doit contenir au moins un chiffre");
+      setError("doit contenir au moins un chiffre");
+    }
+
+    if (!/(?=.[A-Z])/.test(e.target[3].value)) {
+      console.log("doit contenir au moins une lettre majuscule")
+      setError("doit contenir au moins une lettre majuscule")
+    }
+
+    if (!/(?=.[!@#$%^&*(),.?":{}|<>])/.test(e.target[3].value)) {
+      console.log("doit contenir au moins un caractère spécial")
+      setError("doit contenir au moins un caractère spécial")
+    }
+>>>>>>> f830fc93849143177906190b2e0f5dc7abbb1ee2
 
      if (!(e.target[3].value === e.target[4].value) )
     {
       console.log("password not matching");
       validation = false
+<<<<<<< HEAD
     }
  
   
+=======
+      setPassword2Error(true)
+    }
+>>>>>>> f830fc93849143177906190b2e0f5dc7abbb1ee2
 
     if (validation === true) { 
       console.log("subscribed!");
@@ -116,7 +186,10 @@ function Signin(props) {
       const user = await createUser(UserArray)
   }
    
+<<<<<<< HEAD
 
+=======
+>>>>>>> f830fc93849143177906190b2e0f5dc7abbb1ee2
     // if (user.request.status === 400) {
     //   alert(user.response.data)
     //   return
@@ -125,7 +198,11 @@ function Signin(props) {
     // alert(`Bienvenue ${UserArray.firstname}`)
   }
 
+<<<<<<< HEAD
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+=======
+ 
+>>>>>>> f830fc93849143177906190b2e0f5dc7abbb1ee2
 
   return (
     <>
@@ -144,8 +221,13 @@ function Signin(props) {
           {lastNameError?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Veuillez rentrer un prénom valide</span>:null}
           <input type="text" placeholder='Email' />
           {EmailError?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Veuillez rentrer un email valide</span>:null}
+<<<<<<< HEAD
           <input type="password" placeholder='Mot de passe' />
           {Password1Error?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Votre mot de passe n'est pas assez robuste</span>:null}
+=======
+          <input type="password" placeholder={ResetPassword} />
+          {Password1Error?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>{error}</span>:null}
+>>>>>>> f830fc93849143177906190b2e0f5dc7abbb1ee2
           <input type="password" placeholder='Confirmer mot de passe' />
           {Password2Error?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Votre mot de passe ne correspond pas</span>:null}
           <button>Sign in</button>
@@ -158,3 +240,7 @@ function Signin(props) {
 export default Signin;
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f830fc93849143177906190b2e0f5dc7abbb1ee2
