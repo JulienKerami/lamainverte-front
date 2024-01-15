@@ -1,32 +1,29 @@
-import {useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import  {addZone, editZone}  from '../store/slices/zonesSlice'
 import './Zone.scss';
 
-function Zone({nom}) {
-
+function Zone(props{nom}) {
+  
  
   const zoneValue = useSelector((state)=> state.zones.value)
   const dispatch = useDispatch()
  
   // État pour stocker le nom actuel de la zone
-  const [name, setName] = useState("Jardin");
+    const [name, setName] = useState(props.nom);
 
-  // État pour stocker le nouveau nom pendant l'édition
-  const [newName, setNewName] = useState("");
-
-  // État pour suivre si l'édition est active ou non
-  const [nameEdit, setNameEdit] = useState(false);
+    // État pour suivre si l'édition du nom est active ou non
+    const [nameEdit, setNameEdit] = useState(false);
 
   // Fonction pour supprimer la zone
   const deleteZone = () => {
     console.log(`Supprimer la zone : ${name}`);
   };
 
-  // Fonction pour activer l'édition du nom
-  const changeName = () => {
-    setNameEdit(true);
-    
+    // Fonction pour activer l'édition du nom
+    const changeName = () => {
+        setNameEdit(true);
+      
   };
 
   // Fonction pour enregistrer le nouveau nom
