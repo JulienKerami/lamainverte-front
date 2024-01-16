@@ -15,26 +15,23 @@ function Login(props) {
         let userInfos = {email: e.target[0].value,
                         password:e.target[1].value }
 
-        console.log(userInfos);
+       
 
-    const user = await fetchUser(userInfos)
-    
-    // .then((res) => {
+    const user = await fetchUser(userInfos).then((res) => {
         
        
-    //     if(res.statusText == "OK") {
+        if(res.statusText == "OK") {
             
-    //         console.log(res.data);
-    //         const authentification = async () => {await localStorage.setItem('name', res.data );
-    //         console.log(localStorage.data);
-    //         navigate('/')}
-    //         authentification()
-    //         return
-    //         }
-    //     else ( 
-    //         setError(res.response.data))})
-   
-
+            console.log(res.data.token);
+            const authentification = async () => { localStorage.setItem('name', res.data.token );
+            console.log(localStorage.data);
+            navigate('/')}
+            authentification()
+            window.location.reload();
+            return
+            }
+        else ( 
+            setError(res.response.data))})
     }
 
     return (

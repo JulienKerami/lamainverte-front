@@ -68,38 +68,38 @@ function Signin() {
   
 ////////////////////// REGEX POUR LES MOT DE PASSE ///////////////////
   
-    if (e.target[3].value.length < 8) {
-      console.log("doit contenir au moins 8 caractères");
-      validation = false
-      setError("doit contenir au moins 8 caractères")
-      setPassword1Error(true)
-    }
+    // if (e.target[3].value.length < 8) {
+    //   console.log("doit contenir au moins 8 caractères");
+    //   validation = false
+    //   setError("doit contenir au moins 8 caractères")
+    //   setPassword1Error(true)
+    // }
 
-    if (!/(?=.\d)/.test(e.target[3].value)) {
-      console.log("doit contenir au moins un chiffre");
-      validation = false
-      setError("doit contenir au moins un chiffre");
-      setPassword1Error(true)
-    }
+    // if (!/(?=.\d)/.test(e.target[3].value)) {
+    //   console.log("doit contenir au moins un chiffre");
+    //   validation = false
+    //   setError("doit contenir au moins un chiffre");
+    //   setPassword1Error(true)
+    // }
 
-    if (!/(?=.*[A-Z])/.test(e.target[3].value)) {
-      console.log("doit contenir au moins une lettre majuscule")
-      validation = false
-      setError("doit contenir au moins une lettre majuscule")
-      setPassword1Error(true)
-    }
+    // if (!/(?=.*[A-Z])/.test(e.target[3].value)) {
+    //   console.log("doit contenir au moins une lettre majuscule")
+    //   validation = false
+    //   setError("doit contenir au moins une lettre majuscule")
+    //   setPassword1Error(true)
+    // }
 
-    if (!/(?=.[!@#$%^&*(),.?":{}|<>])/.test(e.target[3].value)) {
-      console.log("doit contenir au moins un caractère spécial")
-      validation = false
-      setError("doit contenir au moins un caractère spécial")
-      setPassword1Error(true)
-    }
+    // if (!/(?=.[!@#$%^&*(),.?":{}|<>])/.test(e.target[3].value)) {
+    //   console.log("doit contenir au moins un caractère spécial")
+    //   validation = false
+    //   setError("doit contenir au moins un caractère spécial")
+    //   setPassword1Error(true)
+    // }
 
-    if (e.target[3].value.length < 8) {
-      console.log("doit contenir au moins 8 caractères");
-      setError("doit contenir au moins 8 caractères")
-    }
+    // if (e.target[3].value.length < 8) {
+    //   console.log("doit contenir au moins 8 caractères");
+    //   setError("doit contenir au moins 8 caractères")
+    // }
 
     /////////////////////////////////////////////////
 
@@ -134,6 +134,7 @@ function Signin() {
       createUser(UserArray)
   }
    
+  
 if (validation === false) {
       e.target[3].value = ""
       e.target[4].value = ""
