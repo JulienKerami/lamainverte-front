@@ -22,7 +22,7 @@ function App() {
     <Provider store={store}>
     <Navbar/>
     <Routes>
-       <Route path='/potager' element={<Potager/>}/>
+      <Route path='/potager' element={<Potager/>}/>
       <Route path='/signin' element={<SignIn/>}/>
       <Route path='/' element={<Home/>}/>
       <Route path='/login' element={<Login/>}/>
