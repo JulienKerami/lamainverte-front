@@ -5,7 +5,7 @@ export async function fetchUser(userData) {
     
   try {
  const httpResponse = await axios.post(`http://localhost:3000/api/login`, userData);
- console.log(httpResponse);
+ 
    return httpResponse;
    
 
@@ -28,7 +28,7 @@ export async function createUser(user) {
       
   
     } catch (error) {
-      console.error(error);
+      
       return error;
     }
   }

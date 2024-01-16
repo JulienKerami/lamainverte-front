@@ -10,6 +10,7 @@ function Signin() {
   // const [FormCheck, setFormCheck] = useState(true)
   // let navigate = useNavigate()
   const [error, setError] = useState("aaa")
+  const [EmailErrorText, setEmailErrorText] = useState("Veuillez rentrer un email valide")
   const [firstNameError, setFirstNameError] = useState(false)
   const [lastNameError, setLastNameError] = useState(false)
   const [EmailError, setEmailError] = useState(false)
@@ -130,11 +131,19 @@ function Signin() {
  
     if (validation === true) { 
       console.log("subscribed!");
-      console.log(UserArray);
-      createUser(UserArray)
+      
+     const httpResponse = await createUser(UserArray)
+     if(httpResponse.request.statusText === "ok")
+     {console.log(httpResponse);
+      navigate('/')
+      alert(`Bienvenue ${UserArray.firstname}, vous pouvez vous connecter à votre compte`)}
+
+      else{setEmailErrorText("cet email est déja utilisé par un utilisateur")
+      setEmailError(true)}
+
   }
    
-  
+
 if (validation === false) {
       e.target[3].value = ""
       e.target[4].value = ""
@@ -165,7 +174,7 @@ if (validation === false) {
           <input type="text" placeholder='Prénom' />
           {lastNameError?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Veuillez rentrer un prénom valide</span>:null}
           <input type="text" placeholder='Email' />
-          {EmailError?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>Veuillez rentrer un email valide</span>:null}
+          {EmailError?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>{EmailErrorText}</span>:null}
           <input type="password" placeholder="Mot de passe" />
           {Password1Error?<span className='NameMessage' style={{ margin: "0", padding: "0" }}>{error}</span>:null}
           <input type="password" placeholder="Confimer mot de passe" />

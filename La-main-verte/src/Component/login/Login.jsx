@@ -31,13 +31,13 @@ function Login(props) {
             return
             }
         else ( 
-            setError(res.response.data))})
+            setError("email ou mot de passe invalide"))})
     }
 
     return (
         <>
            <form className='login'action="submit" onSubmit={(e) =>{e.preventDefault(); handleSubmit(e)}}>
-            {error?<p style={{color:"red"}}>{error}</p>: null}
+            {error?<p style={{color:"red", fontSize:"1rem"}}>{error}</p>: null}
 
             <input type="text" placeholder='email' />
             <input type="password" placeholder='mot de passe' />
