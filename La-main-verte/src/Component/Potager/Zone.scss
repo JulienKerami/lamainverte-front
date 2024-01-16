@@ -2,7 +2,11 @@
         height: 150px;
     background: rgba(233, 233, 233, 0.5);
 border-radius: 20px;
-margin: 10px;}
+margin: 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
+position: relative;}
 
 .zoneToAdd{width: 150px;
     height: 150px;
@@ -11,3 +15,24 @@ border-radius: 20px;
 margin: 10px;
 font-size: 3rem;}
 
+.title{cursor:pointer}
+
+.deleteModal{
+padding-top: 7px;
+background: rgb(211, 211, 211);
+position: absolute;
+height: 150px;
+border-radius: 20px;
+p{margin: 3px; 
+  margin-left: 7px;
+  font-size: 0.9rem;}
+.Modalbuttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    button{
+        margin-top: 5px;
+        width: 95%;
+        font-size: 0.7rem;
+        padding: 2px 2px;}
+}}

@@ -70,14 +70,16 @@
 
 
 
-export const zone = [
+export const zoneArray = [
     {id: 1,
     name: "jardin",
     },
     {id: 2,
     name: "serre"},
     {id: 3,
-        name: "serre2"}
+        name: "serre2"},
+    {id: 4,
+        name: "serre3"}
     
 
 ]
@@ -120,7 +122,25 @@ export const vegetable = [
     variety: "",
     comment: "",
     zone_id: 2,
-    family_id: null}
+    family_id: null},
+
+    {id:1,
+        growth_time: 30,
+        name: "tomate cerise" ,
+        variety: "",
+        comment: "",
+        zone_id: 3,
+        family_id: null},
+        
+        {id:2,
+        growth_time: 30,
+        name: "raisins",
+        variety: "",
+        comment: "",
+        zone_id: 3,
+        family_id: null}
+        
+    
 
 ]
 

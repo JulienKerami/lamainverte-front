@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 // import axios from 'axios'
 import './Signin.scss'
+import { createUser } from '../Apicall/Apicall';
 // import { useNavigate } from 'react-router';
 
 
@@ -21,17 +22,6 @@ function Signin() {
   }, []);
 
 
-  //  async function createUser(user) {
-  //     try {
-  //         console.log(user);
-  //       const httpResponse = await axios.post(`http://localhost:3000/signin`, user);
-  //       return httpResponse;
-
-  //     } catch (error) {
-  //       console.error(error);
-  //       return error;
-  //     }
-  //   }
 
 
 
@@ -44,13 +34,13 @@ function Signin() {
           setPassword2Error(false)
     
             
-    // let UserArray = {
-    //   lastname: e.target[0].value,
-    //   firstname: e.target[1].value,
-    //   email: e.target[2].value,
-    //   password: e.target[3].value,
-    //   password2: e.target[4].value
-    // }
+    let UserArray = {
+      lastname: e.target[0].value,
+      firstname: e.target[1].value,
+      email: e.target[2].value,
+      password: e.target[3].value,
+      
+    }
 
     
     let validation = true
@@ -76,7 +66,8 @@ function Signin() {
       }
 
   
-
+////////////////////// REGEX POUR LES MOT DE PASSE ///////////////////
+  
     if (e.target[3].value.length < 8) {
       console.log("doit contenir au moins 8 caractères");
       validation = false
@@ -104,6 +95,14 @@ function Signin() {
       setError("doit contenir au moins un caractère spécial")
       setPassword1Error(true)
     }
+
+    if (e.target[3].value.length < 8) {
+      console.log("doit contenir au moins 8 caractères");
+      setError("doit contenir au moins 8 caractères")
+    }
+
+    /////////////////////////////////////////////////
+
   
     if (NameRegex.test(e.target[1].value) === false) {
         console.log("false LastName")
@@ -117,35 +116,22 @@ function Signin() {
       setEmailError(true)
     }
 
-    if (e.target[3].value.length < 8) {
-      console.log("doit contenir au moins 8 caractères");
-      setError("doit contenir au moins 8 caractères")
-    }
+    
+  
 
-    if (!/(?=.\d)/.test(e.target[3].value)) {
-      console.log("doit contenir au moins un chiffre");
-      setError("doit contenir au moins un chiffre");
-    }
 
-    if (!/(?=.[A-Z])/.test(e.target[3].value)) {
-      console.log("doit contenir au moins une lettre majuscule")
-      setError("doit contenir au moins une lettre majuscule")
-    }
-
-    if (!/(?=.[!@#$%^&*(),.?":{}|<>])/.test(e.target[3].value)) {
-      console.log("doit contenir au moins un caractère spécial")
-      setError("doit contenir au moins un caractère spécial")
-    }
-
+ 
      if (!(e.target[3].value === e.target[4].value) )
     {
       console.log("password not matching");
+      setError('les mots de passe ne correspondent pas')
       validation = false
     }
  
     if (validation === true) { 
       console.log("subscribed!");
-            // const user = await createUser(UserArray)
+      console.log(UserArray);
+      createUser(UserArray)
   }
    
 if (validation === false) {
