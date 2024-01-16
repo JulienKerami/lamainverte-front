@@ -3,6 +3,7 @@ import Zone from './Zone';
 import { zoneArray } from '../Data/data';
 import { useDispatch, useSelector } from 'react-redux'
 import  {addZone, editZone}  from '../store/slices/zonesSlice'
+import { jwtDecode } from 'jwt-decode'
 import "./Potager.scss"
 
 
@@ -24,6 +25,10 @@ function Potager(props) {
 
     const AddZoneHandle = () => {
       console.log('Une nouvelle zone à été ajoutée');
+      
+      const token = localStorage.getItem('name')
+        const decodedToken = jwtDecode(token)
+        console.log(decodedToken.id);
   }
 
     return (

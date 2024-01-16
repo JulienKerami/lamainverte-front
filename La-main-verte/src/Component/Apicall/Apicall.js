@@ -32,3 +32,18 @@ export async function createUser(user) {
       return error;
     }
   }
+
+
+  export async function createZone(userId) {
+    try {
+        console.log(userId);
+      const httpResponse = await axios.get(`http://localhost:3000/api/${userId}/zones`, user);
+      
+      return httpResponse;
+      
+  
+    } catch (error) {
+      
+      return error;
+    }
+  }
