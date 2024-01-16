@@ -122,7 +122,25 @@ export const vegetable = [
     variety: "",
     comment: "",
     zone_id: 2,
-    family_id: null}
+    family_id: null},
+
+    {id:1,
+        growth_time: 30,
+        name: "tomate cerise" ,
+        variety: "",
+        comment: "",
+        zone_id: 3,
+        family_id: null},
+        
+        {id:2,
+        growth_time: 30,
+        name: "raisins",
+        variety: "",
+        comment: "",
+        zone_id: 3,
+        family_id: null}
+        
+    
 
 ]
 

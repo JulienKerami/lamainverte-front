@@ -3,16 +3,23 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 import './login.scss'
+import { fetchUser } from '../Apicall/Apicall';
 
 function Login(props) {
     const [error, setError] = useState("")
 
     let navigate = useNavigate()
 
-    // async function handleSubmit(e) {
-    //     e.preventDefault()
-        
-    // const user = await fetchUser(e).then((res) => {
+    async function handleSubmit(e) {
+     
+        let userInfos = {email: e.target[0].value,
+                        password:e.target[1].value }
+
+        console.log(userInfos);
+
+    const user = await fetchUser(userInfos)
+    
+    // .then((res) => {
         
        
     //     if(res.statusText == "OK") {
@@ -28,11 +35,11 @@ function Login(props) {
     //         setError(res.response.data))})
    
 
-    // }
+    }
 
     return (
         <>
-           <form className='login'action="submit" onSubmit={(e) => handleSubmit(e)}>
+           <form className='login'action="submit" onSubmit={(e) =>{e.preventDefault(); handleSubmit(e)}}>
             {error?<p style={{color:"red"}}>{error}</p>: null}
 
             <input type="text" placeholder='email' />
