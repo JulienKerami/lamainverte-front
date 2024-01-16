@@ -2,6 +2,8 @@ import {useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import  {addZone, editZone}  from '../store/slices/zonesSlice'
 import './Zone.scss';
+import { vegetable } from '../Data/data';
+import Vegetable from '../Vegetables/Vegetable';
 
 function Zone({nom}) {
 
@@ -68,6 +70,7 @@ function Zone({nom}) {
   
   }, []);
 
+ 
   // Rendu du composant
   return (
     <div className='zone'>
@@ -87,6 +90,13 @@ function Zone({nom}) {
         // Sinon, afficher le nom actuel et le bouton pour activer l'édition
         nom?<h3 className='title' onClick={changeName}>{nom}</h3>:<h3 className='title' onClick={changeName}>...</h3>
       )}
+      <div className='vegetable-container'>
+       {vegetable.map((e)=> {return(
+            <>
+            <Vegetable/>
+            </>
+          )})}
+      </div>
       {/* Bouton pour supprimer la zone */}
       <button className='zoneToDelete' onClick={() => setDeleteModal(true)}>
         Supprimer
