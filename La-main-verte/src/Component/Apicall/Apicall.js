@@ -31,7 +31,7 @@ export async function fetchUser(userData) {
 export async function createUser(user) {
     try {
         console.log(user);
-      const httpResponse = await axios.post(`${url}/user`, user);
+      const httpResponse = await axios.post(`${url}/signin`, user);
       
       return httpResponse;
       
@@ -80,7 +80,6 @@ export async function createUser(user) {
     }
 
 
-
   export async function deleteOneZone(userId, zoneId) {
 
    try {
@@ -90,4 +89,16 @@ export async function createUser(user) {
 
    catch (error) 
    {return error;}
+  }
+
+
+  export async function modifyOneZone(userId, zoneId, name) {
+    try{ 
+      const httpResponse = await instance.patch(`/users/${userId}/zones/${zoneId}`, {name: name})
+      return httpResponse
+    }
+
+    catch (error) {
+      return error
+    }
   }

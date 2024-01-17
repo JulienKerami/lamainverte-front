@@ -5,6 +5,8 @@
     flex-wrap: wrap;
 }
 
+h2{margin: 20px;}
+
 .zoneToAdd{width: 150px;
     height: 150px;
 background: rgba(233, 233, 233, 0.5);
@@ -40,13 +42,13 @@ justify-content: center;
 align-items: center;
 position: relative;
 
-    .sameNameMessage{color: red;
+    .sameNameMessage{color: rgb(240, 99, 99);
         font-size: 0.8rem;
         position: absolute;
         top: -40px;
         width: 80%;
         text-align: center;
-        }
+        text-shadow: none;}
 }
 
 .ModalButtons{display: flex;
