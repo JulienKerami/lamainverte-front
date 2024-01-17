@@ -13,7 +13,7 @@ function Vegetable(props) {
     return (
         <>
            <div className='vegetable'>
-            O
+            
            </div>
         </>
     )
