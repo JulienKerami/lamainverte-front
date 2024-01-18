@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const url = 'https://la-main-verte-back-end.onrender.com/api'
 
+
+
 const instance = axios.create({
   baseURL: 'https://la-main-verte-back-end.onrender.com/api',
   headers: {'Authorization': 'Bearer ' + localStorage.getItem('name')}
@@ -9,14 +11,11 @@ const instance = axios.create({
 })
 
 export async function fetchUser(userData) {
- 
 
-
-    
   try {
     console.log(localStorage.getItem('name'));
  const httpResponse = await axios.post(`${url}/login`, userData);
- 
+    console.log(httpResponse);
    return httpResponse;
    
 
@@ -43,7 +42,7 @@ export async function createUser(user) {
   }
 
 
-  export async function createZone(userId, name) {
+export async function createZone(userId, name) {
     try {
         let nameObj = {name: name}
       const httpResponse = await axios.post(`${url}/users/${userId}/zones`, nameObj, {
@@ -61,7 +60,7 @@ export async function createUser(user) {
   }
 
 
-  export async function GetAllZones(userId) {
+export async function GetAllZones(userId) {
 
     try {
       const httpResponse = await axios.get(`${url}/users/${userId}/zones`, {
@@ -80,7 +79,7 @@ export async function createUser(user) {
     }
 
 
-  export async function deleteOneZone(userId, zoneId) {
+export async function deleteOneZone(userId, zoneId) {
 
    try {
     const httpResponse = await instance.delete(`/users/${userId}/zones/${zoneId}`)
@@ -92,7 +91,7 @@ export async function createUser(user) {
   }
 
 
-  export async function modifyOneZone(userId, zoneId, name) {
+export async function modifyOneZone(userId, zoneId, name) {
     try{ 
       const httpResponse = await instance.patch(`/users/${userId}/zones/${zoneId}`, {name: name})
       return httpResponse
