@@ -10,7 +10,7 @@ function Signin() {
   // const [FormCheck, setFormCheck] = useState(true)
   let navigate = useNavigate()
   const [error, setError] = useState("aaa")
-  const [EmailErrorText, setEmailErrorText] = useState("Veuillez rentrer un email valide")
+  const [EmailErrorText, setEmailErrorText] = useState("")
   const [firstNameError, setFirstNameError] = useState(false)
   const [lastNameError, setLastNameError] = useState(false)
   const [EmailError, setEmailError] = useState(false)
@@ -51,7 +51,7 @@ function Signin() {
     // const EmailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
       
     const EmailRegEx = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g
-    const NameRegex = /^[-a-zA-Z]+$/
+    const NameRegex = /^[-a-zA-Zzéèà\s]+$/
     
  
     if (NameRegex.test(e.target[0].value) === false) {
@@ -116,12 +116,15 @@ function Signin() {
      if (EmailRegEx.test(e.target[2].value) === false) {
       console.log("false Email")
       validation = false
+      setEmailErrorText("veuillez rentrer un email valide")
       setEmailError(true)
+      EmailErrorText
     }
  
      if (!(e.target[3].value === e.target[4].value) )
     {
       console.log("password not matching");
+      setPassword1Error(true)
       setError('les mots de passe ne correspondent pas')
       validation = false
     }
@@ -138,6 +141,8 @@ function Signin() {
       else if(httpResponse.request.statusText !== "ok"){
         console.log(httpResponse);
         setEmailErrorText("cet email est déja utilisé par un utilisateur")
+        e.target[3].value = ""
+      e.target[4].value = ""
       setEmailError(true)}
 
   }

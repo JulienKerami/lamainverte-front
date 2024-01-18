@@ -16,7 +16,7 @@ const Navbar = () => {
             {localStorage.name?<>
               <Link to='/' className="header__nav__h2">Accueil</Link>
             <Link to='/potager' className="header__nav__h2">Potager</Link>
-            <Link to='/logout' className="header__nav__h2" onClick={()=> {logout()}}>Deconnexion</Link></>
+            <Link className="header__nav__h2" onClick={()=> {logout()}}>Deconnexion</Link></>
             :<><Link to='/' className="header__nav__h2">Accueil</Link>
             <Link to='/signin'className="header__nav__h2">Créer un compte </Link> 
             <Link to='/login' className="header__nav__h2">Connexion</Link></>
