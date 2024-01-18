@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 // import axios from 'axios'
 import './Signin.scss'
 import { createUser } from '../Apicall/Apicall';
-// import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 
 function Signin() {
   // const [user, setUser] = useState([]);
   // const [FormCheck, setFormCheck] = useState(true)
-  // let navigate = useNavigate()
+  let navigate = useNavigate()
   const [error, setError] = useState("aaa")
   const [EmailErrorText, setEmailErrorText] = useState("Veuillez rentrer un email valide")
   const [firstNameError, setFirstNameError] = useState(false)
@@ -116,11 +116,6 @@ function Signin() {
       validation = false
       setEmailError(true)
     }
-
-    
-  
-
-
  
      if (!(e.target[3].value === e.target[4].value) )
     {
@@ -133,12 +128,14 @@ function Signin() {
       console.log("subscribed!");
       
      const httpResponse = await createUser(UserArray)
-     if(httpResponse.request.statusText === "ok")
-     {console.log(httpResponse);
+     if(httpResponse.request.statusText === "OK")
+     {console.log("test");
       navigate('/')
       alert(`Bienvenue ${UserArray.firstname}, vous pouvez vous connecter à votre compte`)}
 
-      else{setEmailErrorText("cet email est déja utilisé par un utilisateur")
+      else if(httpResponse.request.statusText !== "ok"){
+        console.log(httpResponse);
+        setEmailErrorText("cet email est déja utilisé par un utilisateur")
       setEmailError(true)}
 
   }
@@ -150,12 +147,6 @@ if (validation === false) {
     }
    
     
-    // if (user.request.status === 400) {
-    //   alert(user.response.data)
-    //   return
-    // }
-    // navigate('/')
-    // alert(`Bienvenue ${UserArray.firstname}`)
   }
 
   return (
