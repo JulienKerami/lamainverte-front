@@ -20,8 +20,8 @@ function Login(props) {
     const user = await fetchUser(userInfos).then((res) => {
         
        
-        if(res.statusText == "OK") {
-            
+        if(res.status == 200) {
+            console.log(res);
             console.log(res.data.token);
             const authentification = async () => { localStorage.setItem('name', res.data.token );
             console.log(localStorage.data);
