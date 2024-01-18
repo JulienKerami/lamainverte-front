@@ -70,9 +70,9 @@ function Potager(props) {
     <main className='potager-container'> 
     <h2 className='title'>Potager</h2>
     <section className='zone-container'>
-      {zoneValue.map((zone, index) => (
+      {zoneValue?<>{zoneValue.map((zone, index) => (
         <Zone key={index} nom={zone.name} id={zone.id} />
-        ))}
+        ))}</>:null}
     </section>
     
     <section className='zone-container'>
