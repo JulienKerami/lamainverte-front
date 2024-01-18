@@ -66,7 +66,8 @@ function Potager(props) {
 
 
     return (
-     <>
+    <>
+     {localStorage.name?<>
     <main className='potager-container'> 
     <h2 className='title'>Potager</h2>
     <section className='zone-container'>
@@ -91,8 +92,8 @@ function Potager(props) {
        <button className='zoneToAdd' onClick={()=> setZoneModale(true)}>+</button>  
     </section>
     </main>
-  </>
-    )
+  </>:<><h3>veuillez vous créer un compte</h3></>}
+    </>)
 }
 
 export default Potager;
