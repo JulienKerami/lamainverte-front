@@ -22,6 +22,7 @@ function Login(props) {
        
         if(res.Status== "200") {
             
+            console.log(res);
             console.log(res.data.token);
             const authentification = async () => { localStorage.setItem('name', res.data.token );
             console.log(localStorage.data);
