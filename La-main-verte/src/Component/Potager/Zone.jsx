@@ -1,53 +1,76 @@
 import {useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import  {addZone, editZone}  from '../store/slices/zonesSlice'
+import  {addZone, editZone, removeZone}  from '../store/slices/zonesSlice'
 import './Zone.scss';
+import { vegetable } from '../Data/data';
+import Vegetable from '../Vegetables/Vegetable';
+import { deleteOneZone, modifyOneZone } from '../Apicall/Apicall';
+import { jwtDecode } from 'jwt-decode'
 
-function Zone({nom}) {
+function Zone({nom, id}) {
 
  
-  const zoneValue = useSelector((state)=> state.zones.value)
+  const zoneValue = useSelector((state)=> state.zones.value)      // Accès aux données redux
   const dispatch = useDispatch()
  
   const [deleteModal, setDeleteModal] = useState(false)
   // État pour stocker le nom actuel de la zone
   const [name, setName] = useState("Jardin");
-
   // État pour stocker le nouveau nom pendant l'édition
   const [newName, setNewName] = useState("");
-
   // État pour suivre si l'édition est active ou non
   const [nameEdit, setNameEdit] = useState(false);
+  const [sameNameModale, setSameNameModale] = useState(false)
+  const [emptyNameModale, setEmptyNameModale] = useState(false)
+
+
+
 
   // Fonction pour supprimer la zone
-  const deleteZone = () => {
-    
+  const deleteZone = async (e) => {
+    console.log(id);
+    const token = localStorage.getItem('name')                                  // On récupère l'ID de l'utilisateur avec JWT token
+      const decodedToken = jwtDecode(token)                       
+      const userId = decodedToken.id
+
+    const zoneId = id         //on va chercher l'id de la zone, en remontant depuis le bouton jusqu'à la div principale
     console.log(deleteModal);
-    deleteZone(nom)
+    const zoneDeleted = await deleteOneZone(userId, zoneId )
+    dispatch(removeZone(zoneId))
+    setDeleteModal(false)
+    console.log(zoneDeleted);
   };
 
-  // Fonction pour activer l'édition du nom
-  const changeName = () => {
-    setNameEdit(true);
+  const saveName = async () => {
+    setSameNameModale(false)
+    setEmptyNameModale(false)
     
-  };
-
-  // Fonction pour enregistrer le nouveau nom
-  const saveName = () => {
-    if(newName === "") {setName(nom)}
+    if(newName === "") {setEmptyNameModale(true); return}    // Fonction pour enregistrer le nouveau nom
 
     else{setName(newName)} // Mettre à jour le nom avec le nouveau nom
-    setNameEdit(false); // Désactiver le mode édition
+   
+    const searchForSameName = zoneValue.find((e) => (e.name).toLowerCase() === newName.toLowerCase())
+    console.log(searchForSameName)
+    console.log(id);
      // Réinitialiser newName après l'enregistrement
-
-    const searchForSameName = zoneValue.find((e) => e.name === newName)
-    if (searchForSameName){console.log("ce nom est déja utilisé pour une zone");
+    if (searchForSameName && id !== searchForSameName.id ){setSameNameModale(true);
      return}
-         //
-    const NewArray = zoneValue.map(obj => {     //Création d'un nouveau tableau qui inclue la zone dont l'utilisateur a modifié le nom.
-      if (obj.name === nom) {
+
+     setNameEdit(false)
+     setNewName("")
+
+
+     const token = localStorage.getItem('name')
+     const decodedToken = jwtDecode(token)
+     const userId = decodedToken.id
+  
+    const zoneModified = await modifyOneZone(userId, id, newName)
+    
+        const NewArray = zoneValue.map(obj => {      //Création d'un nouveau tableau qui inclue la zone dont l'utilisateur a modifié le nom.
+    if (obj.name === nom) {
           return { ...obj, name: newName };
-      }
+      };
+      ; // Désactiver le mode édition
       return obj;
   });
 
@@ -56,37 +79,48 @@ function Zone({nom}) {
     
   };
 
-  // dispatch(addZone({name:newName, id:zoneValue[zoneValue.length-1].id+1}))
+  const addVegetable = (e) => {
+  console.log("vegetable added");
+  }
 
-  // Fonction pour mettre à jour newName pendant l'édition
-  const editName = (e) => {
-    setNewName(e.target.value)
-  };
 
-  // Effet secondaire (vide pour l'instant, peut contenir des nettoyages si nécessaire)
+
   useEffect(() => {
   
   }, []);
 
+ 
   // Rendu du composant
   return (
-    <div className='zone'>
+    <div className='zone' id={id}>
       {/* Si l'édition est active, afficher le champ de saisie et le bouton d'enregistrement */}
+
       {nameEdit ? (
         <>
           <input
           className='EditName'
             type="text"
             placeholder={nom}
-            
-            onChange={(e)=> editName(e)}
+            onChange={(e)=> setNewName(e.target.value)}
           />
-          <button onClick={saveName}>Enregistrer</button>
+          {sameNameModale?<><span className='sameNameError'>vous avez déja une zone à ce nom</span></>:null}
+          {emptyNameModale?<><span className='sameNameError'>Au moins une lettre plz?</span></>:null}
+          <button className='saveNameButton' onClick={saveName}>enregistrer</button>
         </>
       ) : (
         // Sinon, afficher le nom actuel et le bouton pour activer l'édition
-        nom?<h3 className='title' onClick={changeName}>{nom}</h3>:<h3 className='title' onClick={changeName}>...</h3>
+        nom?<h3 className='title' onClick={() => setNameEdit(true)}>{nom}</h3>:<h3 className='title' onClick={() => setNameEdit(true)}></h3>
       )}
+
+      <div className='vegetable-container'>
+       {vegetable.map((e)=> {return(
+            <>
+            <Vegetable/>
+            </>
+          )})}
+        <button className='addVegetableButton' onClick={(e)=>{e.preventDefault(e); addVegetable(e)}}>+</button>
+      </div>
+
       {/* Bouton pour supprimer la zone */}
       <button className='zoneToDelete' onClick={() => setDeleteModal(true)}>
         Supprimer
@@ -94,7 +128,7 @@ function Zone({nom}) {
       {deleteModal?<form className='deleteModal'>            
         <p>Voulez vous supprimer cette zone et ses légumes?</p>  
         <div className='Modalbuttons'>
-        <button onClick={deleteZone}> supprimer</button>
+        <button onClick={(e) =>{e.preventDefault();deleteZone(e)}}> supprimer</button>
         <button onClick={() => setDeleteModal(false)}>annuler</button>
         </div>
       </form>: null}

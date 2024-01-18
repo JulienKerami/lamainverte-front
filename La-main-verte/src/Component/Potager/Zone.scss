@@ -1,5 +1,6 @@
-.zone{width: 150px;
-        height: 150px;
+.zone{
+    max-height: 500px;
+    max-width: 150px;
     background: rgba(233, 233, 233, 0.5);
 border-radius: 20px;
 margin: 10px;
@@ -36,3 +37,32 @@ p{margin: 3px;
         font-size: 0.7rem;
         padding: 2px 2px;}
 }}
+
+
+.vegetable-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.addVegetableButton{
+    padding: 2px 2px;
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.151);
+    margin: 10px;
+    }
+
+.saveNameButton{padding: 2px 10px;
+    
+margin-top: 10px;
+font-size:0.7rem}
+
+.sameNameError{color: red;
+    font-size: 0.7rem;
+    position: absolute;
+    top: -40px;
+    width: 80%;
+    text-align: center;
+    }
