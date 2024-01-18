@@ -51,7 +51,7 @@ function Signin() {
     // const EmailRegEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
       
     const EmailRegEx = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g
-    const NameRegex = /^[A-Z][-a-zA-Z]+$/
+    const NameRegex = /^[-a-zA-Z]+$/
     
  
     if (NameRegex.test(e.target[0].value) === false) {
@@ -97,10 +97,12 @@ function Signin() {
     //   setPassword1Error(true)
     // }
 
-    // if (e.target[3].value.length < 8) {
-    //   console.log("doit contenir au moins 8 caractères");
-    //   setError("doit contenir au moins 8 caractères")
-    // }
+    if (e.target[3].value.length < 8) {
+      console.log("doit contenir au moins 8 caractères");
+      setPassword1Error(true)
+      setError("doit contenir au moins 8 caractères")
+      validation = false
+    }
 
     /////////////////////////////////////////////////
 
@@ -128,7 +130,7 @@ function Signin() {
       console.log("subscribed!");
       
      const httpResponse = await createUser(UserArray)
-     if(httpResponse.request.statusText === "OK")
+     if(httpResponse.request.status === 200)
      {console.log("test");
       navigate('/')
       alert(`Bienvenue ${UserArray.firstname}, vous pouvez vous connecter à votre compte`)}
