@@ -39,13 +39,16 @@ export async function createUser(user) {
       
       return error;
     }
-  }
+}
 
 
 export async function createZone(userId, name) {
+
+    console.log(localStorage.getItem('name'));
     try {
-        let nameObj = {name: name}
-      const httpResponse = await axios.post(`${url}/users/${userId}/zones`, nameObj, {
+        let nameObj = {name: name, userId: userId}
+        console.log(nameObj);
+      const httpResponse = await axios.post(`${url}/zones`, nameObj, {
         'headers': {
           'Authorization': 'Bearer ' + localStorage.getItem('name')
         }});
@@ -57,26 +60,26 @@ export async function createZone(userId, name) {
       
       return error;
     }
-  }
+}
 
 
 export async function GetAllZones(userId) {
 
-    try {
-      const httpResponse = await axios.get(`${url}/users/${userId}/zones`, {
-        'headers': {
-          'Authorization': 'Bearer ' + localStorage.getItem('name')
-        }});
-      
-      return httpResponse;
-      
-  
-    } catch (error) {
-      
-      return error;
-    }
+  let token = localStorage.getItem('name')
 
-    }
+try {
+  const httpResponse = await instance.get('/vegetables')
+  return httpResponse
+  
+}
+
+catch(error) {
+  return error
+}
+
+
+
+}
 
 
 export async function deleteOneZone(userId, zoneId) {
@@ -88,7 +91,7 @@ export async function deleteOneZone(userId, zoneId) {
 
    catch (error) 
    {return error;}
-  }
+}
 
 
 export async function modifyOneZone(userId, zoneId, name) {
@@ -100,4 +103,17 @@ export async function modifyOneZone(userId, zoneId, name) {
     catch (error) {
       return error
     }
+}
+
+
+export async function getFamily () {
+  try {
+    const httpResponse = await instance.get("/families")
+    return httpResponse
+
   }
+
+  catch(error) {
+    return error
+  }
+}

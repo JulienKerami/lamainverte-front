@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './vegetable.scss'
 
-function Vegetable(props) {
+function Vegetable({name}) {
     const [state, setState] = useState('');
 
     useEffect(() => {
-        return () => {
-
-        }
+       ;
     }, []);
 
     return (
         <>
            <div className='vegetable'>
-            
+            <p>{name}</p>
            </div>
         </>
     )

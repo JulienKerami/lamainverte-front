@@ -1,18 +1,20 @@
 import {useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import  {addZone, editZone, removeZone}  from '../store/slices/zonesSlice'
+
 import './Zone.scss';
 import { vegetable } from '../Data/data';
 import Vegetable from '../Vegetables/Vegetable';
 import { deleteOneZone, modifyOneZone } from '../Apicall/Apicall';
 import { jwtDecode } from 'jwt-decode'
+import { switchVegetableModale } from '../store/slices/vegetableSlice';
 
-function Zone({nom, id}) {
+function Zone({nom, id, plant}) {
 
- 
+  const vegetableSwitch = useSelector((state) => state.vegetable.switch)
   const zoneValue = useSelector((state)=> state.zones.value)      // Accès aux données redux
   const dispatch = useDispatch()
- 
+
   const [deleteModal, setDeleteModal] = useState(false)
   // État pour stocker le nom actuel de la zone
   const [name, setName] = useState("Jardin");
@@ -22,23 +24,24 @@ function Zone({nom, id}) {
   const [nameEdit, setNameEdit] = useState(false);
   const [sameNameModale, setSameNameModale] = useState(false)
   const [emptyNameModale, setEmptyNameModale] = useState(false)
+  
 
 
 
 
   // Fonction pour supprimer la zone
   const deleteZone = async (e) => {
-    console.log(id);
+    
     const token = localStorage.getItem('name')                                  // On récupère l'ID de l'utilisateur avec JWT token
       const decodedToken = jwtDecode(token)                       
       const userId = decodedToken.id
 
     const zoneId = id         //on va chercher l'id de la zone, en remontant depuis le bouton jusqu'à la div principale
-    console.log(deleteModal);
+    
     const zoneDeleted = await deleteOneZone(userId, zoneId )
     dispatch(removeZone(zoneId))
     setDeleteModal(false)
-    console.log(zoneDeleted);
+    
   };
 
   const saveName = async () => {
@@ -50,8 +53,7 @@ function Zone({nom, id}) {
     else{setName(newName)} // Mettre à jour le nom avec le nouveau nom
    
     const searchForSameName = zoneValue.find((e) => (e.name).toLowerCase() === newName.toLowerCase())
-    console.log(searchForSameName)
-    console.log(id);
+    
      // Réinitialiser newName après l'enregistrement
     if (searchForSameName && id !== searchForSameName.id ){setSameNameModale(true);
      return}
@@ -80,16 +82,18 @@ function Zone({nom, id}) {
   };
 
   const addVegetable = (e) => {
-  console.log("vegetable added");
+    dispatch(switchVegetableModale(true))
+
   }
 
 
 
   useEffect(() => {
-  
+ 
   }, []);
 
- 
+
+
   // Rendu du composant
   return (
     <div className='zone' id={id}>
@@ -113,11 +117,13 @@ function Zone({nom, id}) {
       )}
 
       <div className='vegetable-container'>
-       {vegetable.map((e)=> {return(
+       {plant.map((e)=> {
+        return(
             <>
-            <Vegetable/>
+            <Vegetable name={e.variety}/>
             </>
           )})}
+
         <button className='addVegetableButton' onClick={(e)=>{e.preventDefault(e); addVegetable(e)}}>+</button>
       </div>
 

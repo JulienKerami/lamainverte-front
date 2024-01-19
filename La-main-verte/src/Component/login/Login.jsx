@@ -19,7 +19,7 @@ function Login(props) {
 
     const user = await fetchUser(userInfos).then((res) => {
         
-       
+       console.log(res);
 
         if(res.status == 200) {
 

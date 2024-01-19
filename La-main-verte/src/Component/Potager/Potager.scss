@@ -1,4 +1,6 @@
-.potager-container{margin: 20px;}
+.potager-container{margin: 20px;
+position: relative;
+z-index: 0;}
 
 .zone-container {
     display: flex;
@@ -69,4 +71,40 @@ border-radius: 5px;
 height: 30px;
 font-size: 1rem;
 padding: 5px
+}
+
+.vegetableModale{height: 80%;
+width: 80%;
+background: rgb(236, 236, 236);
+border-radius: 20px;
+position: absolute;
+z-index: 1;
+display: flex;
+flex-wrap: wrap;
+}
+
+.family-container{
+    height: 100%;
+    overflow: scroll;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.family{padding: 10px 20px;
+margin: 15px;
+background: greenyellow;
+border-radius: 5px;}
+
+
+
+.addVegetableForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    input{margin: 10px;
+            border: none;
+        border-radius: 5px;
+    padding:10px}
 }
