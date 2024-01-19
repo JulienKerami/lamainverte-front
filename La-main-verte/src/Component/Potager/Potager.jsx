@@ -28,9 +28,15 @@ function Potager(props) {
   
     const [oneFamily, setOneFamily] = useState("")
     const [family, setFamily] = useState([])
-    const [croissance, setCroissance] = useState("")
-    
+    const [dateArray, setDateArray] = useState([])
 
+    const [startDateHarvest, setStartDateHarvest] = useState("2024-11-05")
+    const [endDateHarvest, setEndDateHarvest] = useState("2024-11-05")
+    const [startDateSeeding, setStartDateSeeding] = useState("")
+    const [endDateSeeding, setEndDateSeeding] = useState("")
+    const [startDatePlanting, setStartDatePlanting] = useState("2024-11-05")
+    const [endDatePlanting, setEndDatePlanting] = useState("2024-11-05")
+ 
     useEffect( () => {
      const Data = GetZonesFromBDD()
      getFamilies()
@@ -38,19 +44,19 @@ function Potager(props) {
 
     useEffect(() => {
       setAddVarietyModale(vegetableSwitch);
-      console.log(vegetableFamily);
+      
       setFamily(vegetableFamily)
     }, [vegetableSwitch])
 
     useEffect(()=> {
-      console.log(family);
+      
     }, [family])
 
 
 
     const getFamilies = async () => {
       const legumes = await getFamily()
-      console.log(legumes.data);
+     
       let legumesArray = legumes.data
       dispatch(addFamily(legumesArray))
       
@@ -94,10 +100,46 @@ function Potager(props) {
 
     const addVegetable = async (e) => {
       console.log(e.target.textContent);
-
       setOneFamily(e.target.textContent)
-      const vegetable = vegetableFamily.find((element)=> element.name === e.target.textContent)
+      const vegetable = vegetableFamily.find((element)=> element.name === e.target.textContent) // recupère le vegetable grâce au nom
       console.log(vegetable);
+
+    
+      let date = new Date()
+      let year = date.getFullYear()
+     
+      if(vegetable.start_date_day_seeding)
+      {
+        const startSeedingDate = "2024-03-22"
+        //`${vegetable.start_date_day_seeding }/${vegetable.start_date_month_seeding}/${year}`
+        const endSeedingDate= "2024-04-12"
+        // `${vegetable.end_date_day_seeding}/${vegetable.end_date_month_seeding}/${year}`
+        console.log(startSeedingDate);
+        // DateArray.push({startSeedDate:startSeedingDate, endSeedDate: endSeedingDate })
+
+      }
+
+      const startPlantingdDate = "2024-11-04"
+             //`${vegetable.start_date_day_planting}/${vegetable.start_date_month_planting}/${year}`
+      const endPlantingDate = "2024-11-05"
+      //`${vegetable.end_date_d2024-planting}/${vegetable.end_date_month_planting}/${year}`
+
+     
+
+      const startRecoltingDate = "2024-05-04"
+      // `${vegetable.start_date_day_harvest}/${vegetable.start_date_month_harvest}/${year}`
+      const endRecoltingDate = "2024-06-04"
+      // `${vegetable.end_date_day_harvest}/${vegetable.end_date_month_harvest}/${year}`
+
+      // DateArray.push({startPlantDate: startPlantingdDate, endPlantDate: endPlantingDate },{startRecoltDate: startRecoltingDate, endRecoltDate: endRecoltingDate })
+
+      // setDateArray(DateArray)
+
+      
+ 
+        
+      
+
       setAddVegetableModale(true)
     }
    
@@ -128,13 +170,31 @@ function Potager(props) {
 
       {addVegetableModale?<><div className='vegetableModale'>
         <form action="submit" className='addVegetableForm'>
-            <label htmlFor="family">légume</label>
-            <input name='family' type="text" value={oneFamily} placeholder='' onChange={(e) => setOneFamily(e.target.value)} />
-            <label htmlFor="croissance">temps de croissance</label>
-            <input name="croissance" type="text" placeholder=''/>
-            <label htmlFor=""></label>
-            <input type="text" />
+            <label htmlFor="">Légume :
+            <input  type="text" value={oneFamily} placeholder='' onChange={(e) => setOneFamily(e.target.value)} />
+            </label>
+           
+            {startDateSeeding?<> <label htmlFor="seeding">Semage (debut/fin): <div className='creneau' >
+              <input type="date" value={startDateSeeding} onChange={(e)=> setStartDateHarvest(e.target.value)} />
+              <input type="date" value={endDateSeeding} onChange={(e)=> setEndDateSeeding(e.target.value)}/>
+              </div> 
+              </label></>:null}
+              <label htmlFor="seeding">plantation (debut/fin): 
+              <div className='creneau' >
+                <input type="date" value={startDatePlanting} onChange={(e)=> setStartDatePlanting(e.target.value)} />
+                <input type="date" value={endDatePlanting} onChange={(e)=> setEndDatePlanting(e.target.value)}/>
+              </div>
+              </label>
+              <label htmlFor="seeding">recolte (debut/fin): 
+              <div className='creneau' >
+                <input type="date" value={startDateHarvest} onChange={(e)=> setStartDateHarvest(e.target.value)}/>
+                <input type="date" value={endDateHarvest} onChange={(e)=> setEndDateHarvest(e.target.value)}/>
+              </div>
+              </label>
+            <button onClick={(e) => {e.preventDefault(); setAddVegetableModale(false)}}>fermer</button>
+        <button>ajouter un plant</button>
         </form>
+       
         </div></>:null}
 
 
@@ -160,7 +220,7 @@ function Potager(props) {
       {vegetableSwitch||addVegetableModale? null: <><button className='zoneToAdd' onClick={()=> setZoneModale(true)}>+</button></>}  
       </section>
     </main>
-  </>:<><h3>veuillez vous créer un compte</h3></>}
+  </>:<><h3>veuillez vous créer un compte :)</h3></>}
     </>)
 }
 

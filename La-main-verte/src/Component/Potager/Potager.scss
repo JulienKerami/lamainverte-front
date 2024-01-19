@@ -73,8 +73,10 @@ font-size: 1rem;
 padding: 5px
 }
 
-.vegetableModale{height: 80%;
-width: 80%;
+
+
+.vegetableModale{
+width: 100%;
 background: rgb(236, 236, 236);
 border-radius: 20px;
 position: absolute;
@@ -102,9 +104,21 @@ border-radius: 5px;}
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    max-height: 600px;
 
     input{margin: 10px;
-            border: none;
+        border: none;
         border-radius: 5px;
-    padding:10px}
+        padding:10px;
+        width: 50%;
+        }
+    label{font-size: 0.9rem;
+    text-align: center;}
+
+    .creneau{
+        display: flex;
+        input{width: 50%;}
+        }
+        
+    button{margin: 10px;}
 }
