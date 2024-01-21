@@ -20,9 +20,10 @@ function Potager(props) {
     const vegetableSwitch = useSelector((state) => state.vegetable.switch)
     const vegetableFamily = useSelector((state) => state.vegetable.familyValue)
     const selectedZoneId = useSelector((state) => state.zones.zoneId)
+    const vegetableModaleSwitch = useSelector((state) => state.vegetable.vegeInfoSwitch )
     const dispatch = useDispatch()
 
-    //States pour gérerles modales
+    //States pour gérer les modales
     const [zoneModale, setZoneModale] = useState(false)
     const [sameNameModale, setSameNameModale] = useState(false)
     const [emptyNameModale, setEmptyNameModale] = useState(false)
@@ -240,7 +241,34 @@ function Potager(props) {
           && VegetableObj.end_date_period_seeding && VegetableObj.start_date_period_planting && VegetableObj.end_date_period_planting 
           && VegetableObj.start_date_period_harvest && VegetableObj.end_date_period_harvest   ) // vérifie que tout les inputs obligatoires sont remplis
         {console.log("vegetable created!");
-          const createdVegetable = await createVegetable(VegetableObj)
+
+        const ZoneToAddPlant = zoneValue.find((e)=> e.id === selectedZoneId)
+        
+        
+
+        const zoneToModify = (element) => element.id === selectedZoneId;
+        const index = zoneValue.findIndex(zoneToModify)
+
+        const array = zoneValue[index].vegetable
+        const arrayToModify = [...zoneValue, {...zoneValue[index], vegetable: [...array, VegetableObj ]}]
+        console.log(arrayToModify);
+        
+       
+        
+        const newArray = [...array, VegetableObj]
+        const FinalArray = {...arrayToModify[index], vegetable:newArray}
+        
+        const FinalValue = [...arraySpliced, FinalArray]
+        
+        console.log(FinalValue);
+
+
+        console.log(ZoneToAddPlant);
+
+        // const createdVegetable = await createVegetable(VegetableObj)
+        
+        
+
           console.log(createdVegetable);
         setInvalidVegetableFormModale(false)
         setAddVegetableModale(false)
@@ -302,6 +330,7 @@ function Potager(props) {
               <input type="date" value={endDateSeeding} onChange={(e)=> {setEndDateSeeding(e.target.value)}}/>
               </div> 
               </label></>:null}
+
               <label htmlFor="seeding">* période de plantation (début/fin): 
               <div className='creneau' >
                 <input type="date" value={startDatePlanting} onChange={(e)=> {setStartDatePlanting(e.target.value)}} />
@@ -355,7 +384,12 @@ function Potager(props) {
           wrapperStyle
           wrapperClass
         /></>}
+
+        {vegetableModaleSwitch?<><div className='VegeInfoSwitch'>
+        <p>infos</p></div></>:null}
       </section>
+
+      
       
       <section className='zone-container'>
       {zoneModale?<div className='zoneModale'>
@@ -374,6 +408,8 @@ function Potager(props) {
       </section>
     </main>
   </>:<><h3>veuillez vous créer un compte ou vous connecter :)</h3></>}
+
+
     </>)
 }
 

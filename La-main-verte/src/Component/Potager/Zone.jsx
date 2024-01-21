@@ -92,7 +92,7 @@ function Zone({nom, id, plant}) {
 
 
   useEffect(() => {
- 
+    console.log(plant);
   }, []);
 
 
@@ -123,10 +123,10 @@ function Zone({nom, id, plant}) {
        {plant?<>{plant.map((e)=> {
         return(
             <>
-            <Vegetable name={e.variety}/>
+            <Vegetable name={e.variety} plant={e} />
             </>
           )})}</>:null}
-
+        
         <button className='addVegetableButton' onClick={(e)=>{e.preventDefault(e); addVegetable(e)}}>+</button>
       </div>
 

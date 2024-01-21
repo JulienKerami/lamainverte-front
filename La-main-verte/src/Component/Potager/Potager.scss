@@ -7,6 +7,7 @@ flex-direction: column;}
 .zone-container {
     display: flex;
     flex-wrap: wrap;
+    position: relative;
 }
 
 h2{margin: 20px;}
@@ -147,6 +148,12 @@ min-height: 120px;
 }
 
 
-
+.VegeInfoSwitch{background: rgb(249, 255, 240);
+border-radius: 10px;
+min-height: 100px;
+min-width: 100px;
+position: absolute;
+left: 35%;
+}
 
 
