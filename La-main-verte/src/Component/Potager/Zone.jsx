@@ -1,11 +1,11 @@
 import {useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import  {addZone, editZone, removeZone}  from '../store/slices/zonesSlice'
+import  {addZone, editZone, removeZone, selectZoneId}  from '../store/slices/zonesSlice'
 
 import './Zone.scss';
 import { vegetable } from '../Data/data';
 import Vegetable from '../Vegetables/Vegetable';
-import { deleteOneZone, modifyOneZone } from '../Apicall/Apicall';
+import { deleteOneZone, modifyOneZone, } from '../Apicall/Apicall';
 import { jwtDecode } from 'jwt-decode'
 import { switchVegetableModale } from '../store/slices/vegetableSlice';
 
@@ -84,6 +84,8 @@ function Zone({nom, id, plant}) {
 
   const addVegetable = (e) => {
     dispatch(switchVegetableModale(true))
+    console.log(id);
+    dispatch(selectZoneId(id))
 
   }
 

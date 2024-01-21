@@ -118,3 +118,13 @@ export async function getFamily () {
     return error
   }
 }
+
+export async function createVegetable (vegeObj){
+
+  console.log(vegeObj);
+  try {const httpResponse = await instance.post("/vegetables", vegeObj)
+return httpResponse}
+
+catch(error) 
+{return error}
+}

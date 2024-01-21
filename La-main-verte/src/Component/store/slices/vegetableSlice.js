@@ -7,7 +7,8 @@ const vegetableSlice = createSlice({
    initialState : {
       familyValue : [],
       vegetableValue: [],
-      switch: false
+      switch: false,
+      
      
    }
 , // The initial state of the slice.
@@ -16,11 +17,12 @@ const vegetableSlice = createSlice({
        state.switch = action.payload},
        addFamily: (state, action ) => {
         state.familyValue = action.payload
-       }
+       },
+      
 
       }
 })
 
 
-export const {switchVegetableModale, addFamily} = vegetableSlice.actions;
+export const {switchVegetableModale, addFamily, selectZoneId} = vegetableSlice.actions;
 export default vegetableSlice.reducer;
