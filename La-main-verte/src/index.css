@@ -1,4 +1,15 @@
 :root {
+
+    /* Typographies */
+    --font-principale: 'Poppins', sans-serif;
+    --font-secondaire: 'Permanent Marker', cursive;
+  
+    /* Palette de Couleurs */
+    --couleur-vert-clair: #89a57c; /* ex : pour le nom “La Main Verte” */
+    --couleur-vert-foncé: #203624; /* ex : pour le fond */
+    --couleur-beige: #e8ddd1;
+  
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
