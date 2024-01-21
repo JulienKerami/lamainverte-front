@@ -85,7 +85,7 @@ catch(error) {
 export async function deleteOneZone(userId, zoneId) {
 
    try {
-    const httpResponse = await instance.delete(`/users/${userId}/zones/${zoneId}`)
+    const httpResponse = await instance.delete(`/zones/${zoneId}`)
     return httpResponse
    }
 
@@ -94,9 +94,10 @@ export async function deleteOneZone(userId, zoneId) {
 }
 
 
-export async function modifyOneZone(userId, zoneId, name) {
+export async function modifyOneZone(zoneId, name) {
+  console.log(zoneId, name);
     try{ 
-      const httpResponse = await instance.patch(`/users/${userId}/zones/${zoneId}`, {name: name})
+      const httpResponse = await instance.patch(`/zones/${zoneId}`, {name: name})
       return httpResponse
     }
 

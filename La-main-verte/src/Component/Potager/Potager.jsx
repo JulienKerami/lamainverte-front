@@ -32,8 +32,8 @@ function Potager(props) {
 
     const [startDateHarvest, setStartDateHarvest] = useState("2024-11-05")
     const [endDateHarvest, setEndDateHarvest] = useState("2024-11-05")
-    const [startDateSeeding, setStartDateSeeding] = useState("")
-    const [endDateSeeding, setEndDateSeeding] = useState("")
+    const [startDateSeeding, setStartDateSeeding] = useState("2024-11-05")
+    const [endDateSeeding, setEndDateSeeding] = useState("2024-11-06")
     const [startDatePlanting, setStartDatePlanting] = useState("2024-11-05")
     const [endDatePlanting, setEndDatePlanting] = useState("2024-11-05")
  
@@ -78,12 +78,14 @@ function Potager(props) {
       
       console.log('Une nouvelle zone à été ajoutée');
       const name = e.target.form[0].value
-      if(name ==="") {setEmptyNameModale(true); return}
+      if(name ==="") {setEmptyNameModale(true)
+        setSameNameModale(false); return}
       
       if(zoneValue){
       const searchForSameName = zoneValue.find((e) => e.name === name)
       if(searchForSameName) {
         setSameNameModale(true)
+        setEmptyNameModale(false)
         return}
         setSameNameModale(false)
         setZoneModale(false)
@@ -99,7 +101,7 @@ function Potager(props) {
   }
 
     const addVegetable = async (e) => {
-      console.log(e.target.textContent);
+      
       setOneFamily(e.target.textContent)
       const vegetable = vegetableFamily.find((element)=> element.name === e.target.textContent) // recupère le vegetable grâce au nom
       console.log(vegetable);
@@ -114,7 +116,7 @@ function Potager(props) {
         //`${vegetable.start_date_day_seeding }/${vegetable.start_date_month_seeding}/${year}`
         const endSeedingDate= "2024-04-12"
         // `${vegetable.end_date_day_seeding}/${vegetable.end_date_month_seeding}/${year}`
-        console.log(startSeedingDate);
+       
         // DateArray.push({startSeedDate:startSeedingDate, endSeedDate: endSeedingDate })
 
       }
@@ -143,7 +145,16 @@ function Potager(props) {
       setAddVegetableModale(true)
     }
    
-
+    const DateHandle = (e, dateToCompare) => { console.log(e.target.value);
+    let newdate = e.target.value;
+    let parseNewDate = Date.parse(newdate)
+    let parseOtherDate = Date.parse(dateToCompare)
+    if(parseNewDate > parseOtherDate) {console.log("error");
+    setStartDateSeeding(dateToCompare)}
+    
+    else if (parseNewDate < parseOtherDate) {
+      setStartDateSeeding(newdate)
+    }}
 
     return (
     <>
@@ -175,7 +186,7 @@ function Potager(props) {
             </label>
            
             {startDateSeeding?<> <label htmlFor="seeding">Semage (debut/fin): <div className='creneau' >
-              <input type="date" value={startDateSeeding} onChange={(e)=> setStartDateHarvest(e.target.value)} />
+              <input type="date" value={startDateSeeding} onChange={(e)=> {DateHandle(e, endDateSeeding)}} />                
               <input type="date" value={endDateSeeding} onChange={(e)=> setEndDateSeeding(e.target.value)}/>
               </div> 
               </label></>:null}

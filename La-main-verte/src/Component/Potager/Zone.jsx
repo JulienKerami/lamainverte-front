@@ -66,7 +66,8 @@ function Zone({nom, id, plant}) {
      const decodedToken = jwtDecode(token)
      const userId = decodedToken.id
   
-    const zoneModified = await modifyOneZone(userId, id, newName)
+    const zoneModified = await modifyOneZone(id, newName)
+    console.log(zoneModified);
     
         const NewArray = zoneValue.map(obj => {      //Création d'un nouveau tableau qui inclue la zone dont l'utilisateur a modifié le nom.
     if (obj.name === nom) {
@@ -117,12 +118,12 @@ function Zone({nom, id, plant}) {
       )}
 
       <div className='vegetable-container'>
-       {plant.map((e)=> {
+       {plant?<>{plant.map((e)=> {
         return(
             <>
             <Vegetable name={e.variety}/>
             </>
-          )})}
+          )})}</>:null}
 
         <button className='addVegetableButton' onClick={(e)=>{e.preventDefault(e); addVegetable(e)}}>+</button>
       </div>
