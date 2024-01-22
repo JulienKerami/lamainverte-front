@@ -7,6 +7,7 @@ const vegetableSlice = createSlice({
    initialState : {
       familyValue : [],
       vegetableValue: [],
+      vegetableSelected: {},
       switch: false,
       vegeInfoSwitch: false
       
@@ -19,11 +20,16 @@ const vegetableSlice = createSlice({
        addFamily: (state, action ) => {
         state.familyValue = action.payload
        },
+       addVegetable: (state, action ) => {
+         state.vegetableValue = action.payload},
        switchVegeInfoModale: (state, action) => {
          state.vegeInfoSwitch = action.payload}
+      },
+      selectVegetable: (state, action) => {
+         state.vegetableIdSelected = action.payload
       }
 })
 
 
-export const {switchVegetableModale, addFamily, selectZoneId, switchVegeInfoModale} = vegetableSlice.actions;
+export const {switchVegetableModale, addFamily, selectZoneId, switchVegeInfoModale, selectVegetable} = vegetableSlice.actions;
 export default vegetableSlice.reducer;
