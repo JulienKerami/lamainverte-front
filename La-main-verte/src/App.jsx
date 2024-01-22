@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Navbar from './Component/Navbar/Navbar'
+import Todo from './Component/Todo/Todo'
 import Login from './Component/login/Login'
 import Potager from './Component/Potager/Potager'
 import './App.css'
@@ -26,7 +27,7 @@ function App() {
       <Route path='/signin' element={<SignIn/>}/>
       <Route path='/' element={<Home/>}/>
       <Route path='/login' element={<Login/>}/>
-      
+      <Route path='/todo' element={<Todo/>}/>
     </Routes>
     </Provider>
     </>
