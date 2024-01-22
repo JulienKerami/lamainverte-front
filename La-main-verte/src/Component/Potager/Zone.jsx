@@ -19,7 +19,7 @@ function Zone({nom, id, plant}) {
   // État pour stocker le nom actuel de la zone
   const [name, setName] = useState("Jardin");
   // État pour stocker le nouveau nom pendant l'édition
-  const [newName, setNewName] = useState("");
+  const [newName, setNewName] = useState(nom);
   // État pour suivre si l'édition est active ou non
   const [nameEdit, setNameEdit] = useState(false);
   const [sameNameModale, setSameNameModale] = useState(false)
@@ -59,7 +59,7 @@ function Zone({nom, id, plant}) {
      return}
 
      setNameEdit(false)
-     setNewName("")
+     
 
 
      const token = localStorage.getItem('name')
@@ -84,7 +84,7 @@ function Zone({nom, id, plant}) {
 
   const addVegetable = (e) => {
     dispatch(switchVegetableModale(true))
-   
+    console.log(id);
     dispatch(selectZoneId(id))
 
   }
@@ -92,7 +92,7 @@ function Zone({nom, id, plant}) {
 
 
   useEffect(() => {
-    
+    console.log(plant);
   }, []);
 
 
@@ -107,6 +107,7 @@ function Zone({nom, id, plant}) {
           <input
           className='EditName'
             type="text"
+            value={newName}
             placeholder={nom}
             onChange={(e)=> setNewName(e.target.value)}
           />

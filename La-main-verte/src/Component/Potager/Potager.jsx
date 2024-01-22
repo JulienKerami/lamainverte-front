@@ -280,11 +280,19 @@ function Potager(props) {
             <li>temps de croissance: {SelectedVegetable.growth_time} jours</li>
           </ul>
           <div className='tasks'>
-          <h5>tâches à faire:</h5> 
+          <h5>tâches à faire</h5> 
           {SelectedVegetable.task[0].type== "seeding"?<p>semer: {SelectedVegetable.task[0].status}</p>:<p>planter: {SelectedVegetable.task[0].status} </p>} 
           {SelectedVegetable.task[1].type =="planting"? <p>planter: {SelectedVegetable.task[1].status} </p>:<p>recolter: {SelectedVegetable.task[1].status} </p>} 
           
-          {SelectedVegetable.task[2]? <>{SelectedVegetable.task[2].type}</>:null}
+          {SelectedVegetable.task[2]? <>recolter: {SelectedVegetable.task[2].status} </>:null}
+          </div>
+          <div className='familyInfos'>
+                  <p><h5>Informations sur la famille de légume</h5></p>
+                  <p>profondeur: {selectedFamily.depth}</p>
+                  <p>exposition: {selectedFamily.exposure}</p>
+                  <p>espacement entre les rangés: {selectedFamily.row_spacing}</p>
+                  <p>espacement entre les plants: {selectedFamily.spacing}</p>
+                  <p>type de sol: {selectedFamily.soil_type}</p>
           </div>
           <button onClick={(e) => {HandleDeleteVegetable()}}>supprimer le plant</button>
         </div></>:null} 
