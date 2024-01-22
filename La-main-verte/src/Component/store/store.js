@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-
+import todoReducer from './slices/todoSlice';
 import zonesReducer from './slices/zonesSlice'
 import vegetableReducer from './slices/vegetableSlice'
 
@@ -10,7 +10,7 @@ const store = configureStore({
    
    zones: zonesReducer,
    vegetable: vegetableReducer,
-  
+   todo: todoReducer,
    devtools: true
  },
 });
