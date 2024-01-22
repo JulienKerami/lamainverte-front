@@ -150,10 +150,14 @@ min-height: 120px;
 
 .VegeInfoSwitch{background: rgb(249, 255, 240);
 border-radius: 10px;
-min-height: 100px;
-min-width: 100px;
-position: absolute;
-left: 35%;
+min-height: 300px;
+min-width: 200px;
+padding: 20px;
+position: fixed;
+top: 40% ;
+left: 10%;
+z-index: 5;
+
 }
 
 

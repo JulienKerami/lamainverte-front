@@ -84,7 +84,7 @@ function Zone({nom, id, plant}) {
 
   const addVegetable = (e) => {
     dispatch(switchVegetableModale(true))
-    console.log(id);
+   
     dispatch(selectZoneId(id))
 
   }
@@ -92,7 +92,7 @@ function Zone({nom, id, plant}) {
 
 
   useEffect(() => {
-    console.log(plant);
+    
   }, []);
 
 

@@ -121,10 +121,28 @@ export async function getFamily () {
 
 export async function createVegetable (vegeObj){
 
+  let newVegeObj = {}
   console.log(vegeObj);
-  try {const httpResponse = await instance.post("/vegetables", vegeObj)
-return httpResponse}
+  if(vegeObj.start_date_period_seeding === 1)
+  { newVegeObj = {...vegeObj, start_date_period_seeding: null, end_date_period_seeding: null}}
+  else { newVegeObj = vegeObj}
+
+  
+  try {const httpResponse = await instance.post("/vegetables", newVegeObj)
+return httpResponse
+}
 
 catch(error) 
 {return error}
+}
+
+export async function deleteVegetable (vegeId) {
+  console.log(vegeId);
+try { const httpResponse = await instance.delete(`/vegetables/${vegeId}`)
+return httpResponse
+}
+
+catch (error) {
+  return error
+}
 }
