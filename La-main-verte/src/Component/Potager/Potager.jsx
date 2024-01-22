@@ -281,8 +281,8 @@ function Potager(props) {
           </ul>
           <div className='tasks'>
           <h5>tâches à faire:</h5> 
-          {SelectedVegetable.task[0].type== "seeding"?<p>semer</p>:<p>planter</p>}
-          <p>{SelectedVegetable.task[1].type}</p>
+          {SelectedVegetable.task[0].type== "seeding"?<p>semer: {SelectedVegetable.task[0].status}</p>:<p>planter: {SelectedVegetable.task[0].status} </p>} 
+          {SelectedVegetable.task[1].type =="planting"? <p>planter: {SelectedVegetable.task[1].status} </p>:<p>recolter: {SelectedVegetable.task[1].status} </p>} 
           
           {SelectedVegetable.task[2]? <>{SelectedVegetable.task[2].type}</>:null}
           </div>
