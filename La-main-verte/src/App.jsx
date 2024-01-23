@@ -50,22 +50,26 @@ function App() {
      
    } 
 
-
-  return (
+   return (
     <>
-
-    <h1>La main verte</h1>
-  
-    
-    <Navbar/>
-    <Routes>
-      <Route path='/potager' element={<Potager/>}/>
-      <Route path='/signin' element={<SignIn/>}/>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/login' element={<Login/>}/>
-      <Route path='/todo' element={<Todo/>}/>
-    </Routes>
-    
+      <div className='header'>
+        <div className="logo">
+          <img src="/src/assets/logo.png" alt="logo laMainVerte" className='logo-img' /> 
+          <div className="logo-title">
+            <span>la</span>
+            <span>main</span>
+            <span className="logo-title_text">verte</span>
+          </div>
+        </div>
+      </div>
+        <Navbar/>
+        <Routes>
+          <Route path='/potager' element={<Potager/>}/>
+          <Route path='/signin' element={<SignIn/>}/>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/todo' element={<Todo/>}/>
+        </Routes>
     </>
   )
 }
