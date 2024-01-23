@@ -1,8 +1,15 @@
-.header__nav{
+#root{
+    background-color: #203624;
+}
+
+.navbar{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background: rgb(245, 245, 245);
-    height: 100px
+    background:#e8ddd1;
+    height: 30px
+}
 
+.navbar-link{
+    color: black;
 }

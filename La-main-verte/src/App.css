@@ -12,6 +12,7 @@
   flex-direction: column;
   height: 16vh; 
   width: 100%;
+  background-color: white;
 }
 
 .logo {
@@ -42,6 +43,30 @@
 .logo-title_text{
   font-family: Permanent Marker;
 }
+
+.navbarToggle{
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  margin-left: 80vw;
+}
+
+.navbarToggle:focus{
+  outline: none;
+}
+
+.navbarToggle-img {
+  width: 35px;
+  height: 3px;
+  background: #203624;
+  margin: 3px 0; 
+  border-radius: 10px;
+}
+
+
 
 
 

@@ -9,25 +9,19 @@ const Navbar = () => {
   navigate(`/`)}
 
     return(
-        <header className="header">
-        <section className="header__title">
-          
-          <nav className="header__nav">
+
+          <nav className="navbar">
             {localStorage.name?<>
-            <Link to='/' className="header__nav__h2">Accueil</Link>
-            <Link to='/potager' className="header__nav__h2">Potager</Link>
-            <Link to='/todo' className="header__nav__h2">Todo</Link>
-            <Link className="header__nav__h2" onClick={()=> {logout()}}>Deconnexion</Link></>
-            :<><Link to='/' className="header__nav__h2">Accueil</Link>
-            <Link to='/signin'className="header__nav__h2">Créer un compte </Link> 
-            <Link to='/login' className="header__nav__h2">Connexion</Link></>
+            <Link to='/' className="navbar-link">Accueil</Link>
+            <Link to='/potager' className="navbar-link">Potager</Link>
+            <Link to='/todo' className="navbar-link">Todo</Link>
+            <Link className="navbar-link" onClick={()=> {logout()}}>Deconnexion</Link></>
+            :<><Link to='/' className="navbar-link">Accueil</Link>
+            <Link to='/signin'className="navbar-link">Créer un compte </Link> 
+            <Link to='/login' className="navbar-link">Connexion</Link></>
             }
-            
-            
           </nav>
-        </section>
-       
-      </header>
+    
     )
 }
 
