@@ -10,6 +10,7 @@ import { GetAllZones, createZone, getFamily, createVegetable, deleteVegetable } 
 import { addFamily } from '../store/slices/vegetableSlice';
 import { switchVegetableModale, switchVegeInfoModale } from '../store/slices/vegetableSlice';
 import { Audio } from 'react-loader-spinner'
+import { toggleAddFamilyModale, toggleAddZoneModale, toggleDeleteZoneModale } from '../store/slices/modaleSlice';
 
 
 
@@ -23,10 +24,15 @@ function Potager(props) {
     const vegetableInfosModaleSwitch = useSelector((state) => state.vegetable.vegeInfoSwitch )
     const SelectedVegetable = useSelector((state) => state.vegetable.vegetableSelected )
     const selectedFamily = useSelector((state) => state.vegetable.selectedFamily)
+
+    const addFamilyModale = useSelector((state) => state.modale.addFamilyModale)
+    const deleteZoneModale = useSelector((state) => state.modale.deleteZoneModale)
+    const addZoneModale = useSelector((state) => state.modale.addZoneModale)
+
     const dispatch = useDispatch()
 
     //States pour gérer les MODALES
-    const [zoneModale, setZoneModale] = useState(false)
+    
     const [sameNameModale, setSameNameModale] = useState(false)
     const [emptyNameModale, setEmptyNameModale] = useState(false)
     const [addVarietyModale, setAddVarietyModale] = useState(false)
@@ -68,14 +74,14 @@ function Potager(props) {
 
 
     useEffect(()=> {
-      console.log(SelectedVegetable.family_id);
+      console.log(addFamilyModale, deleteZoneModale, addZoneModale);
    
     
-      console.log(selectedFamily);
+ 
       
     }, [vegetableInfosModaleSwitch])
 
-
+    
 
     const getFamilies = async () => {
       const legumes = await getFamily()
@@ -112,7 +118,7 @@ function Potager(props) {
         setEmptyNameModale(false)
         return}
         setSameNameModale(false)
-        setZoneModale(false)
+        dispatch(toggleAddZoneModale(false))
       }
       const token = localStorage.getItem('name')       // On récupère l'ID de l'utilisateur avec JWT token
       const decodedToken = jwtDecode(token)
@@ -384,22 +390,22 @@ function Potager(props) {
       
       {/* Modale d'ajout de zone, elle s'affiche au clique sur le gros +  */}
       <section className='.zone-add-button'>
-      {zoneModale?<div className='zoneModale'>
+      {addZoneModale?<div className='zoneModale'>
         <form className='ModalForm' action="">
           {sameNameModale?<><span className='sameNameMessage'>Vous avez déja une zone à ce nom</span></>:null}
           {emptyNameModale?<><span className='sameNameMessage'> Au moins une lettre?</span></>:null}
           <input className='formInput'  placeholder='Nom de zone' type="text" />
           <div className='ModalButtons'>
           <button type='submit' onClick={(e) => {e.preventDefault(); AddZoneHandle(e)}}>valider</button>
-          <button onClick={(e)=>{e.preventDefault(); setZoneModale(false);setSameNameModale(false) }} >annuler</button>
+          <button onClick={(e)=>{e.preventDefault(); dispatch(toggleAddZoneModale(false));setSameNameModale(false);setEmptyNameModale(false) }} >annuler</button>
           </div>
         </form>
       
       </div>:null}
-      {vegetableSwitch||addVegetableModale? null: <><button className='zoneToAdd' onClick={()=> setZoneModale(true)}>+</button></>}  
+      {vegetableSwitch||addVegetableModale? null: <><button className='zoneToAdd' onClick={()=> {dispatch(toggleAddZoneModale(true))}}>+</button></>}  
       </section>
     </main>
-  </>:<><h3>veuillez vous créer un compte ou vous connecter :)</h3></>}
+  </>:<><div className='NoTokenpage'><h3>veuillez vous créer un compte ou vous connecter :)</h3></div></>}
 
 
     </>)

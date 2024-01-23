@@ -41,7 +41,7 @@ function Login(props) {
     
 
     return (
-        <>
+        <><section className='form-container'>
            <form className='login'action="submit" onSubmit={(e) =>{e.preventDefault(); handleSubmit(e)}}>
             {error?<p style={{color:"red", fontSize:"1rem"}}>{error}</p>: null}
 
@@ -49,6 +49,7 @@ function Login(props) {
             <input type="password" placeholder='mot de passe' />
             <button>connexion</button>
            </form>
+           </section>
         </>
     )
 }
