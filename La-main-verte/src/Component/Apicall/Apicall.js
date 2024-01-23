@@ -39,13 +39,16 @@ export async function createUser(user) {
       
       return error;
     }
-  }
+}
 
 
 export async function createZone(userId, name) {
+
+    console.log(localStorage.getItem('name'));
     try {
-        let nameObj = {name: name}
-      const httpResponse = await axios.post(`${url}/users/${userId}/zones`, nameObj, {
+        let nameObj = {name: name, userId: userId}
+        console.log(nameObj);
+      const httpResponse = await axios.post(`${url}/zones`, nameObj, {
         'headers': {
           'Authorization': 'Bearer ' + localStorage.getItem('name')
         }});
@@ -57,47 +60,89 @@ export async function createZone(userId, name) {
       
       return error;
     }
-  }
+}
 
 
 export async function GetAllZones(userId) {
 
-    try {
-      const httpResponse = await axios.get(`${url}/users/${userId}/zones`, {
-        'headers': {
-          'Authorization': 'Bearer ' + localStorage.getItem('name')
-        }});
-      
-      return httpResponse;
-      
-  
-    } catch (error) {
-      
-      return error;
-    }
+  let token = localStorage.getItem('name')
 
-    }
+try {
+  const httpResponse = await instance.get('/vegetables')
+  return httpResponse
+  
+}
+
+catch(error) {
+  return error
+}
+
+
+
+}
 
 
 export async function deleteOneZone(userId, zoneId) {
 
    try {
-    const httpResponse = await instance.delete(`/users/${userId}/zones/${zoneId}`)
+    const httpResponse = await instance.delete(`/zones/${zoneId}`)
     return httpResponse
    }
 
    catch (error) 
    {return error;}
-  }
+}
 
 
-export async function modifyOneZone(userId, zoneId, name) {
+export async function modifyOneZone(zoneId, name) {
+  console.log(zoneId, name);
     try{ 
-      const httpResponse = await instance.patch(`/users/${userId}/zones/${zoneId}`, {name: name})
+      const httpResponse = await instance.patch(`/zones/${zoneId}`, {name: name})
       return httpResponse
     }
 
     catch (error) {
       return error
     }
+}
+
+
+export async function getFamily () {
+  try {
+    const httpResponse = await instance.get("/families")
+    return httpResponse
+
   }
+
+  catch(error) {
+    return error
+  }
+}
+
+export async function createVegetable (vegeObj){
+
+  let newVegeObj = {}
+  console.log(vegeObj);
+  if(vegeObj.start_date_period_seeding === 1)
+  { newVegeObj = {...vegeObj, start_date_period_seeding: null, end_date_period_seeding: null}}
+  else { newVegeObj = vegeObj}
+
+  
+  try {const httpResponse = await instance.post("/vegetables", newVegeObj)
+return httpResponse
+}
+
+catch(error) 
+{return error}
+}
+
+export async function deleteVegetable (vegeId) {
+  console.log(vegeId);
+try { const httpResponse = await instance.delete(`/vegetables/${vegeId}`)
+return httpResponse
+}
+
+catch (error) {
+  return error
+}
+}
