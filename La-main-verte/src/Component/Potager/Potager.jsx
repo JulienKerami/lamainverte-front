@@ -57,11 +57,7 @@ function Potager(props) {
     const [emergenceTime, setEmergenceTime] = useState(20)
  
     //recupère toutes les zones et les légumes au chargement du composant
-    useEffect( () => {
-     const Data = GetZonesFromBDD()
-     getFamilies()
-     
-    }, []);
+
 
     //Ajoute les familles de légumes au state family lorsqu'on qu'on clique sur le + dans le composant zone
     useEffect(() => {
@@ -89,6 +85,7 @@ function Potager(props) {
       
     } 
 
+
     const GetZonesFromBDD = async () => {
       
       const token = localStorage.getItem('name')                                  // On récupère l'ID de l'utilisateur avec JWT token
@@ -96,8 +93,8 @@ function Potager(props) {
       const userId = decodedToken.id
 
       const zones =  await GetAllZones(userId)       
-      console.log(zones.data.zone);                                        
-      dispatch(editZone(zones.data.zone))
+      console.log(zones.data.zones);                                        
+      dispatch(editZone(zones.data.zones))
     }
 
     const AddZoneHandle = async (e) => {
@@ -287,7 +284,7 @@ function Potager(props) {
           {SelectedVegetable.task[2]? <>recolter: {SelectedVegetable.task[2].status} </>:null}
           </div>
           <div className='familyInfos'>
-                  <p><h5>Informations sur la famille de légume</h5></p>
+                  <h5>Informations sur la famille de légume</h5>
                   <p>profondeur: {selectedFamily.depth}</p>
                   <p>exposition: {selectedFamily.exposure}</p>
                   <p>espacement entre les rangés: {selectedFamily.row_spacing}</p>
@@ -408,4 +405,4 @@ function Potager(props) {
     </>)
 }
 
-export default Potager;
+export default Potager
