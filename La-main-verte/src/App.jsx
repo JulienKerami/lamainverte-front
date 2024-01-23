@@ -58,6 +58,7 @@ function App() {
    return (
     <>
       <header className='header'>
+      <Link to='/'>
         <div className="logo">
           <img src="/src/assets/logo.png" alt="logo laMainVerte" className='logo-img' /> 
           <div className="logo-title">
@@ -65,12 +66,13 @@ function App() {
             <span>main</span>
             <span className="logo-title_text">verte</span>
           </div>
-          <button className="navbarToggle" onClick={toggleNavbar}>
-            <div className="navbarToggle-img"></div>
-            <div className="navbarToggle-img"></div>
-            <div className="navbarToggle-img"></div>
-          </button>
         </div>
+      </Link>
+        <button className="navbarToggle" onClick={toggleNavbar}>
+          <div className="navbarToggle-img"></div>
+          <div className="navbarToggle-img"></div>
+          <div className="navbarToggle-img"></div>
+        </button>
       </header>
       {isNavbarOn && <Navbar/>}
         <Routes>

@@ -12,7 +12,6 @@ const Navbar = () => {
 
           <nav className="navbar">
             {localStorage.name?<>
-            <Link to='/' className="navbar-link">Accueil</Link>
             <Link to='/potager' className="navbar-link">Potager</Link>
             <Link to='/todo' className="navbar-link">Todo</Link>
             <Link className="navbar-link" onClick={()=> {logout()}}>Deconnexion</Link></>
@@ -21,7 +20,6 @@ const Navbar = () => {
             <Link to='/login' className="navbar-link">Connexion</Link></>
             }
           </nav>
-    
     )
 }
 
