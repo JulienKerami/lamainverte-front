@@ -13,7 +13,7 @@ const instance = axios.create({
 export async function fetchUser(userData) {
 
   try {
-    console.log(localStorage.getItem('name'));
+    
  const httpResponse = await axios.post(`${url}/login`, userData);
     console.log(httpResponse);
    return httpResponse;

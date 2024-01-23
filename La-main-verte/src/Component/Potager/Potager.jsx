@@ -254,7 +254,7 @@ function Potager(props) {
       console.log(e.target.className);
       if(!(e.target.className== "VegeInfoSwitch") && vegetableInfosModaleSwitch ) {dispatch(switchVegeInfoModale(false))}}}> 
      
-      <h2 className='title'>Potager</h2>
+      <h2 className='title'>Mon Potager</h2>
      
       
       
@@ -383,7 +383,7 @@ function Potager(props) {
       </div></>:null}
       
       {/* Modale d'ajout de zone, elle s'affiche au clique sur le gros +  */}
-      <section className='zone-container'>
+      <section className='.zone-add-button'>
       {zoneModale?<div className='zoneModale'>
         <form className='ModalForm' action="">
           {sameNameModale?<><span className='sameNameMessage'>Vous avez déja une zone à ce nom</span></>:null}

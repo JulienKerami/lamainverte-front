@@ -15,7 +15,7 @@ function Login(props) {
         let userInfos = {email: e.target[0].value,
                         password:e.target[1].value }
 
-
+         console.log(userInfos);
 
     const user = await fetchUser(userInfos).then((res) => {
         
@@ -34,7 +34,11 @@ function Login(props) {
             }
         else ( 
             setError("email ou mot de passe invalide"))})
+
+        console.log(user);
     }
+
+    
 
     return (
         <>
