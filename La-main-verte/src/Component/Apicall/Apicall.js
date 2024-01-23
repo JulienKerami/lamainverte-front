@@ -66,9 +66,11 @@ export async function createZone(userId, name) {
 export async function GetAllZones(userId) {
 
   let token = localStorage.getItem('name')
+  console.log(userId);
 
 try {
   const httpResponse = await instance.get('/vegetables')
+  console.log(httpResponse);
   return httpResponse
   
 }
@@ -145,4 +147,12 @@ return httpResponse
 catch (error) {
   return error
 }
+}
+
+export async function getTasks() {
+  try { const Httpresponse = await instance.get('/tasks')
+return Httpresponse}
+
+  catch(err)
+  {return err}
 }
