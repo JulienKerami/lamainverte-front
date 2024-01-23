@@ -156,3 +156,14 @@ return Httpresponse}
   catch(err)
   {return err}
 }
+
+export async function updateTask(id, obj) {
+
+  console.log(id, obj);
+  try { const Httpresponse = await instance.get(`/tasks/${id}`, obj)
+  return Httpresponse}
+  
+    catch(err)
+    {return err}
+
+}
