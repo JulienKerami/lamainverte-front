@@ -71,7 +71,7 @@ const Todo = () => {
   // }
 
   return (<>
-    {localStorage.name?
+    {localStorage.name && tasks?
    <div className="todo--container">
       <h2 className="title">ToDo </h2>
 
