@@ -19,7 +19,8 @@ import { addTask,removeTask } from './Component/store/slices/todoSlice'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0);
+    const [isNavbarOn, setIsNavbarOn] = useState(false); 
 
   useEffect(() => {GetZonesFromBDD();getTask();getFamilies()}, [])
   const dispatch = useDispatch();
@@ -50,22 +51,37 @@ function App() {
      
    } 
 
+   const toggleNavbar = () => {
+    setIsNavbarOn((prev) => !prev); 
+   }
 
-  return (
+   return (
     <>
-
-    <h1>La main verte</h1>
-  
-    
-    <Navbar/>
-    <Routes>
-      <Route path='/potager' element={<Potager/>}/>
-      <Route path='/signin' element={<SignIn/>}/>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/login' element={<Login/>}/>
-      <Route path='/todo' element={<Todo/>}/>
-    </Routes>
-    
+      <header className='header'>
+      <Link to='/'>
+        <div className="logo">
+          <img src="/src/assets/logo.png" alt="logo laMainVerte" className='logo-img' /> 
+          <div className="logo-title">
+            <span>la</span>
+            <span>main</span>
+            <span className="logo-title_text">verte</span>
+          </div>
+        </div>
+      </Link>
+        <button className="navbarToggle" onClick={toggleNavbar}>
+          <div className="navbarToggle-img"></div>
+          <div className="navbarToggle-img"></div>
+          <div className="navbarToggle-img"></div>
+        </button>
+      </header>
+      {isNavbarOn && <Navbar/>}
+        <Routes>
+          <Route path='/potager' element={<Potager/>}/>
+          <Route path='/signin' element={<SignIn/>}/>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/todo' element={<Todo/>}/>
+        </Routes>
     </>
   )
 }

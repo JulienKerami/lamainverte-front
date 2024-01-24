@@ -1,9 +1,18 @@
-.todo-list-container {
+.todo--container {
     margin: 20px;
     position: relative;
     z-index: 0;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+
+    ul{list-style: none;
+    
+    li{margin: 10px;}
+  }
+
   }
 
   .toDoZone {
@@ -11,3 +20,12 @@
   }
   
   .task{margin-left: 20px;}
+
+  .task-container{display: flex;
+  flex-direction: column;
+background: #e8ddd1;;
+width: 50%;
+border-radius: 20px;
+padding: 20px;
+justify-content: center;
+font-family: Poppins;}

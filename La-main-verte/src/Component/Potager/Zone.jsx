@@ -8,11 +8,15 @@ import Vegetable from '../Vegetables/Vegetable';
 import { deleteOneZone, modifyOneZone, } from '../Apicall/Apicall';
 import { jwtDecode } from 'jwt-decode'
 import { switchVegetableModale } from '../store/slices/vegetableSlice';
+import { toggleAddZoneModale } from '../store/slices/modaleSlice';
+
 
 function Zone({nom, id, plant}) {
 
   const vegetableSwitch = useSelector((state) => state.vegetable.switch)
-  const zoneValue = useSelector((state)=> state.zones.value)      // Accès aux données redux
+  const zoneValue = useSelector((state)=> state.zones.value) 
+  const deleteZoneModale = useSelector((state) => state.modale.deleteZoneModale)
+// Accès aux données redux
   const dispatch = useDispatch()
 
   const [deleteModal, setDeleteModal] = useState(false)
@@ -84,6 +88,7 @@ function Zone({nom, id, plant}) {
 
   const addVegetable = (e) => {
     dispatch(switchVegetableModale(true))
+    dispatch(toggleAddZoneModale(false))
     console.log(id);
     dispatch(selectZoneId(id))
 
