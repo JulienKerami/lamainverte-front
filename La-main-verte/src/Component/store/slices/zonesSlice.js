@@ -27,7 +27,8 @@ const zonesSlice = createSlice({
          let array = state.value
 
         let newArray = array.splice(action.payload[0],1,action.payload[1] )
-
+        
+        
       
        },
        deleteVegetableFromZone: (state, action) => {

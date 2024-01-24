@@ -308,12 +308,17 @@ function Potager(props) {
       {/* Modale pour choisir une famille de légume, qui s'affiche au clique sur le petit + d'une zone  */}    
 
       {vegetableSwitch?<><div className='vegetableModale'>
+      <h3>Choissisez une famille de légumes</h3>
         <div className='family-container'>
+         
           {family.map((e)=> {return(
           <>
+          <div className='FamilyToChoose'>
+          <img  src={`image-graphiste/legume-${e.name.toLowerCase()}.png`} alt="logo laMainVerte" className='vegetableImg' />
           <button className='family' onClick={(e) => {e.preventDefault(); dispatch(switchAddFamilyModale(false)); addVegetable(e)}}>
             {e.name}
             </button>
+            </div>
           </>
           )})}
         </div>

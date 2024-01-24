@@ -53,6 +53,7 @@ function Vegetable({name, plant}) {
            <div className='vegetable' onClick={(e) =>{switchModale()}}>
             
            {FamilyName? <img  src={`image-graphiste/legume-${FamilyName}.png`} alt="logo laMainVerte" className='vegetableImg' />:null }
+           <p>{FamilyName}</p>
            </div>
         </>
     )
