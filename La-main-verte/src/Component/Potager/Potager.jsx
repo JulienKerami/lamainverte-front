@@ -141,7 +141,9 @@ function Potager(props) {
       setEndDatePlanting(`${year}-${vegetable.end_date_planting}`)
       setStartDateHarvest(`${year}-${vegetable.start_date_harvest}`)
       setEndDateHarvest(`${year}-${vegetable.end_date_harvest}`)
-
+      console.log(vegetable);
+      setGrowthTime(vegetable.growth_time)
+      setEmergenceTime(vegetable.emergence)
       setDepth(vegetable.depth)
       setExposure(vegetable.exposure)
       setRowSpacing(vegetable.row_spacing)
@@ -314,7 +316,7 @@ function Potager(props) {
           {family.map((e)=> {return(
           <>
           <div className='FamilyToChoose'>
-          <img  src={`image-graphiste/legume-${e.name.toLowerCase()}.png`} alt="logo laMainVerte" className='vegetableImg' />
+          <img  src={`image-graphiste/imglegumes/legume-${e.name.toLowerCase()}-200.webp`} alt="logo laMainVerte" className='vegetableImg' />
           <button className='family' onClick={(e) => {e.preventDefault(); dispatch(switchAddFamilyModale(false)); addVegetable(e)}}>
             {e.name}
             </button>
@@ -371,11 +373,12 @@ function Potager(props) {
                     <input className='growthTimeInput' type="number" value={growthTime} onChange={(e)=> {setGrowthTime(parseInt(e.target.value))}}/> <p className='growthTimeInputLabel'>jours</p>
                   </div>
                   </label>
-                  <label htmlFor="seeding">* emergence (temps de croissance du semis):
+                  {!(startDateSeeding == 1) ?<label htmlFor="seeding">* emergence (temps de croissance du semis):
                   <div className='creneau' >
                     <input className='growthTimeInput' type="number" value={emergenceTime} onChange={(e)=> {setEmergenceTime(e.target.value)}}/> <p className='growthTimeInputLabel'>jours</p>
                   </div>
-                  </label>
+                  </label>:null}
+
                   <label htmlFor="seeding"> commentaire
                   <div className='' >
                     

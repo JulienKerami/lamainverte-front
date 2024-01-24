@@ -19,8 +19,16 @@ function Vegetable({name, plant}) {
 
         const family = vegetableFamily.find((e) => e.id === plant.family_id )
         setTimeout(()=> {
+          
             if(family.name === "Pomme de terre")
-            {setFamilyName("pomme-de-terre")}
+            {
+                setFamilyName("pomme de terre")}
+
+            else if(family.name === "Blette / bette")
+            {setFamilyName("blette")}
+
+            else if (family.name === "Ail de Printemps")
+            {setFamilyName('ail')}
            
            
             else {setFamilyName(family.name.toLowerCase())}
@@ -52,7 +60,7 @@ function Vegetable({name, plant}) {
         <>
            <div className='vegetable' onClick={(e) =>{switchModale()}}>
             
-           {FamilyName? <img  src={`image-graphiste/legume-${FamilyName}.png`} alt="logo laMainVerte" className='vegetableImg' />:null }
+           {FamilyName? <img  src={`image-graphiste/imglegumes/legume-${FamilyName}-200.webp`} alt={`${FamilyName}`} className='vegetableImg' />:null }
            <p>{FamilyName}</p>
            </div>
         </>
