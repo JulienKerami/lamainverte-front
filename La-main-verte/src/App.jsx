@@ -60,7 +60,7 @@ function App() {
       <header className='header'>
       <Link to='/'>
         <div className="logo">
-          <img src="/public/logo.png" alt="logo laMainVerte" className='logo-img' /> 
+          <img src="/logo.png" alt="logo laMainVerte" className='logo-img' /> 
           <div className="logo-title">
             <span>la</span>
             <span>main</span>
