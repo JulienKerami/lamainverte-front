@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 
 
@@ -23,17 +23,29 @@ const zonesSlice = createSlice({
          state.zoneId = action.payload
        },
        addVegetableToZone: (state, action) => {
-         console.log(action.payload[1]);
-         let ZoneIdToModify = action.payload[0]
-         let array = state.value[ZoneIdToModify]
-         // let zoneTosliceId = action.payload.vegetable[0].zone_id
-         // let array = state.value.filter((e) => e.id !== zoneTosliceId )
-         // array.push(action.payload)
-         // state.value = array
+         console.log(action.payload[0],action.payload[1]);
+         let array = state.value
+
+        let newArray = array.splice(action.payload[0],1,action.payload[1] )
+        
+        
+      
+       },
+       deleteVegetableFromZone: (state, action) => {
+        console.log(action.payload[0]);
+        let array = state.value
+        let ZoneToFilter = array.find((e) => e.id = action.payload[1].zone_id)
+        console.log(action.payload[1].zone_id);
+        let ZoneFiltered = {...ZoneToFilter, vegetable: ZoneToFilter.vegetable.filter((e) => e.id !== action.payload[1].id)} 
+       
+        let newArray = array.splice(action.payload[0], 1, ZoneFiltered)
+        
+
+       
        }
       }
 })
 
 
-export const {addZone, removeZone,editZone,selectZoneId, addVegetableToZone} = zonesSlice.actions;
+export const {addZone, removeZone,editZone,selectZoneId, addVegetableToZone, deleteVegetableFromZone} = zonesSlice.actions;
 export default zonesSlice.reducer;

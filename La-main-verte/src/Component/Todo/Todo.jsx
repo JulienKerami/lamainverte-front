@@ -23,9 +23,9 @@ const Todo = () => {
     }
   };
 
-  useEffect(() => {console.log(vegetableFamily)}, [vegetableFamily])
+  useEffect(() => {}, [vegetableFamily])
 
-  useEffect(()=> {console.log(tasks);}, [tasks])
+  
 
   const UpdateTask = async (idtask) => {
     console.log(idtask);

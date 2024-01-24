@@ -2,7 +2,7 @@ import  { useState, useEffect} from 'react';
 import Zone from './Zone';
 import { zoneArray } from '../Data/data';
 import { useDispatch, useSelector } from 'react-redux'
-import {addVegetableToZone, addZone, editZone}  from '../store/slices/zonesSlice'
+import {addVegetableToZone, addZone, deleteVegetableFromZone, editZone}  from '../store/slices/zonesSlice'
 import { jwtDecode } from 'jwt-decode'
 import "./Potager.scss"
 import Vegetable from '../Vegetables/Vegetable';
@@ -83,24 +83,7 @@ function Potager(props) {
 
     
 
-    const getFamilies = async () => {
-      const legumes = await getFamily()
-     
-      let legumesArray = legumes.data
-      dispatch(addFamily(legumesArray))
-      
-    } 
-    
-    const GetZonesFromBDD = async () => {
-      
-      const token = localStorage.getItem('name')                                  // On récupère l'ID de l'utilisateur avec JWT token
-      const decodedToken = jwtDecode(token)                       
-      const userId = decodedToken.id
 
-      const zones =  await GetAllZones(userId)       
-      console.log(zones.data.zones);                                        
-      dispatch(editZone(zones.data.zones))
-    }
 
     const AddZoneHandle = async (e) => {
       
@@ -171,12 +154,13 @@ function Potager(props) {
   
     const SubmitVegetable = async (e) => {
 
-      
-      const vegetable = vegetableFamily.find((element)=> element.name === oneFamily) // recupère le vegetable grâce au nom
+      // on va chercher la famille de légume auquel correspond le nom qu'on a récupéré depuis la modale de
+      // choix de famille de légumes
+      const vegetable = vegetableFamily.find((element)=> element.name === oneFamily)
       setInvalidVegetableFormModale(false)
       setVegetableFormError('')
       
-     
+     // on stocke les valeurs des inputs dans un objet
       let VegetableObj = {
         zoneId: selectedZoneId,
         familyId: vegetable.id,
@@ -192,52 +176,59 @@ function Potager(props) {
 
         
 
-        // console.log(Date.parse(VegetableObj.start_date_period_seeding) > Date.parse(VegetableObj.end_date_period_seeding));
+       // on contrôle si toutes les informations nécessaires sont bien fournis par l'utilisateur
 
         if(Date.parse(VegetableObj.start_date_period_seeding) > Date.parse(VegetableObj.end_date_period_seeding) || 
             Date.parse(VegetableObj.start_date_period_seeding)> Date.parse(VegetableObj.start_date_period_planting)||
             Date.parse(VegetableObj.start_date_period_planting) > Date.parse(VegetableObj.start_date_period_harvest)||
            Date.parse(VegetableObj.start_date_period_planting) > Date.parse(VegetableObj.end_date_period_planting)
           || Date.parse(VegetableObj.start_date_period_harvest) > Date.parse(VegetableObj.end_date_period_harvest) )
-          {setInvalidVegetableFormModale(true)
-            
+
+          {
+            // si deux dates ne sont pas cohérentes entre elles on affiche un message d'erreur
+            setInvalidVegetableFormModale(true)
             setVegetableFormError("les dates ne sont pas valides (les dates de debut et de fin doivent être cohérentes)") 
             return}
 
+         // On vérifie que tout les inputs obligatoires sont remplis
         if (VegetableObj.zoneId && VegetableObj.familyId && VegetableObj.growthTime && VegetableObj.start_date_period_seeding 
           && VegetableObj.end_date_period_seeding && VegetableObj.start_date_period_planting && VegetableObj.end_date_period_planting 
-          && VegetableObj.start_date_period_harvest && VegetableObj.end_date_period_harvest   ) // vérifie que tout les inputs obligatoires sont remplis
-        {console.log("vegetable created!"); 
-
+          && VegetableObj.start_date_period_harvest && VegetableObj.end_date_period_harvest   )
+        {
         const ZoneToAddPlant = zoneValue.find((e)=> e.id === selectedZoneId)
         
-        
-
-        const zoneToModify = (element) => element.id === selectedZoneId;
-        const index = zoneValue.findIndex(zoneToModify)
-
-        // const array = zoneValue[index].vegetable
-        // const arrayToModify = [...zoneValue, {...zoneValue[index], vegetable: [...array, VegetableObj ]}]
-      
-        // const newArray = [...array, VegetableObj]
-        // const FinalArray = {...arrayToModify[index], vegetable:newArray}
-        // console.log("Final Array: ",FinalArray);
-          let Data = [index, VegetableObj]
-        dispatch(addVegetableToZone(Data))
-        // const FinalValue = [...arraySpliced, FinalArray]
-        
-     
-          
-
-        const createdVegetable = await createVegetable(VegetableObj)
-        // console.log(createdVegetable);
-        
-
-          
         setInvalidVegetableFormModale(false)
         setAddVegetableModale(false)
+
+        // on crée le légume
+        const createdVegetable = await createVegetable(VegetableObj)
+
+        // On ajoute le vegetable en front, pour ne pas avoir de délais entre le submit du formulaire et l'affichage du vegetable
+
+        const zoneToModify = (element) => element.id === selectedZoneId;
+        
+        const index = zoneValue.findIndex(zoneToModify)
+        const array = zoneValue[index].vegetable
+        let newArray = []
+        if(array){newArray = [...array, VegetableObj]}
+        else { newArray = [VegetableObj]}
+        const FinalArray = {...zoneValue[index], vegetable: newArray }
+        let Data = [index, FinalArray]
+        dispatch(addVegetableToZone(Data))
+        
+
+        //On fait appel à la base de donnée pour incrementer les données redux pour
+        // permettre à l'utilisateur d'accéder aux tasks du légumes directement après avoir créer le légume (les tasks sont crée en BDD)
+        const token = localStorage.getItem('name')                             
+        const decodedToken = jwtDecode(token)                       
+        const userId = decodedToken.id
+        const zones =  await GetAllZones(userId)       
+                                          
+        dispatch(editZone(zones.data.zones))
+
       }
 
+      // si certains champ sont vides on affiche une erreur
         else {
           setVegetableFormError("certains champs obligatoires ne sont pas remplis :'(")
           setInvalidVegetableFormModale(true)
@@ -246,9 +237,21 @@ function Potager(props) {
     }
 
     const HandleDeleteVegetable = async (e) => {
-      
+      // console.log(SelectedVegetable);
+      // const zoneToModify = (element) => element.id === SelectedVegetable.zone_id
+     
+
+      // const index = zoneValue.findIndex(zoneToModify)
+     // On delete le vegetable en BDD
       const vegetableDeleted = await deleteVegetable(SelectedVegetable.id)
-      console.log(vegetableDeleted);
+
+      // On appel la BDD pour updated les zones
+      const token = localStorage.getItem('name')                             
+      const decodedToken = jwtDecode(token)                       
+      const userId = decodedToken.id
+      const zones =  await GetAllZones(userId) 
+      dispatch(editZone(zones.data.zones))
+
     }
     
     return (
@@ -296,7 +299,7 @@ function Potager(props) {
                   <p>espacement entre les plants: {selectedFamily.spacing}</p>
                   <p>type de sol: {selectedFamily.soil_type}</p>
           </div>
-          <button onClick={(e) => {HandleDeleteVegetable()}}>supprimer le plant</button>
+          <button onClick={(e) => {HandleDeleteVegetable(e)}}>supprimer le plant</button>
         </div></>:null} 
 
       </section>
@@ -305,12 +308,17 @@ function Potager(props) {
       {/* Modale pour choisir une famille de légume, qui s'affiche au clique sur le petit + d'une zone  */}    
 
       {vegetableSwitch?<><div className='vegetableModale'>
+      <h3>Choissisez une famille de légumes</h3>
         <div className='family-container'>
+         
           {family.map((e)=> {return(
           <>
+          <div className='FamilyToChoose'>
+          <img  src={`image-graphiste/legume-${e.name.toLowerCase()}.png`} alt="logo laMainVerte" className='vegetableImg' />
           <button className='family' onClick={(e) => {e.preventDefault(); dispatch(switchAddFamilyModale(false)); addVegetable(e)}}>
             {e.name}
             </button>
+            </div>
           </>
           )})}
         </div>
@@ -387,7 +395,6 @@ function Potager(props) {
       
       {/* Modale d'ajout de zone, elle s'affiche au clique sur le gros +  */}
       <section className='.zone-add-button'>
-
       {addZoneModale?<div className='zoneModale'>
         <form className='ModalForm' action="">
           {sameNameModale?<><span className='sameNameMessage'>Vous avez déja une zone à ce nom</span></>:null}

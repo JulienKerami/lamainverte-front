@@ -89,7 +89,7 @@ function Zone({nom, id, plant}) {
   const addVegetable = () => {
     dispatch(switchAddFamilyModale(true))
     dispatch(toggleAddZoneModale(false))
-    console.log(id);
+    
     dispatch(selectZoneId(id))
 
   }
@@ -97,7 +97,7 @@ function Zone({nom, id, plant}) {
 
 
   useEffect(() => {
-    console.log(plant);
+   
   }, []);
 
 
@@ -126,10 +126,10 @@ function Zone({nom, id, plant}) {
       )}
 
       <div className='vegetable-container'>
-       {plant?<>{plant.map((e)=> {
+       {plant?<>{plant.map((e, index)=> {
         return(
             <>
-            <Vegetable name={e.variety} plant={e} />
+            <Vegetable key={index} variety={e.variety} plant={e} />
             </>
           )})}</>:null}
         
