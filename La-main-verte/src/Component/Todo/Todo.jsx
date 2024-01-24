@@ -23,9 +23,9 @@ const Todo = () => {
     }
   };
 
+  useEffect(() => {console.log(vegetableFamily)}, [vegetableFamily])
 
-
-  useEffect(()=> {}, [tasks])
+  useEffect(()=> {console.log(tasks);}, [tasks])
 
   const UpdateTask = async (idtask) => {
     console.log(idtask);
@@ -78,16 +78,19 @@ const Todo = () => {
 
       <ul className="task-container">
 
-        {vegetableFamily && tasks?<>{tasks.map((e)=> {return(
+       {vegetableFamily && tasks?<>{tasks.map((e)=> {return(
           <>
           <div className='task' >
           {e.Vegetable.variety== "variété orange"?
            null:<> <li>{e.Vegetable.varity? e.Vegetable.variety:e.Vegetable.Family.name} à {e.type==="planting"?<>planter</>:null}
-           {e.type==="harvest"?<>recolter</>:null}{e.type==="seeding"?
+
+           {e.type==="harvest"?<>recolter</>:null}
+           
+           {e.type==="seeding"?
             <>semer</>:null} dans {e.Vegetable.Zone.name} (entre le {e.end_date_period} et le {e.start_date_period} ) <input id={`${e.id}`} on type="checkbox" onChange={(e)=>{UpdateTask(e.target.id)}}/></li>
               </> }
           </div></>
-        )})}</>:null}
+        )})}</>:null} 
 
 
       </ul>

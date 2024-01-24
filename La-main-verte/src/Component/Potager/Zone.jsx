@@ -7,7 +7,7 @@ import { vegetable } from '../Data/data';
 import Vegetable from '../Vegetables/Vegetable';
 import { deleteOneZone, modifyOneZone, } from '../Apicall/Apicall';
 import { jwtDecode } from 'jwt-decode'
-import { switchVegetableModale } from '../store/slices/vegetableSlice';
+import { switchAddFamilyModale } from '../store/slices/vegetableSlice';
 import { toggleAddZoneModale } from '../store/slices/modaleSlice';
 
 
@@ -86,8 +86,8 @@ function Zone({nom, id, plant}) {
     
   };
 
-  const addVegetable = (e) => {
-    dispatch(switchVegetableModale(true))
+  const addVegetable = () => {
+    dispatch(switchAddFamilyModale(true))
     dispatch(toggleAddZoneModale(false))
     console.log(id);
     dispatch(selectZoneId(id))

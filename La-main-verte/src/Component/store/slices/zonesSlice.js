@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 
+
 const zonesSlice = createSlice({
    name : 'zones', // The name of the slice. It is used to automatically generate action type strings.
    initialState : {
@@ -20,10 +21,19 @@ const zonesSlice = createSlice({
        },
        selectZoneId: (state, action) => {
          state.zoneId = action.payload
+       },
+       addVegetableToZone: (state, action) => {
+         console.log(action.payload[1]);
+         let ZoneIdToModify = action.payload[0]
+         let array = state.value[ZoneIdToModify]
+         // let zoneTosliceId = action.payload.vegetable[0].zone_id
+         // let array = state.value.filter((e) => e.id !== zoneTosliceId )
+         // array.push(action.payload)
+         // state.value = array
        }
       }
 })
 
 
-export const {addZone, removeZone,editZone,selectZoneId} = zonesSlice.actions;
+export const {addZone, removeZone,editZone,selectZoneId, addVegetableToZone} = zonesSlice.actions;
 export default zonesSlice.reducer;

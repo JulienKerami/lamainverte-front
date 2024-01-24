@@ -2,13 +2,13 @@ import  { useState, useEffect} from 'react';
 import Zone from './Zone';
 import { zoneArray } from '../Data/data';
 import { useDispatch, useSelector } from 'react-redux'
-import {addZone, editZone}  from '../store/slices/zonesSlice'
+import {addVegetableToZone, addZone, editZone}  from '../store/slices/zonesSlice'
 import { jwtDecode } from 'jwt-decode'
 import "./Potager.scss"
 import Vegetable from '../Vegetables/Vegetable';
 import { GetAllZones, createZone, getFamily, createVegetable, deleteVegetable } from '../Apicall/Apicall';
 import { addFamily } from '../store/slices/vegetableSlice';
-import { switchVegetableModale, switchVegeInfoModale } from '../store/slices/vegetableSlice';
+import { switchAddFamilyModale, switchVegeInfoModale } from '../store/slices/vegetableSlice';
 import { Audio } from 'react-loader-spinner'
 import { toggleAddFamilyModale, toggleAddZoneModale, toggleDeleteZoneModale } from '../store/slices/modaleSlice';
 
@@ -57,7 +57,7 @@ function Potager(props) {
     const [endDatePlanting, setEndDatePlanting] = useState("")
     const [startDateHarvest, setStartDateHarvest] = useState("")
     const [endDateHarvest, setEndDateHarvest] = useState("")
-   
+  
 
     const [growthTime, setGrowthTime] = useState(30)
     const [emergenceTime, setEmergenceTime] = useState(20)
@@ -74,7 +74,7 @@ function Potager(props) {
 
 
     useEffect(()=> {
-      console.log(addFamilyModale, deleteZoneModale, addZoneModale);
+      // console.log(addFamilyModale, deleteZoneModale, addZoneModale);
    
     
  
@@ -90,8 +90,7 @@ function Potager(props) {
       dispatch(addFamily(legumesArray))
       
     } 
-
-
+    
     const GetZonesFromBDD = async () => {
       
       const token = localStorage.getItem('name')                                  // On récupère l'ID de l'utilisateur avec JWT token
@@ -113,10 +112,12 @@ function Potager(props) {
       
       if(zoneValue){
       const searchForSameName = zoneValue.find((e) => e.name === name)
+
       if(searchForSameName) {
         setSameNameModale(true)
         setEmptyNameModale(false)
         return}
+
         setSameNameModale(false)
         dispatch(toggleAddZoneModale(false))
       }
@@ -130,22 +131,29 @@ function Potager(props) {
 
     }
 
+    //fonction qui s'active lorsqu'on choisit une famille de légume
     const addVegetable = async (e) => {
-      
-      setOneFamily(e.target.textContent)
-      
-      const vegetable = vegetableFamily.find((element)=> element.name === e.target.textContent) // recupère le vegetable grâce au nom
-
+         
+      // on récupère l'année courante dans la variable year
       let date = new Date()
       let year = date.getFullYear()
-      console.log(vegetable);
-      console.log(vegetable.start_date_seeding);
-      console.log(`${year}-${vegetable.start_date_seeding}`);
 
-      if(vegetable.start_date_seeding){setStartDateSeeding(`${year}-${vegetable.start_date_seeding}`)
-      setEndDateSeeding(`${year}-${vegetable.end_date_seeding}`)}
-    else {setStartDateSeeding(1);setEndDateSeeding(2)}
+      //on stocke le nom de la famille de légume qu'on a selectionné dans un state
+      setOneFamily(e.target.textContent)
       
+      //on va chercher la famille de  légume en base de données redux grâce à son nom
+      const vegetable = vegetableFamily.find((element)=> element.name === e.target.textContent) // recupère le vegetable grâce au nom
+    
+      //si le légume qu'on a récupéré a une date de seeding, on la stocke dans un state
+     if(vegetable.start_date_seeding){setStartDateSeeding(`${year}-${vegetable.start_date_seeding}`)
+     setEndDateSeeding(`${year}-${vegetable.end_date_seeding}`)}
+
+     //sinon on mets 1 et 2 comme valeur par défault aux dates de seeding
+     else {setStartDateSeeding(1);setEndDateSeeding(2)}
+
+      
+      // on stocke dans des states les dates de plantations et de récoltes de la famille de légume qu'on a récupéré 
+   
       setStartDatePlanting(`${year}-${vegetable.start_date_planting}`)
       setEndDatePlanting(`${year}-${vegetable.end_date_planting}`)
       setStartDateHarvest(`${year}-${vegetable.start_date_harvest}`)
@@ -157,14 +165,7 @@ function Potager(props) {
       setSoilType(vegetable.soil_type)
       setSpacing(vegetable.spacing)
 
-    
-    
-     
-  
- 
-        
-      
-
+      //on ouvre la modale d'ajout de vegetable
       setAddVegetableModale(true)
     }
   
@@ -191,7 +192,7 @@ function Potager(props) {
 
         
 
-        console.log(Date.parse(VegetableObj.start_date_period_seeding) > Date.parse(VegetableObj.end_date_period_seeding));
+        // console.log(Date.parse(VegetableObj.start_date_period_seeding) > Date.parse(VegetableObj.end_date_period_seeding));
 
         if(Date.parse(VegetableObj.start_date_period_seeding) > Date.parse(VegetableObj.end_date_period_seeding) || 
             Date.parse(VegetableObj.start_date_period_seeding)> Date.parse(VegetableObj.start_date_period_planting)||
@@ -212,28 +213,27 @@ function Potager(props) {
         
         
 
-        // const zoneToModify = (element) => element.id === selectedZoneId;
-        // const index = zoneValue.findIndex(zoneToModify)
+        const zoneToModify = (element) => element.id === selectedZoneId;
+        const index = zoneValue.findIndex(zoneToModify)
 
         // const array = zoneValue[index].vegetable
         // const arrayToModify = [...zoneValue, {...zoneValue[index], vegetable: [...array, VegetableObj ]}]
-        // console.log(arrayToModify);
-        
+      
         // const newArray = [...array, VegetableObj]
         // const FinalArray = {...arrayToModify[index], vegetable:newArray}
-        
+        // console.log("Final Array: ",FinalArray);
+          let Data = [index, VegetableObj]
+        dispatch(addVegetableToZone(Data))
         // const FinalValue = [...arraySpliced, FinalArray]
         
-        // console.log(FinalValue);
-
-
-        // console.log(ZoneToAddPlant);
+     
+          
 
         const createdVegetable = await createVegetable(VegetableObj)
-        
+        // console.log(createdVegetable);
         
 
-          console.log(createdVegetable);
+          
         setInvalidVegetableFormModale(false)
         setAddVegetableModale(false)
       }
@@ -250,26 +250,25 @@ function Potager(props) {
       const vegetableDeleted = await deleteVegetable(SelectedVegetable.id)
       console.log(vegetableDeleted);
     }
-
-
     
     return (
     <>
+    
      {localStorage.name?<>
+
     <main className='potager-container' onClick={(e)=> {
       console.log(e.target.className);
       if(!(e.target.className== "VegeInfoSwitch") && vegetableInfosModaleSwitch ) {dispatch(switchVegeInfoModale(false))}}}> 
      
       <h2 className='title'>Mon Potager</h2>
      
-      
-      
-
       {/* Section qui contiens toutes les zones  */}
       <section className='zone-container'>
         {zoneValue?<>{zoneValue.map((zone, index) => (
           <Zone key={index} nom={zone.name} id={zone.id} plant={zone.vegetable} />
           ))}</>: null}
+
+
 
        {/* Modale d'infos sur un vegetable, qui s'affiche au clique sur l'icone d'un vegetable  */}
 
@@ -309,24 +308,23 @@ function Potager(props) {
         <div className='family-container'>
           {family.map((e)=> {return(
           <>
-          <button className='family' onClick={(e) => {e.preventDefault(); dispatch(switchVegetableModale(false)); addVegetable(e)}}>
+          <button className='family' onClick={(e) => {e.preventDefault(); dispatch(switchAddFamilyModale(false)); addVegetable(e)}}>
             {e.name}
             </button>
           </>
           )})}
         </div>
           <div className='validation'>
-            <button onClick={(e) => {dispatch(switchVegetableModale(false)) }}>fermer</button>
+            <button onClick={(e) => {dispatch(switchAddFamilyModale(false)) }}>fermer</button>
           </div>
         </div></>:null}
-
 
        {/* {Modale pour ajouter un vegetable après avoir choisis une famille de légume elle s'ouvre lorsqu'on clique
         sur le bouton d'un légume dans la modale de selection de légume */}
 
       {addVegetableModale?<>
           <div className='vegetableModale'>
-            <form action="submit" onSubmit={(e)=> {e.preventDefault(); SubmitVegetable(e,)}} className='addVegetableForm'>
+            <form action="submit" onSubmit={(e)=> {e.preventDefault(); SubmitVegetable(e)}} className='addVegetableForm'>
                 <h4>{oneFamily}</h4>
                 <div className='FamilyInfos'>
                 <p>profondeur: {depth}</p>
@@ -334,7 +332,6 @@ function Potager(props) {
                 <p>espacement entre les rangés: {rowSpacing}</p>
                 <p>espacement entre les plants: {spacing}</p>
                 <p>type de sol: {soilType}</p>
-
                 </div>
               
 
@@ -390,6 +387,7 @@ function Potager(props) {
       
       {/* Modale d'ajout de zone, elle s'affiche au clique sur le gros +  */}
       <section className='.zone-add-button'>
+
       {addZoneModale?<div className='zoneModale'>
         <form className='ModalForm' action="">
           {sameNameModale?<><span className='sameNameMessage'>Vous avez déja une zone à ce nom</span></>:null}
@@ -402,6 +400,7 @@ function Potager(props) {
         </form>
       
       </div>:null}
+
       {vegetableSwitch||addVegetableModale? null: <><button className='zoneToAdd' onClick={()=> {dispatch(toggleAddZoneModale(true))}}>+</button></>}  
       </section>
     </main>

@@ -28,7 +28,7 @@ function App() {
 
   const getTask = async () => {
     const tasks = await getTasks()
-   console.log(tasks);
+   console.log("tasks: ", tasks);
      dispatch(addTask(tasks.data))
    }
   
@@ -37,16 +37,16 @@ function App() {
      const token = localStorage.getItem('name')                                  // On récupère l'ID de l'utilisateur avec JWT token
      const decodedToken = jwtDecode(token)                       
      const userId = decodedToken.id
-  
+    
      const zones =  await GetAllZones(userId)       
-                                          
+     console.log("zones: ", zones);                                     
      dispatch(editZone(zones.data.zones))
    }
   
    const getFamilies = async () => {
      
      const legumes = await getFamily()
-    console.log(legumes);
+    console.log("family: ", legumes);
      let legumesArray = legumes.data
      dispatch(addFamily(legumesArray))
      
