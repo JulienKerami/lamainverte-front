@@ -3,6 +3,7 @@ import Navbar from './Component/Navbar/Navbar'
 import Todo from './Component/Todo/Todo'
 import Login from './Component/login/Login'
 import Potager from './Component/Potager/Potager'
+import './reset.css'
 import './App.css'
 import SignIn from './Component/SignIn/SignIn'
 import Home from './Component/Home/Home'
@@ -60,7 +61,7 @@ function App() {
       <header className='header'>
       <Link to='/'>
         <div className="logo">
-          <img src="/logo.png" alt="logo laMainVerte" className='logo-img' /> 
+          <img src="logo.png" alt="logo laMainVerte" className='logo-img' /> 
           <div className="logo-title">
             <span>la</span>
             <span>main</span>
