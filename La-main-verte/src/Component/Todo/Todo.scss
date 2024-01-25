@@ -7,6 +7,7 @@
     justify-content: center;
     align-items: center;
     min-height: 80vh;
+   
 
     ul{list-style: none;
     
@@ -24,8 +25,11 @@
   .task-container{display: flex;
   flex-direction: column;
 background: #e8ddd1;;
-width: 50%;
+width: 60%;
 border-radius: 20px;
 padding: 20px;
 justify-content: center;
 font-family: Poppins;}
+
+.TaskChecker{height:20px; width: 20px;
+border-radius: 5px;}

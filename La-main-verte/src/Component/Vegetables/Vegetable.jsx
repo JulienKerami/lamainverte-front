@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 
 
+
 function Vegetable({name, plant}) {
     const [FamilyName, setFamilyName] = useState('');
     const [vegetableVariety, setVegetableVariety] = useState('')
@@ -16,8 +17,7 @@ function Vegetable({name, plant}) {
 
     useEffect(() => {
        
-      
-        
+
         const family = vegetableFamily.find((e) => e.id === plant.family_id )
         setTimeout(()=> {
           
@@ -36,7 +36,7 @@ function Vegetable({name, plant}) {
             
         }, "1")
         
-
+      
     }, [vegetableFamily, zoneValue]);
 
 
@@ -61,8 +61,37 @@ function Vegetable({name, plant}) {
         <>
            <div className='vegetable' onClick={(e) =>{switchModale()}}>
             
-           {FamilyName? <img  src={`image-graphiste/imglegumes/legume-${FamilyName}-200.webp`} alt={`${FamilyName}`} className='vegetableImg' />:null }
-           <p>{FamilyName}</p>
+
+           {FamilyName?<>
+           <div className='vegetableVisuals'>
+            <img  src={`image-graphiste/legume-${FamilyName}.png`} alt="logo laMainVerte" className='vegetableImg' /> 
+            <div className='progressBar'>
+
+            {/* Affichage conditionnel si le légume a des semis */}
+            {plant.task.length == 3?<>
+            
+              {plant.status_code == 2 || plant.status_code == 4 || plant.status == null?<span className='barSemi'></span>:null}
+            {plant.status_code == 4 || plant.status == null?<span className='barPlant'></span>:null}
+            {plant.status == null? <span className='barHarvest'></span>: null}</>:null }   
+            
+             {/* Affichage conditionnel si le légume n'a pas de semiss */}
+            {plant.task.length == 2?<>
+            
+            {plant.status_code == 4 || plant.status == null?<span className='barPlant'></span>:null}
+            {plant.status == null? <span className='barHarvest'></span>: null}</>:null }  
+
+          
+{/* 
+                 {plant.status == 2 && plant.task[2]?<span className='barSemi'></span>:null }
+
+                {plant.task[1].status_code == 2? <span className='barPlant'></span>:null}
+
+                {plant.task[2]?<>{plant.task[2].status_code == 2 ? <span className='barHarvest'></span>: null}</>:null}  */}
+
+                </div>
+           </div></> 
+           :null }
+
            </div>
         </>
     )

@@ -10,7 +10,36 @@ align-items: center;
 border-radius: 15px;
 font-family: Permanent Marker;;
 
-margin: 10px;}
+
+.vegetableVisuals{display: flex;
+}
+
+.progressBar{display: flex;
+    flex-direction: column;
+    }
+margin: 10px;
+    .barSemi{background: rgb(241, 220, 22);
+        border-radius: 2px;
+        width: 10px;
+        height: 15px;
+        margin-top: 10px;
+        margin-left: 20px}
+    .barPlant{background: green;
+            width: 10px;
+            border-radius: 2px;
+            height: 15px;
+            margin-top: 10px;
+            margin-left: 20px}
+    .barHarvest{background: rgb(1, 73, 1);
+                width: 10px;
+                border-radius: 2px;
+                height: 15px;
+                margin-top: 10px;
+                margin-left: 20px}
+        
+    
+}
+
 
 .vegetableImg{width: 60px;
     padding: 5px;

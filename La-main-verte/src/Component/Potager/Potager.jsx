@@ -65,6 +65,7 @@ function Potager(props) {
  
     //recupère toutes les zones et les légumes au chargement du composant
 
+    useEffect(()=> {GetZonesFromBDD()}, []  )
 
     //Ajoute les familles de légumes au state family lorsqu'on qu'on clique sur le + dans le composant zone
     useEffect(() => {
@@ -83,7 +84,16 @@ function Potager(props) {
     }, [vegetableInfosModaleSwitch])
 
     
-
+    const GetZonesFromBDD = async () => {
+       
+      const token = localStorage.getItem('name')                                  // On récupère l'ID de l'utilisateur avec JWT token
+      const decodedToken = jwtDecode(token)                       
+      const userId = decodedToken.id
+     
+      const zones =  await GetAllZones(userId)       
+      console.log("zones: ", zones);                                     
+      dispatch(editZone(zones.data.zones))
+    }
 
 
     const AddZoneHandle = async (e) => {
@@ -294,11 +304,16 @@ function Potager(props) {
             <li>temps de croissance: {SelectedVegetable.growth_time} jours</li>
           </ul>
           <div className='tasks'>
-          <h5>tâches à faire</h5> 
-          {SelectedVegetable.task[0].type== "seeding"?<p>semer: {SelectedVegetable.task[0].status}</p>:<p>planter: {SelectedVegetable.task[0].status} </p>} 
-          {SelectedVegetable.task[1].type =="planting"? <p>planter: {SelectedVegetable.task[1].status} </p>:<p>recolter: {SelectedVegetable.task[1].status} </p>} 
+          <h5>état du légume:</h5>
+
+          {/* Affichage conditionnel de l'état du légume en fonction du status de l'objet vegetable */}
+          {SelectedVegetable.status == "En attente de la période de semis"?<>  en attente d'être semé </>:null}
+          {SelectedVegetable.status == "En attente de la période de plantation" && SelectedVegetable.task.length == 3?<>  semis </>:null}
+          {SelectedVegetable.status == "En attente de la période de plantation" && SelectedVegetable.task.length == 2?<>  en attente d'être planté </>:null}
           
-          {SelectedVegetable.task[2]? <>recolter: {SelectedVegetable.task[2].status} </>:null}
+          {SelectedVegetable.status == "En attente de la période de récolte"?<>  plant </>:null}
+          {SelectedVegetable.status == null?<> récolté </>:null}
+
           </div>
           <div className='familyInfos'>
                   <h5>Informations sur la famille de légume</h5>
