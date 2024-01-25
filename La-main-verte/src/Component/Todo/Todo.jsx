@@ -23,7 +23,10 @@ const Todo = () => {
     }
   };
 
-  useEffect(() => {}, [vegetableFamily])
+  useEffect(() => { 
+   
+    
+  }, [])
 
   
 
@@ -87,7 +90,7 @@ const Todo = () => {
            {e.type==="harvest"?<>recolter</>:null}
            
            {e.type==="seeding"?
-            <>semer</>:null} dans {e.Vegetable.Zone.name} (entre le {e.end_date_period} et le {e.start_date_period} ) <input id={`${e.id}`} on type="checkbox" onChange={(e)=>{UpdateTask(e.target.id)}}/></li>
+            <>semer</>:null} dans {e.Vegetable.Zone.name} (entre le {e.start_date_period}  et le {e.end_date_period} ) <input id={`${e.id}`} on type="checkbox" onChange={(e)=>{UpdateTask(e.target.id)}}/></li>
               </> }
           </div></>
         )})}</>:null} 

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 function Vegetable({name, plant}) {
     const [FamilyName, setFamilyName] = useState('');
+    const [vegetableVariety, setVegetableVariety] = useState('')
     const SelectedVegetable = useSelector((state) => state.vegetable.vegetableSelected )
     const vegetableModaleSwitch = useSelector((state) => state.vegetable.vegeInfoSwitch )
     const vegetableFamily = useSelector((state) => state.vegetable.familyValue)
@@ -16,7 +17,7 @@ function Vegetable({name, plant}) {
     useEffect(() => {
        
       
-
+        
         const family = vegetableFamily.find((e) => e.id === plant.family_id )
         setTimeout(()=> {
           
@@ -33,7 +34,7 @@ function Vegetable({name, plant}) {
            
             else {setFamilyName(family.name.toLowerCase())}
             
-        }, "100")
+        }, "1")
         
 
     }, [vegetableFamily, zoneValue]);

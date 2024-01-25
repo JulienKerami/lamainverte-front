@@ -6,7 +6,7 @@ import {addVegetableToZone, addZone, deleteVegetableFromZone, editZone}  from '.
 import { jwtDecode } from 'jwt-decode'
 import "./Potager.scss"
 import Vegetable from '../Vegetables/Vegetable';
-import { GetAllZones, createZone, getFamily, createVegetable, deleteVegetable } from '../Apicall/Apicall';
+import { GetAllZones, createZone, getFamily, createVegetable, deleteVegetable, getTasks } from '../Apicall/Apicall';
 import { addFamily } from '../store/slices/vegetableSlice';
 import { switchAddFamilyModale, switchVegeInfoModale } from '../store/slices/vegetableSlice';
 import { Audio } from 'react-loader-spinner'
@@ -225,9 +225,15 @@ function Potager(props) {
         const decodedToken = jwtDecode(token)                       
         const userId = decodedToken.id
         const zones =  await GetAllZones(userId)       
-                                          
+               
         dispatch(editZone(zones.data.zones))
 
+        const getTask = async () => {
+          const tasks = await getTasks()
+         console.log("tasks: ", tasks);
+           dispatch(addTask(tasks.data))
+         }
+         getTask()
       }
 
       // si certains champ sont vides on affiche une erreur
