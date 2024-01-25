@@ -64,6 +64,7 @@ function Potager(props) {
  
     //recupère toutes les zones et les légumes au chargement du composant
 
+    useEffect(()=> {GetZonesFromBDD()}, []  )
 
     //Ajoute les familles de légumes au state family lorsqu'on qu'on clique sur le + dans le composant zone
     useEffect(() => {
@@ -82,7 +83,16 @@ function Potager(props) {
     }, [vegetableInfosModaleSwitch])
 
     
-
+    const GetZonesFromBDD = async () => {
+       
+      const token = localStorage.getItem('name')                                  // On récupère l'ID de l'utilisateur avec JWT token
+      const decodedToken = jwtDecode(token)                       
+      const userId = decodedToken.id
+     
+      const zones =  await GetAllZones(userId)       
+      console.log("zones: ", zones);                                     
+      dispatch(editZone(zones.data.zones))
+    }
 
 
     const AddZoneHandle = async (e) => {

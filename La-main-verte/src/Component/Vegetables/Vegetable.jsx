@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 
 
+
 function Vegetable({name, plant}) {
     const [FamilyName, setFamilyName] = useState('');
     const SelectedVegetable = useSelector((state) => state.vegetable.vegetableSelected )
@@ -15,7 +16,7 @@ function Vegetable({name, plant}) {
 
     useEffect(() => {
        
-      
+        console.log(plant);
 
         const family = vegetableFamily.find((e) => e.id === plant.family_id )
         setTimeout(()=> {
@@ -27,7 +28,7 @@ function Vegetable({name, plant}) {
             
         }, "100")
         
-
+      
     }, [vegetableFamily, zoneValue]);
 
 
@@ -52,7 +53,17 @@ function Vegetable({name, plant}) {
         <>
            <div className='vegetable' onClick={(e) =>{switchModale()}}>
             
-           {FamilyName? <img  src={`image-graphiste/legume-${FamilyName}.png`} alt="logo laMainVerte" className='vegetableImg' />:null }
+           {FamilyName?<>
+           <div className='vegetableVisuals'>
+            <img  src={`image-graphiste/legume-${FamilyName}.png`} alt="logo laMainVerte" className='vegetableImg' /> 
+            <div className='progressBar'>
+                 <span className='barSemi'></span>
+                {plant.task[1].status_code == 2 || plant.task[1].status_code == 1? <span className='barPlant'></span>:null}
+                {plant.task[2]?<>{plant.task[2].status_code == 2 ? <span className='barHarvest'></span>: null}</>:null}
+
+                </div>
+           </div></> 
+           :null }
            <p>{FamilyName}</p>
            </div>
         </>

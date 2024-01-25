@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTask, removeTask } from '../store/slices/todoSlice';
+import { addOneTask, addTask, removeTask } from '../store/slices/todoSlice';
 import './Todo.scss'; 
 import { GetAllZones, getTasks, getFamily, updateTask } from '../Apicall/Apicall';
 import { editZone } from '../store/slices/zonesSlice';
@@ -16,16 +16,15 @@ const Todo = () => {
   const [task, setTask] = useState('');
 
 
-  const handleAddTask = () => {
-    if (task.trim() !== '') {
-      
-      setTask('');
-    }
-  };
+  const getTask = async () => {
+    const tasks = await getTasks()
+   console.log("tasks: ", tasks);
+     dispatch(addTask(tasks.data))
+   }
 
   useEffect(() => {}, [vegetableFamily])
 
-  
+
 
   const UpdateTask = async (idtask) => {
     console.log(idtask);
@@ -42,15 +41,15 @@ const Todo = () => {
     
    const task = tasks.find((e)=> e.id == idtask)
 
-
+  
    let taskObj = {
-    ...task, effective_date: formattedDate, statut_code: 2
+    ...task, effective_date: formattedDate, status_code: 2
    }
 
 
-   const taskUpdated = await updateTask(userId,taskObj )
-
-   console.log(taskUpdated);
+   const taskUpdated = await updateTask(task.id,taskObj )
+    
+   getTask()
   }
 
   const handleRemoveTask = (index) => {
@@ -87,7 +86,7 @@ const Todo = () => {
            {e.type==="harvest"?<>recolter</>:null}
            
            {e.type==="seeding"?
-            <>semer</>:null} dans {e.Vegetable.Zone.name} (entre le {e.end_date_period} et le {e.start_date_period} ) <input id={`${e.id}`} on type="checkbox" onChange={(e)=>{UpdateTask(e.target.id)}}/></li>
+            <>semer</>:null} dans {e.Vegetable.Zone.name} (entre le {e.start_date_period} et le  {e.end_date_period} ) <input id={`${e.id}`} on type="checkbox" onChange={(e)=>{UpdateTask(e.target.id)}}/></li>
               </> }
           </div></>
         )})}</>:null} 
