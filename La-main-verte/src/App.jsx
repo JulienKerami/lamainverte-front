@@ -37,7 +37,7 @@ function App() {
      const token = localStorage.getItem('name')                                  // On récupère l'ID de l'utilisateur avec JWT token
      const decodedToken = jwtDecode(token)                       
      const userId = decodedToken.id
-    
+     console.log(localStorage.getItem('name'))
      const zones =  await GetAllZones(userId)       
      console.log("zones: ", zones);                                     
      dispatch(editZone(zones.data.zones))

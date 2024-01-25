@@ -59,6 +59,7 @@ p{margin: 3px;
 .vegetable-container{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .addVegetableButton{
@@ -88,4 +89,5 @@ font-size:0.7rem}
     }
 
 .zoneToDelete{background: none;
-    border: 1px solid #203624}
+    border: 1px solid #203624;
+    margin: 10px;}

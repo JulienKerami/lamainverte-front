@@ -6,11 +6,12 @@ import {addVegetableToZone, addZone, deleteVegetableFromZone, editZone}  from '.
 import { jwtDecode } from 'jwt-decode'
 import "./Potager.scss"
 import Vegetable from '../Vegetables/Vegetable';
-import { GetAllZones, createZone, getFamily, createVegetable, deleteVegetable } from '../Apicall/Apicall';
+import { GetAllZones, createZone, getFamily, createVegetable, deleteVegetable, getTasks } from '../Apicall/Apicall';
 import { addFamily } from '../store/slices/vegetableSlice';
 import { switchAddFamilyModale, switchVegeInfoModale } from '../store/slices/vegetableSlice';
 import { Audio } from 'react-loader-spinner'
 import { toggleAddFamilyModale, toggleAddZoneModale, toggleDeleteZoneModale } from '../store/slices/modaleSlice';
+import { addTask } from '../store/slices/todoSlice';
 
 
 
@@ -151,7 +152,9 @@ function Potager(props) {
       setEndDatePlanting(`${year}-${vegetable.end_date_planting}`)
       setStartDateHarvest(`${year}-${vegetable.start_date_harvest}`)
       setEndDateHarvest(`${year}-${vegetable.end_date_harvest}`)
-
+      console.log(vegetable);
+      setGrowthTime(vegetable.growth_time)
+      setEmergenceTime(vegetable.emergence)
       setDepth(vegetable.depth)
       setExposure(vegetable.exposure)
       setRowSpacing(vegetable.row_spacing)
@@ -233,9 +236,15 @@ function Potager(props) {
         const decodedToken = jwtDecode(token)                       
         const userId = decodedToken.id
         const zones =  await GetAllZones(userId)       
-                                          
+               
         dispatch(editZone(zones.data.zones))
 
+        const getTask = async () => {
+          const tasks = await getTasks()
+         console.log("tasks: ", tasks);
+           dispatch(addTask(tasks.data))
+         }
+         getTask()
       }
 
       // si certains champ sont vides on affiche une erreur
@@ -295,11 +304,16 @@ function Potager(props) {
             <li>temps de croissance: {SelectedVegetable.growth_time} jours</li>
           </ul>
           <div className='tasks'>
-          <h5>tâches à faire</h5> 
-          {SelectedVegetable.task[0].type== "seeding"?<p>semer: {SelectedVegetable.task[0].status}</p>:<p>planter: {SelectedVegetable.task[0].status} </p>} 
-          {SelectedVegetable.task[1].type =="planting"? <p>planter: {SelectedVegetable.task[1].status} </p>:<p>recolter: {SelectedVegetable.task[1].status} </p>} 
+          <h5>état du légume:</h5>
+
+          {/* Affichage conditionnel de l'état du légume en fonction du status de l'objet vegetable */}
+          {SelectedVegetable.status == "En attente de la période de semis"?<>  en attente d'être semé </>:null}
+          {SelectedVegetable.status == "En attente de la période de plantation" && SelectedVegetable.task.length == 3?<>  semis </>:null}
+          {SelectedVegetable.status == "En attente de la période de plantation" && SelectedVegetable.task.length == 2?<>  en attente d'être planté </>:null}
           
-          {SelectedVegetable.task[2]? <>recolter: {SelectedVegetable.task[2].status} </>:null}
+          {SelectedVegetable.status == "En attente de la période de récolte"?<>  plant </>:null}
+          {SelectedVegetable.status == null?<> récolté </>:null}
+
           </div>
           <div className='familyInfos'>
                   <h5>Informations sur la famille de légume</h5>
@@ -324,7 +338,7 @@ function Potager(props) {
           {family.map((e)=> {return(
           <>
           <div className='FamilyToChoose'>
-          <img  src={`image-graphiste/legume-${e.name.toLowerCase()}.png`} alt="logo laMainVerte" className='vegetableImg' />
+          <img  src={`image-graphiste/imglegumes/legume-${e.name.toLowerCase()}-200.webp`} alt="logo laMainVerte" className='vegetableImg' />
           <button className='family' onClick={(e) => {e.preventDefault(); dispatch(switchAddFamilyModale(false)); addVegetable(e)}}>
             {e.name}
             </button>
@@ -381,11 +395,12 @@ function Potager(props) {
                     <input className='growthTimeInput' type="number" value={growthTime} onChange={(e)=> {setGrowthTime(parseInt(e.target.value))}}/> <p className='growthTimeInputLabel'>jours</p>
                   </div>
                   </label>
-                  <label htmlFor="seeding">* emergence (temps de croissance du semis):
+                  {!(startDateSeeding == 1) ?<label htmlFor="seeding">* emergence (temps de croissance du semis):
                   <div className='creneau' >
                     <input className='growthTimeInput' type="number" value={emergenceTime} onChange={(e)=> {setEmergenceTime(e.target.value)}}/> <p className='growthTimeInputLabel'>jours</p>
                   </div>
-                  </label>
+                  </label>:null}
+
                   <label htmlFor="seeding"> commentaire
                   <div className='' >
                     
