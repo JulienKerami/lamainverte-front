@@ -139,22 +139,36 @@ function Potager(props) {
       
       //on va chercher la famille de  légume en base de données redux grâce à son nom
       const vegetable = vegetableFamily.find((element)=> element.name === e.target.textContent) // recupère le vegetable grâce au nom
-    
-      //si le légume qu'on a récupéré a une date de seeding, on la stocke dans un state
-     if(vegetable.start_date_seeding){setStartDateSeeding(`${year}-${vegetable.start_date_seeding}`)
-     setEndDateSeeding(`${year}-${vegetable.end_date_seeding}`)}
 
+      //si le légume qu'on a récupéré a une date de seeding, on la stocke dans un state
+     if(vegetable.start_date_seeding){
+      
+      //on fait passer les dates reçus de la BDD dans new Date pour corriger les dates qui n'existent pas (ex: le 31 avril 2024 n'existe pas dans le calendrier) 
+      let EndSeeding = new Date(`${year}-${vegetable.end_date_seeding}`).toISOString().slice(0,10)
+      let StartSeeding = new Date(`${year}-${vegetable.start_date_seeding}`).toISOString().slice(0,10)
+      
+      setStartDateSeeding(StartSeeding)
+     setEndDateSeeding(EndSeeding)}
+
+     
      //sinon on mets 1 et 2 comme valeur par défault aux dates de seeding
      else {setStartDateSeeding(1);setEndDateSeeding(2)}
 
       
       // on stocke dans des states les dates de plantations et de récoltes de la famille de légume qu'on a récupéré 
    
-      setStartDatePlanting(`${year}-${vegetable.start_date_planting}`)
-      setEndDatePlanting(`${year}-${vegetable.end_date_planting}`)
-      setStartDateHarvest(`${year}-${vegetable.start_date_harvest}`)
-      setEndDateHarvest(`${year}-${vegetable.end_date_harvest}`)
-      console.log(vegetable);
+      let StartPlanting = new Date(`${year}-${vegetable.start_date_planting}`).toISOString().slice(0,10)
+      let EndPlanting = new Date(`${year}-${vegetable.end_date_planting}`).toISOString().slice(0,10)
+     
+      setStartDatePlanting(StartPlanting)
+      setEndDatePlanting(EndPlanting)
+
+      let StartHarvest = new Date(`${year}-${vegetable.start_date_harvest}`).toISOString().slice(0,10)
+      let EndHarvest = new Date(`${year}-${vegetable.end_date_harvest}`).toISOString().slice(0,10)
+     
+      setStartDateHarvest(StartHarvest)
+      setEndDateHarvest(EndHarvest)
+     
       setGrowthTime(vegetable.growth_time)
       setEmergenceTime(vegetable.emergence)
       setDepth(vegetable.depth)
@@ -167,6 +181,8 @@ function Potager(props) {
       setAddVegetableModale(true)
     }
   
+
+    
     //fonction qui s'active lorsqu'on valide le formulaire de création de vegetable
     const SubmitVegetable = async (e) => {
 
