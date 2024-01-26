@@ -55,3 +55,27 @@ transition: 0.1s;}
 
 .TaskChecker:hover{color: green;
 border: 1px solid green}
+
+
+
+  /* un peu plus grand */
+  @media (max-width:600px) {
+
+    body{background: red;}
+    .todo--container ul li{margin: 5px;}
+
+    .task-container{width: 80%;}
+
+    .title{margin: 0;
+    }
+   .task{font-size: 0.8rem;
+        margin: 0;}
+
+    li{margin: 0;
+      padding: 0;}
+      
+      
+  }
+  
+  
+  
