@@ -9,9 +9,11 @@ import Vegetable from '../Vegetables/Vegetable';
 import { GetAllZones, createZone, getFamily, createVegetable, deleteVegetable, getTasks } from '../Apicall/Apicall';
 import { addFamily } from '../store/slices/vegetableSlice';
 import { switchAddFamilyModale, switchVegeInfoModale } from '../store/slices/vegetableSlice';
-import { Audio } from 'react-loader-spinner'
+import { Oval } from 'react-loader-spinner'
 import { toggleAddFamilyModale, toggleAddZoneModale, toggleDeleteZoneModale } from '../store/slices/modaleSlice';
 import { addTask } from '../store/slices/todoSlice';
+import LoaderExampleLoader from '../Loader/Loader';
+import LoaderExampleInline from '../Loader/Loader';
 
 
 
@@ -295,14 +297,26 @@ function Potager(props) {
     <main className='potager-container' onClick={(e)=> {
       console.log(e.target.className);
       if(!(e.target.className== "VegeInfoSwitch") && vegetableInfosModaleSwitch ) {dispatch(switchVegeInfoModale(false))}}}> 
-     
+ 
       <h2 className='title'>Mon Potager</h2>
-     
+
+      
+
       {/* Section qui contiens toutes les zones  */}
       <section className='zone-container'>
         {zoneValue?<>{zoneValue.map((zone, index) => (
           <Zone key={index} nom={zone.name} id={zone.id} plant={zone.vegetable} />
-          ))}</>: null}
+          ))}</>:   
+          // Oval = Loader spinner (logo de chargement)
+          <Oval
+          visible={true}
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="oval-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          />} 
 
 
 
