@@ -12,8 +12,10 @@ const Todo = () => {
   const zones = useSelector((state) => state.zones.value); 
   const tasks = useSelector((state) => state.todo.tasks);
   const vegetableFamily = useSelector((state) => state.vegetable.familyValue);
-  const [nameFound, setNameFound] = useState(false)
-  const [task, setTask] = useState('');
+  
+  const [TaskDisplay, setTaskDisplay] = useState(true);
+  const [taskIndexSelected, setTaskIndexSelected] = useState(0)
+  const [CheckerValue, setCheckerValue] = useState("X")
 
 
   const getTask = async () => {
@@ -30,6 +32,10 @@ const Todo = () => {
 
 
   const UpdateTask = async (idtask) => {
+
+    setTaskDisplay(false)
+    setTaskIndexSelected(idtask)
+
     console.log(idtask);
     const date = new Date()
     var year = date.toLocaleString("default", { year: "numeric" });
@@ -55,22 +61,7 @@ const Todo = () => {
    getTask()
   }
 
-  const handleRemoveTask = (index) => {
-    dispatch(removeTask(index));
-  };
 
-  // const getFamilyName = (id) => {
-  //   setTimeout(() => {
-  //     console.log(id);
-  //   console.log(vegetableFamily);
-  //   const name = vegetableFamily.find((e)=> e.id === id)
-  //   setNameFound(true)
-  //   console.log(name.name)
-  //   return name.name
-  //   }, "2000");
-    
-
-  // }
 
   return (<>
     {localStorage.name && tasks?
@@ -84,13 +75,16 @@ const Todo = () => {
        {vegetableFamily && tasks?<>{tasks.map((e)=> {return(
           <>
           <div className='task' >
-          <li>{e.Vegetable.varity? e.Vegetable.variety:e.Vegetable.Family.name} à {e.type==="planting"?<>planter</>:null}
+        
+            {/* si le vegetable de la tâche a une variété on l'affiche sinon on affiche le nom de la family*/}
+          <li id={e.id} className={!TaskDisplay && e.id  == taskIndexSelected ? 'hideTask': ""}>{e.Vegetable.varity? e.Vegetable.variety:e.Vegetable.Family.name} à {e.type==="planting"?<><span className='planter'>planter</span></>:null}
 
-           {e.type==="harvest"?<>recolter</>:null}
+          {/* on affiche le type de tâche en fonction de la propriété type de task */}
+           {e.type==="harvest"?<><span className='recolter'>recolter</span></>:null}
            
            {e.type==="seeding"?
-            <>semer</>:null} dans {e.Vegetable.Zone.name} (entre le {e.start_date_period}  et le {e.end_date_period} )
-             <input id={`${e.id}`} on type="button" className='TaskChecker' onClick={(e)=>{UpdateTask(e.target.id)}} />
+            <><span className='semer'>semer</span></>:null} dans {e.Vegetable.Zone.name} (entre le {e.start_date_period}  et le {e.end_date_period} )
+             <input id={`${e.id}`} on type="button" className='TaskChecker'  onClick={(e)=>{UpdateTask(e.target.id)}} value={CheckerValue} />
              
              </li>
 
@@ -100,7 +94,7 @@ const Todo = () => {
 
 
       </ul>
-    </div>:null}</>
+    </div>:<><div className='NoTokenpage'><h3>veuillez vous créer un compte ou vous connecter :)</h3></div></>}</>
   );
 };
 
