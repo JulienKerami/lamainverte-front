@@ -98,12 +98,12 @@ function Potager(props) {
 
     const AddZoneHandle = async (e) => {
       
-      
-      console.log('Une nouvelle zone à été ajoutée');
+      //on vérifie que l'utilisateur a bien rentré un nom sinon on lui envoie un message d'erreur
       const name = e.target.form[0].value
       if(name ==="") {setEmptyNameModale(true)
         setSameNameModale(false); return}
       
+        //on vérifie que l'utilisateur n'a pas rentré le nom d'une zone qui existe déja en BDD
       if(zoneValue){
       const searchForSameName = zoneValue.find((e) => e.name === name)
 
@@ -111,7 +111,7 @@ function Potager(props) {
         setSameNameModale(true)
         setEmptyNameModale(false)
         return}
-
+        // si il n'y a pas d'erreur on ferme les modales d'erreur et la modale d'ajout de zone
         setSameNameModale(false)
         dispatch(toggleAddZoneModale(false))
       }
@@ -165,6 +165,7 @@ function Potager(props) {
       setAddVegetableModale(true)
     }
   
+    //fonction qui s'active lorsqu'on valide le formulaire de création de vegetable
     const SubmitVegetable = async (e) => {
 
       // on va chercher la famille de légume auquel correspond le nom qu'on a récupéré depuis la modale de
@@ -255,12 +256,9 @@ function Potager(props) {
           return} 
     }
 
+    //fonction qui s'active lorsqu'on clique sur la valider dans la modale de suppression 
     const HandleDeleteVegetable = async (e) => {
-      // console.log(SelectedVegetable);
-      // const zoneToModify = (element) => element.id === SelectedVegetable.zone_id
      
-
-      // const index = zoneValue.findIndex(zoneToModify)
      // On delete le vegetable en BDD
       const vegetableDeleted = await deleteVegetable(SelectedVegetable.id)
 

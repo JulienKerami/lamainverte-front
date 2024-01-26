@@ -80,11 +80,11 @@ const Todo = () => {
 
       <ul className="task-container">
 
+      {/* si les données family et tasks de la BDD ont bien été stockés dans redux on affiche les tasks avec le "map" sinon on affiche null */}
        {vegetableFamily && tasks?<>{tasks.map((e)=> {return(
           <>
           <div className='task' >
-          {e.Vegetable.variety== "variété orange"?
-           null:<> <li>{e.Vegetable.varity? e.Vegetable.variety:e.Vegetable.Family.name} à {e.type==="planting"?<>planter</>:null}
+          <li>{e.Vegetable.varity? e.Vegetable.variety:e.Vegetable.Family.name} à {e.type==="planting"?<>planter</>:null}
 
            {e.type==="harvest"?<>recolter</>:null}
            
@@ -94,7 +94,7 @@ const Todo = () => {
              
              </li>
 
-              </> }
+             
           </div></>
         )})}</>:null} 
 
