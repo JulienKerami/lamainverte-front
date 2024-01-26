@@ -290,7 +290,9 @@ function Potager(props) {
       <section className='zone-container'>
         {zoneValue?<>{zoneValue.map((zone, index) => (
           <Zone key={index} nom={zone.name} id={zone.id} plant={zone.vegetable} />
-          ))}</>:     <Oval
+          ))}</>:   
+          // Oval = Loader spinner (logo de chargement)
+          <Oval
           visible={true}
           height="80"
           width="80"
@@ -298,7 +300,7 @@ function Potager(props) {
           ariaLabel="oval-loading"
           wrapperStyle={{}}
           wrapperClass=""
-          />}
+          />} 
 
 
 

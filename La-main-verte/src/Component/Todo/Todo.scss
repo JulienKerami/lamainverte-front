@@ -33,7 +33,8 @@
   .planter{color: green;}
   .recolter{color:  rgb(74, 94, 1)}
   
-  .task{margin-left: 20px;}
+  .task{margin-left: 20px;
+  }
 
   .task-container{display: flex;
   flex-direction: column;
@@ -61,7 +62,7 @@ border: 1px solid green}
   /* un peu plus grand */
   @media (max-width:600px) {
 
-    body{background: red;}
+  
     .todo--container ul li{margin: 5px;}
 
     .task-container{width: 80%;}

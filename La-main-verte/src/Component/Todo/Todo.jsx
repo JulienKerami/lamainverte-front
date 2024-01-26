@@ -6,6 +6,7 @@ import { GetAllZones, getTasks, getFamily, updateTask } from '../Apicall/Apicall
 import { editZone } from '../store/slices/zonesSlice';
 import { jwtDecode } from 'jwt-decode'
 import { addFamily } from '../store/slices/vegetableSlice';
+import { Oval } from 'react-loader-spinner'
 
 const Todo = () => {
   const dispatch = useDispatch();
@@ -25,11 +26,32 @@ const Todo = () => {
    }
 
   useEffect(() => { 
+    // const event = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
+ 
    
+    // console.log(tasks[0].start_date_period.toLocaleDateString('de-DE', options));
+   FormatDate()
+   
+
+  }, [tasks])
+
+  const FormatDate = (date) => {
+    const options = {
     
-  }, [])
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
 
+    let formatedDate = ""
+     let taskdate = date
+      const dateToformat = new Date(taskdate)
+       formatedDate = dateToformat.toLocaleDateString('fr-FR', options)
+    
 
+    return formatedDate
+
+  }
 
   const UpdateTask = async (idtask) => {
 
@@ -77,20 +99,26 @@ const Todo = () => {
           <div className='task' >
         
             {/* si le vegetable de la tâche a une variété on l'affiche sinon on affiche le nom de la family*/}
-          <li id={e.id} className={!TaskDisplay && e.id  == taskIndexSelected ? 'hideTask': ""}>{e.Vegetable.varity? e.Vegetable.variety:e.Vegetable.Family.name} à {e.type==="planting"?<><span className='planter'>planter</span></>:null}
+          <li id={e.id} className={!TaskDisplay && e.id  == taskIndexSelected ? 'hideTask': ""}>{e.Vegetable.varity? e.Vegetable.variety:<strong>{e.Vegetable.Family.name}</strong>} à {e.type==="planting"?<><span className='planter'>planter</span></>:null}
 
           {/* on affiche le type de tâche en fonction de la propriété type de task */}
            {e.type==="harvest"?<><span className='recolter'>recolter</span></>:null}
            
            {e.type==="seeding"?
-            <><span className='semer'>semer</span></>:null} dans {e.Vegetable.Zone.name} (entre le {e.start_date_period}  et le {e.end_date_period} )
+            <><span className='semer'>semer</span></>:null} dans {e.Vegetable.Zone.name} (entre le {FormatDate(e.start_date_period)}  et le {FormatDate(e.end_date_period)} )
              <input id={`${e.id}`} on type="button" className='TaskChecker'  onClick={(e)=>{UpdateTask(e.target.id)}} value={CheckerValue} />
              
              </li>
-
-             
           </div></>
-        )})}</>:null} 
+        )})}</>:<Oval
+        visible={true}
+        height="80"
+        width="80"
+        color="#4fa94d"
+        ariaLabel="oval-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        />} 
 
 
       </ul>
