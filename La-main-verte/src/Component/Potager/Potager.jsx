@@ -9,9 +9,11 @@ import Vegetable from '../Vegetables/Vegetable';
 import { GetAllZones, createZone, getFamily, createVegetable, deleteVegetable, getTasks } from '../Apicall/Apicall';
 import { addFamily } from '../store/slices/vegetableSlice';
 import { switchAddFamilyModale, switchVegeInfoModale } from '../store/slices/vegetableSlice';
-import { Audio } from 'react-loader-spinner'
+import { Oval } from 'react-loader-spinner'
 import { toggleAddFamilyModale, toggleAddZoneModale, toggleDeleteZoneModale } from '../store/slices/modaleSlice';
 import { addTask } from '../store/slices/todoSlice';
+import LoaderExampleLoader from '../Loader/Loader';
+import LoaderExampleInline from '../Loader/Loader';
 
 
 
@@ -98,12 +100,12 @@ function Potager(props) {
 
     const AddZoneHandle = async (e) => {
       
-      
-      console.log('Une nouvelle zone à été ajoutée');
+      //on vérifie que l'utilisateur a bien rentré un nom sinon on lui envoie un message d'erreur
       const name = e.target.form[0].value
       if(name ==="") {setEmptyNameModale(true)
         setSameNameModale(false); return}
       
+        //on vérifie que l'utilisateur n'a pas rentré le nom d'une zone qui existe déja en BDD
       if(zoneValue){
       const searchForSameName = zoneValue.find((e) => e.name === name)
 
@@ -111,7 +113,7 @@ function Potager(props) {
         setSameNameModale(true)
         setEmptyNameModale(false)
         return}
-
+        // si il n'y a pas d'erreur on ferme les modales d'erreur et la modale d'ajout de zone
         setSameNameModale(false)
         dispatch(toggleAddZoneModale(false))
       }
@@ -137,22 +139,36 @@ function Potager(props) {
       
       //on va chercher la famille de  légume en base de données redux grâce à son nom
       const vegetable = vegetableFamily.find((element)=> element.name === e.target.textContent) // recupère le vegetable grâce au nom
-    
-      //si le légume qu'on a récupéré a une date de seeding, on la stocke dans un state
-     if(vegetable.start_date_seeding){setStartDateSeeding(`${year}-${vegetable.start_date_seeding}`)
-     setEndDateSeeding(`${year}-${vegetable.end_date_seeding}`)}
 
+      //si le légume qu'on a récupéré a une date de seeding, on la stocke dans un state
+     if(vegetable.start_date_seeding){
+      
+      //on fait passer les dates reçus de la BDD dans new Date pour corriger les dates qui n'existent pas (ex: le 31 avril 2024 n'existe pas dans le calendrier) 
+      let EndSeeding = new Date(`${year}-${vegetable.end_date_seeding}`).toISOString().slice(0,10)
+      let StartSeeding = new Date(`${year}-${vegetable.start_date_seeding}`).toISOString().slice(0,10)
+      
+      setStartDateSeeding(StartSeeding)
+     setEndDateSeeding(EndSeeding)}
+
+     
      //sinon on mets 1 et 2 comme valeur par défault aux dates de seeding
      else {setStartDateSeeding(1);setEndDateSeeding(2)}
 
       
       // on stocke dans des states les dates de plantations et de récoltes de la famille de légume qu'on a récupéré 
    
-      setStartDatePlanting(`${year}-${vegetable.start_date_planting}`)
-      setEndDatePlanting(`${year}-${vegetable.end_date_planting}`)
-      setStartDateHarvest(`${year}-${vegetable.start_date_harvest}`)
-      setEndDateHarvest(`${year}-${vegetable.end_date_harvest}`)
-      console.log(vegetable);
+      let StartPlanting = new Date(`${year}-${vegetable.start_date_planting}`).toISOString().slice(0,10)
+      let EndPlanting = new Date(`${year}-${vegetable.end_date_planting}`).toISOString().slice(0,10)
+     
+      setStartDatePlanting(StartPlanting)
+      setEndDatePlanting(EndPlanting)
+
+      let StartHarvest = new Date(`${year}-${vegetable.start_date_harvest}`).toISOString().slice(0,10)
+      let EndHarvest = new Date(`${year}-${vegetable.end_date_harvest}`).toISOString().slice(0,10)
+     
+      setStartDateHarvest(StartHarvest)
+      setEndDateHarvest(EndHarvest)
+     
       setGrowthTime(vegetable.growth_time)
       setEmergenceTime(vegetable.emergence)
       setDepth(vegetable.depth)
@@ -165,6 +181,9 @@ function Potager(props) {
       setAddVegetableModale(true)
     }
   
+
+    
+    //fonction qui s'active lorsqu'on valide le formulaire de création de vegetable
     const SubmitVegetable = async (e) => {
 
       // on va chercher la famille de légume auquel correspond le nom qu'on a récupéré depuis la modale de
@@ -255,12 +274,9 @@ function Potager(props) {
           return} 
     }
 
+    //fonction qui s'active lorsqu'on clique sur la valider dans la modale de suppression 
     const HandleDeleteVegetable = async (e) => {
-      // console.log(SelectedVegetable);
-      // const zoneToModify = (element) => element.id === SelectedVegetable.zone_id
      
-
-      // const index = zoneValue.findIndex(zoneToModify)
      // On delete le vegetable en BDD
       const vegetableDeleted = await deleteVegetable(SelectedVegetable.id)
 
@@ -281,14 +297,26 @@ function Potager(props) {
     <main className='potager-container' onClick={(e)=> {
       console.log(e.target.className);
       if(!(e.target.className== "VegeInfoSwitch") && vegetableInfosModaleSwitch ) {dispatch(switchVegeInfoModale(false))}}}> 
-     
+ 
       <h2 className='title'>Mon Potager</h2>
-     
+
+      
+
       {/* Section qui contiens toutes les zones  */}
       <section className='zone-container'>
         {zoneValue?<>{zoneValue.map((zone, index) => (
           <Zone key={index} nom={zone.name} id={zone.id} plant={zone.vegetable} />
-          ))}</>: null}
+          ))}</>:   
+          // Oval = Loader spinner (logo de chargement)
+          <Oval
+          visible={true}
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="oval-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          />} 
 
 
 

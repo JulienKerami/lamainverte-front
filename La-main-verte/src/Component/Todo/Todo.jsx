@@ -6,14 +6,17 @@ import { GetAllZones, getTasks, getFamily, updateTask } from '../Apicall/Apicall
 import { editZone } from '../store/slices/zonesSlice';
 import { jwtDecode } from 'jwt-decode'
 import { addFamily } from '../store/slices/vegetableSlice';
+import { Oval } from 'react-loader-spinner'
 
 const Todo = () => {
   const dispatch = useDispatch();
   const zones = useSelector((state) => state.zones.value); 
   const tasks = useSelector((state) => state.todo.tasks);
   const vegetableFamily = useSelector((state) => state.vegetable.familyValue);
-  const [nameFound, setNameFound] = useState(false)
-  const [task, setTask] = useState('');
+  
+  const [TaskDisplay, setTaskDisplay] = useState(true);
+  const [taskIndexSelected, setTaskIndexSelected] = useState(0)
+  const [CheckerValue, setCheckerValue] = useState("X")
 
 
   const getTask = async () => {
@@ -23,13 +26,38 @@ const Todo = () => {
    }
 
   useEffect(() => { 
+    // const event = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
+ 
    
+    // console.log(tasks[0].start_date_period.toLocaleDateString('de-DE', options));
+   FormatDate()
+   
+
+  }, [tasks])
+
+  const FormatDate = (date) => {
+    const options = {
     
-  }, [])
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
 
+    let formatedDate = ""
+     let taskdate = date
+      const dateToformat = new Date(taskdate)
+       formatedDate = dateToformat.toLocaleDateString('fr-FR', options)
+    
 
+    return formatedDate
+
+  }
 
   const UpdateTask = async (idtask) => {
+
+    setTaskDisplay(false)
+    setTaskIndexSelected(idtask)
+
     console.log(idtask);
     const date = new Date()
     var year = date.toLocaleString("default", { year: "numeric" });
@@ -55,22 +83,7 @@ const Todo = () => {
    getTask()
   }
 
-  const handleRemoveTask = (index) => {
-    dispatch(removeTask(index));
-  };
 
-  // const getFamilyName = (id) => {
-  //   setTimeout(() => {
-  //     console.log(id);
-  //   console.log(vegetableFamily);
-  //   const name = vegetableFamily.find((e)=> e.id === id)
-  //   setNameFound(true)
-  //   console.log(name.name)
-  //   return name.name
-  //   }, "2000");
-    
-
-  // }
 
   return (<>
     {localStorage.name && tasks?
@@ -80,27 +93,36 @@ const Todo = () => {
 
       <ul className="task-container">
 
+      {/* si les données family et tasks de la BDD ont bien été stockés dans redux on affiche les tasks avec le "map" sinon on affiche null */}
        {vegetableFamily && tasks?<>{tasks.map((e)=> {return(
           <>
           <div className='task' >
-          {e.Vegetable.variety== "variété orange"?
-           null:<> <li>{e.Vegetable.varity? e.Vegetable.variety:e.Vegetable.Family.name} à {e.type==="planting"?<>planter</>:null}
+        
+            {/* si le vegetable de la tâche a une variété on l'affiche sinon on affiche le nom de la family*/}
+          <li id={e.id} className={!TaskDisplay && e.id  == taskIndexSelected ? 'hideTask': ""}>{e.Vegetable.varity? e.Vegetable.variety:<strong>{e.Vegetable.Family.name}</strong>} à {e.type==="planting"?<><span className='planter'>planter</span></>:null}
 
-           {e.type==="harvest"?<>recolter</>:null}
+          {/* on affiche le type de tâche en fonction de la propriété type de task */}
+           {e.type==="harvest"?<><span className='recolter'>recolter</span></>:null}
            
            {e.type==="seeding"?
-            <>semer</>:null} dans {e.Vegetable.Zone.name} (entre le {e.start_date_period}  et le {e.end_date_period} )
-             <input id={`${e.id}`} on type="button" className='TaskChecker' onClick={(e)=>{UpdateTask(e.target.id)}} />
+            <><span className='semer'>semer</span></>:null} dans {e.Vegetable.Zone.name} (entre le {FormatDate(e.start_date_period)}  et le {FormatDate(e.end_date_period)} )
+             <input id={`${e.id}`} on type="button" className='TaskChecker'  onClick={(e)=>{UpdateTask(e.target.id)}} value={CheckerValue} />
              
              </li>
-
-              </> }
           </div></>
-        )})}</>:null} 
+        )})}</>:<Oval
+        visible={true}
+        height="80"
+        width="80"
+        color="#4fa94d"
+        ariaLabel="oval-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        />} 
 
 
       </ul>
-    </div>:null}</>
+    </div>:<><div className='NoTokenpage'><h3>veuillez vous créer un compte ou vous connecter :)</h3></div></>}</>
   );
 };
 
