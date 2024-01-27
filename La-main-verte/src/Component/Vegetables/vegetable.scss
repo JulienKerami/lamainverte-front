@@ -1,3 +1,11 @@
+@keyframes example {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+
+
+
 .vegetable{width: 100px;
     height: 100px;
 background: none;
@@ -8,10 +16,15 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 border-radius: 15px;
-font-family: Permanent Marker;;
+font-family: Permanent Marker;
+transition: 0.3s;
+animation-name: example;
+animation-duration: 0.5s;
 
 
 .vegetableVisuals{display: flex;
+    transition: 1s;
+
 }
 
 .progressBar{display: flex;
@@ -43,4 +56,6 @@ margin: 10px;
 
 .vegetableImg{width: 60px;
     padding: 5px;
+    transition: 1s;
+
 margin: 0 auto;}
