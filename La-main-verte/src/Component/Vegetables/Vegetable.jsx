@@ -67,14 +67,14 @@ function Vegetable({name, plant}) {
             <img  src={`image-graphiste/legume-${FamilyName}.png`} alt="logo laMainVerte" className='vegetableImg' /> 
             <div className='progressBar'>
 
-            {/* Affichage conditionnel si le légume a des semis */}
+            {/* Affichage conditionnel de la progressBar si le légume a des semis */}
             {plant.task.length == 3?<>
             
               {plant.status_code == 2 || plant.status_code == 4 || plant.status == null?<span className='barSemi'></span>:null}
             {plant.status_code == 4 || plant.status == null?<span className='barPlant'></span>:null}
             {plant.status == null? <span className='barHarvest'></span>: null}</>:null }   
             
-             {/* Affichage conditionnel si le légume n'a pas de semiss */}
+             {/* Affichage conditionnel de la progressBar si le légume n'a pas de semiss */}
             {plant.task.length == 2?<>
             
             {plant.status_code == 4 || plant.status == null?<span className='barPlant'></span>:null}
