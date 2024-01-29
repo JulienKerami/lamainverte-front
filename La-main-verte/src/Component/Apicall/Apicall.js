@@ -165,7 +165,7 @@ return Httpresponse}
 export async function updateTask(id, obj) {
 
   console.log(id, obj);
-  try { const Httpresponse = await instance.get(`/tasks/${id}`, obj)
+  try { const Httpresponse = await instance.patch(`/tasks/${id}`, obj)
   return Httpresponse}
   
     catch(err)

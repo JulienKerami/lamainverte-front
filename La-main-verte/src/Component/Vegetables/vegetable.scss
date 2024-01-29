@@ -1,5 +1,17 @@
-.vegetable {
-  box-sizing: border-box;
+
+@keyframes example {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+.vegetableImg {
+  width: 80px;
+  padding: 5px;
+  margin: 0 auto;
+}
+
+
+.vegetable{  box-sizing: border-box;
   width: 150px;
   height: 150px;
   background: none;
@@ -12,13 +24,42 @@
   border-radius: 15px;
   font-family: Permanent Marker;
   margin: 5px;
+transition: 0.3s;
+animation-name: example;
+animation-duration: 0.5s;
+
+
+.vegetableVisuals{display: flex;
+    transition: 1s;
+
 }
 
-.vegetableImg {
-  width: 80px;
-  padding: 5px;
-  margin: 0 auto;
+.progressBar{display: flex;
+    flex-direction: column;
+    }
+margin: 10px;
+    .barSemi{background: rgb(241, 220, 22);
+        border-radius: 2px;
+        width: 10px;
+        height: 15px;
+        margin-top: 10px;
+        margin-left: 20px}
+    .barPlant{background: green;
+            width: 10px;
+            border-radius: 2px;
+            height: 15px;
+            margin-top: 10px;
+            margin-left: 20px}
+    .barHarvest{background: rgb(1, 73, 1);
+                width: 10px;
+                border-radius: 2px;
+                height: 15px;
+                margin-top: 10px;
+                margin-left: 20px}
+        
+    
 }
+
 
 @media (min-width: 600px) {
   .vegetable {
@@ -54,6 +95,8 @@
   .vegetableImg {
     width: 150px;
     padding: 5px;
-    margin: 0 auto;
-  }
-}
+
+    transition: 1s;
+
+margin: 0 auto;}
+
