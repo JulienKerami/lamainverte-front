@@ -102,6 +102,12 @@
     font-size: 2.5rem;
   }
 
+  .vegetable-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .deleteModal p {
     font-size: 0.85rem;
   }
@@ -193,8 +199,9 @@
 
   .vegetable-container {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    align-items: center;
   }
 
   .addVegetableButton {
