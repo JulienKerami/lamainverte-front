@@ -104,7 +104,6 @@ flex-direction: column;}
 padding: 20px;
 background: #e8ddd1;
 border: 3px solid #a59e97;
-
 max-width: 60%;
 position: fixed;
 top: 3%;
@@ -155,7 +154,7 @@ overflow-y: hidden;
         border-radius: 10px;
         font-weight: bold;
         p{margin: 5px 0;}
-    }
+        }
 
     input{margin: 10px;
         border: none;
@@ -173,10 +172,10 @@ overflow-y: hidden;
         }
         
     button{margin: 10px;
-       }
+        }
 
-        .growthTimeInputLabel{height:50%;align-self: center;}
-        .formButton{display: flex;}
+    .growthTimeInputLabel{height:50%;align-self: center;}
+    .formButton{display: flex;}
 }
 
 
@@ -217,4 +216,6 @@ border-radius: 10px;}
 color: white;
 h3{text-align: center;
     margin-top: 100px;}}
+
+
 

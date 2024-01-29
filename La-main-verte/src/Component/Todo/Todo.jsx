@@ -7,6 +7,8 @@ import { editZone } from '../store/slices/zonesSlice';
 import { jwtDecode } from 'jwt-decode'
 import { addFamily } from '../store/slices/vegetableSlice';
 import { Oval } from 'react-loader-spinner'
+import {Link} from 'react-router-dom'
+import { useNavigate } from 'react-router';
 
 const Todo = () => {
   const dispatch = useDispatch();
@@ -55,6 +57,7 @@ const Todo = () => {
 
   const UpdateTask = async (idtask) => {
 
+    //on fait disparaître la tâche
     setTaskDisplay(false)
     setTaskIndexSelected(idtask)
 
@@ -89,7 +92,7 @@ const Todo = () => {
     {localStorage.name && tasks?
    <div className="todo--container">
       <h2 className="title">ToDo </h2>
-
+      
 
       <ul className="task-container">
 
@@ -98,19 +101,25 @@ const Todo = () => {
           <>
           <div className='task' >
         
-            {/* si le vegetable de la tâche a une variété on l'affiche sinon on affiche le nom de la family*/}
-          <li id={e.id} className={!TaskDisplay && e.id  == taskIndexSelected ? 'hideTask': ""}>{e.Vegetable.varity? e.Vegetable.variety:<strong>{e.Vegetable.Family.name}</strong>} à {e.type==="planting"?<><span className='planter'>planter</span></>:null}
-
-          {/* on affiche le type de tâche en fonction de la propriété type de task */}
-           {e.type==="harvest"?<><span className='recolter'>recolter</span></>:null}
-           
-           {e.type==="seeding"?
-            <><span className='semer'>semer</span></>:null} dans {e.Vegetable.Zone.name} (entre le {FormatDate(e.start_date_period)}  et le {FormatDate(e.end_date_period)} )
-             <input id={`${e.id}`} on type="button" className='TaskChecker'  onClick={(e)=>{UpdateTask(e.target.id)}} value={CheckerValue} />
+              {/*
+               si le vegetable de la tâche a une variété on l'affiche sinon on affiche le nom de la family*/}
+            <li id={e.id} className={!TaskDisplay && e.id  == taskIndexSelected ? 'hideTask': ""}>
+              <strong>{`${e.Vegetable.Family.name}`}</strong>
+             {e.Vegetable.variety? <>{<p> ({e.Vegetable.variety}) </p>}</>:null} à {e.type==="planting"?<><span className='planter'>planter</span></>:null}
+               
+            {/* on affiche le type de tâche en fonction de la propriété "type" de task */}
+            {e.type==="harvest"?<><span className='recolter'>recolter</span></>:null}
+            
+            {e.type==="seeding"?
+              <><span className='semer'>semer</span></>:null} dans {e.Vegetable.Zone.name} (entre le {FormatDate(e.start_date_period)}  et le {FormatDate(e.end_date_period)} )
+              <input id={`${e.id}`} on type="button" className='TaskChecker'  onClick={(e)=>{UpdateTask(e.target.id)}} value={CheckerValue} />
              
              </li>
-          </div></>
-        )})}</>:<Oval
+          </div>
+         
+          
+          </>
+        )})}   </>:<Oval
         visible={true}
         height="80"
         width="80"
@@ -119,6 +128,7 @@ const Todo = () => {
         wrapperStyle={{}}
         wrapperClass=""
         />} 
+      
 
 
       </ul>

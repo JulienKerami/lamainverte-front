@@ -1,19 +1,17 @@
 import  { useState, useEffect} from 'react';
 import Zone from './Zone';
-import { zoneArray } from '../Data/data';
+
 import { useDispatch, useSelector } from 'react-redux'
-import {addVegetableToZone, addZone, deleteVegetableFromZone, editZone}  from '../store/slices/zonesSlice'
+import {addVegetableToZone, addZone, editZone}  from '../store/slices/zonesSlice'
 import { jwtDecode } from 'jwt-decode'
 import "./Potager.scss"
-import Vegetable from '../Vegetables/Vegetable';
-import { GetAllZones, createZone, getFamily, createVegetable, deleteVegetable, getTasks } from '../Apicall/Apicall';
-import { addFamily } from '../store/slices/vegetableSlice';
+
+import { GetAllZones, createZone, createVegetable, deleteVegetable, getTasks } from '../Apicall/Apicall';
+
 import { switchAddFamilyModale, switchVegeInfoModale } from '../store/slices/vegetableSlice';
 import { Oval } from 'react-loader-spinner'
-import { toggleAddFamilyModale, toggleAddZoneModale, toggleDeleteZoneModale } from '../store/slices/modaleSlice';
+import { toggleAddZoneModale } from '../store/slices/modaleSlice';
 import { addTask } from '../store/slices/todoSlice';
-import LoaderExampleLoader from '../Loader/Loader';
-import LoaderExampleInline from '../Loader/Loader';
 
 
 
@@ -28,8 +26,6 @@ function Potager(props) {
     const SelectedVegetable = useSelector((state) => state.vegetable.vegetableSelected )
     const selectedFamily = useSelector((state) => state.vegetable.selectedFamily)
 
-    const addFamilyModale = useSelector((state) => state.modale.addFamilyModale)
-    const deleteZoneModale = useSelector((state) => state.modale.deleteZoneModale)
     const addZoneModale = useSelector((state) => state.modale.addZoneModale)
 
     const dispatch = useDispatch()
@@ -38,7 +34,7 @@ function Potager(props) {
     
     const [sameNameModale, setSameNameModale] = useState(false)
     const [emptyNameModale, setEmptyNameModale] = useState(false)
-    const [addVarietyModale, setAddVarietyModale] = useState(false)
+
     const [addVegetableModale, setAddVegetableModale] = useState(false)
     const [invalidVegetableFormModale, setInvalidVegetableFormModale] = useState(false)
     const [VegetableFormError, setVegetableFormError] = useState("")
@@ -71,7 +67,7 @@ function Potager(props) {
 
     //Ajoute les familles de légumes au state family lorsqu'on qu'on clique sur le + dans le composant zone
     useEffect(() => {
-      setAddVarietyModale(vegetableSwitch);
+     
       
       setFamily(vegetableFamily)
     }, [vegetableSwitch])
@@ -129,57 +125,70 @@ function Potager(props) {
 
     //fonction qui s'active lorsqu'on choisit une famille de légume
     const addVegetable = async (e) => {
+
+     //on va chercher la famille de  légume en base de données redux grâce à son nom
+     const vegetable = vegetableFamily.find((element)=> element.name === e.target.textContent) // recupère le vegetable grâce au nom
          
       // on récupère l'année courante dans la variable year
       let date = new Date()
       let year = date.getFullYear()
+    
 
       //on stocke le nom de la famille de légume qu'on a selectionné dans un state
       setOneFamily(e.target.textContent)
       
-      //on va chercher la famille de  légume en base de données redux grâce à son nom
-      const vegetable = vegetableFamily.find((element)=> element.name === e.target.textContent) // recupère le vegetable grâce au nom
-
-      //si le légume qu'on a récupéré a une date de seeding, on la stocke dans un state
+      
+      //SI le légume qu'on a récupéré a une date de seeding, on la stocke dans un state
      if(vegetable.start_date_seeding){
-      
-      //on fait passer les dates reçus de la BDD dans new Date pour corriger les dates qui n'existent pas (ex: le 31 avril 2024 n'existe pas dans le calendrier) 
-      let EndSeeding = new Date(`${year}-${vegetable.end_date_seeding}`).toISOString().slice(0,10)
-      let StartSeeding = new Date(`${year}-${vegetable.start_date_seeding}`).toISOString().slice(0,10)
-      
-      setStartDateSeeding(StartSeeding)
-     setEndDateSeeding(EndSeeding)}
+
+           //on vérifie que la date de fin de seeding n'est pas dépassé, sinon on rajoute une année à l'année courante
+            let EndSeedingCheck =new Date(`${year}-${vegetable.end_date_seeding}`).toISOString().slice(0,10)
+            if (Date.parse(EndSeedingCheck)<Date.parse(date))
+            {year = year+1}
+
+        //on fait passer les dates reçus de la BDD dans la method new Date pour corriger les dates qui n'existent pas (ex: le 31 avril 2024 n'existe pas dans le calendrier) 
+        let EndSeeding = new Date(`${year}-${vegetable.end_date_seeding}`).toISOString().slice(0,10)
+        let StartSeeding = new Date(`${year}-${vegetable.start_date_seeding}`).toISOString().slice(0,10)
+        
+        setStartDateSeeding(StartSeeding)
+        setEndDateSeeding(EndSeeding)}
 
      
-     //sinon on mets 1 et 2 comme valeur par défault aux dates de seeding
+     //SINON on mets 1 et 2 comme valeur par défault aux dates de seeding
      else {setStartDateSeeding(1);setEndDateSeeding(2)}
 
+
+    //  On vérifie vérifie que la date de fin de planting (pour les légumes qui n'ont pas de semis) n'est pas dépassé, sinon on rajoute une année à l'année courante
+     let EndPlantingCheck =new Date(`${year}-${vegetable.end_date_planting}`).toISOString().slice(0,10)
+     if (Date.parse(EndPlantingCheck)<Date.parse(date))
+     {year = year+1}
       
       // on stocke dans des states les dates de plantations et de récoltes de la famille de légume qu'on a récupéré 
    
-      let StartPlanting = new Date(`${year}-${vegetable.start_date_planting}`).toISOString().slice(0,10)
-      let EndPlanting = new Date(`${year}-${vegetable.end_date_planting}`).toISOString().slice(0,10)
-     
-      setStartDatePlanting(StartPlanting)
-      setEndDatePlanting(EndPlanting)
+        let StartPlanting = new Date(`${year}-${vegetable.start_date_planting}`).toISOString().slice(0,10)
+        let EndPlanting = new Date(`${year}-${vegetable.end_date_planting}`).toISOString().slice(0,10)
+      
+        setStartDatePlanting(StartPlanting)
+        setEndDatePlanting(EndPlanting)
 
-      let StartHarvest = new Date(`${year}-${vegetable.start_date_harvest}`).toISOString().slice(0,10)
-      let EndHarvest = new Date(`${year}-${vegetable.end_date_harvest}`).toISOString().slice(0,10)
-     
-      setStartDateHarvest(StartHarvest)
-      setEndDateHarvest(EndHarvest)
-     
-      setGrowthTime(vegetable.growth_time)
-      setEmergenceTime(vegetable.emergence)
-      setDepth(vegetable.depth)
-      setExposure(vegetable.exposure)
-      setRowSpacing(vegetable.row_spacing)
-      setSoilType(vegetable.soil_type)
-      setSpacing(vegetable.spacing)
+        let StartHarvest = new Date(`${year}-${vegetable.start_date_harvest}`).toISOString().slice(0,10)
+        let EndHarvest = new Date(`${year}-${vegetable.end_date_harvest}`).toISOString().slice(0,10)
+      
+        setStartDateHarvest(StartHarvest)
+        setEndDateHarvest(EndHarvest)
+      
+        //  on stocke dans des states le restes des informations sur une famille de légumes.s
+        setGrowthTime(vegetable.growth_time)
+        setEmergenceTime(vegetable.emergence)
+        setDepth(vegetable.depth)
+        setExposure(vegetable.exposure)
+        setRowSpacing(vegetable.row_spacing)
+        setSoilType(vegetable.soil_type)
+        setSpacing(vegetable.spacing)
 
-      //on ouvre la modale d'ajout de vegetable
-      setAddVegetableModale(true)
-    }
+        //on ouvre la modale d'ajout de vegetable
+        setAddVegetableModale(true)
+      }
   
 
     

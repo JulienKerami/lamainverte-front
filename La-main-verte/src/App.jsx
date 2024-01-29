@@ -16,6 +16,7 @@ import { jwtDecode } from 'jwt-decode'
 import { editZone } from './Component/store/slices/zonesSlice'
 import { addFamily } from './Component/store/slices/vegetableSlice'
 import { addTask,removeTask } from './Component/store/slices/todoSlice'
+import TodoMonth from './Component/Todo/TodoMounth'
 
 
 
@@ -82,6 +83,7 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/todo' element={<Todo/>}/>
+          <Route path='/todoMonth' element={<TodoMonth/>}/>
         </Routes>
     </>
   )

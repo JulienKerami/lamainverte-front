@@ -34,12 +34,13 @@
   .recolter{color:  rgb(74, 94, 1)}
   
   .task{margin-left: 20px;
+    min-width: 90%;
   }
 
   .task-container{display: flex;
   flex-direction: column;
 background: #e8ddd1;;
-width: 60%;
+width:70%;
 border-radius: 20px;
 padding: 20px;
 justify-content: center;
