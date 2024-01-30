@@ -7,7 +7,7 @@ import Potager from './Component/Potager/Potager'
 import './App.css'
 import SignIn from './Component/SignIn/SignIn'
 import Home from './Component/Home/Home'
-import {Routes, Route, Link, NavLink, Router} from 'react-router-dom'
+import {Routes, Route, Link, NavLink, Router, useNavigate, useLocation} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { Provider } from 'react-redux';
 import store from './Component/store/store'
@@ -23,8 +23,22 @@ import TodoMonth from './Component/Todo/TodoMounth'
 function App() {
     const [count, setCount] = useState(0);
     const [isNavbarOn, setIsNavbarOn] = useState(false); 
+    const [pathLocation, setPathLocation] = useState(""); 
 
-  useEffect(() => {GetZonesFromBDD();getTask();getFamilies()}, [])
+
+    useEffect(() => {
+      GetZonesFromBDD();
+      getTask();
+      getFamilies();
+    }, []);
+
+    const location = useLocation();
+
+    useEffect(() => {
+      console.log('La route a changé ! en', location.pathname);
+      setPathLocation(location.pathname);
+    }, [location]);
+
   const dispatch = useDispatch();
 
   const getTask = async () => {
@@ -59,28 +73,30 @@ function App() {
 
    return (
     <>
-      <header className='header'>
+      <header className={`header ${pathLocation === "/" ? "header_home" : ""}`}>
       <Link to='/'>
-        <div className="logo">
-          <img src="logo.png" alt="logo laMainVerte" className='logo-img' /> 
-          <div className="logo-title">
+
+        <div className={`logo ${pathLocation === "/" ? "logo_home" : ""}`}>
+          <img src="/src/assets/logo.png" alt="logo laMainVerte" className={`logo-img ${pathLocation === "/" ? "logo-img_home" : ""}`}/>
+          <div className={`logo-title ${pathLocation === "/" ? "logo-title_home" : ""}`}>
+
             <span>la</span>
             <span>main</span>
             <span className="logo-title_text">verte</span>
           </div>
         </div>
       </Link>
-        <button className="navbarToggle" onClick={toggleNavbar}>
-          <div className="navbarToggle-img"></div>
-          <div className="navbarToggle-img"></div>
-          <div className="navbarToggle-img"></div>
+        <button className={`navbarToggle ${pathLocation === "/" ? "navbarToggle_home" : ""}`}>
+          <div className={`navbarToggle-img ${pathLocation === "/" ? "navbarToggle-img_home" : ""}`}></div>
+          <div className={`navbarToggle-img ${pathLocation === "/" ? "navbarToggle-img_home" : ""}`}></div>
+          <div className={`navbarToggle-img ${pathLocation === "/" ? "navbarToggle-img_home" : ""}`}></div>
         </button>
       </header>
       {isNavbarOn && <Navbar/>}
         <Routes>
           <Route path='/potager' element={<Potager/>}/>
           <Route path='/signin' element={<SignIn/>}/>
-          <Route path='/' element={<Home/>}/>
+          <Route path="/" element={<Home setPathLocation={() => setPathLocation("/")} />} />
           <Route path='/login' element={<Login/>}/>
           <Route path='/todo' element={<Todo/>}/>
           <Route path='/todoMonth' element={<TodoMonth/>}/>

@@ -11,10 +11,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 16vh; 
+  height: 16%; 
   width: 100%;
   background-color: white;
+}
 
+.header_home{
+  height: 25%;
+  justify-content: center;
 }
 
 .logo {
@@ -23,9 +27,21 @@
   margin-left: 3rem;
 }
 
+.logo_home{
+  display: flex;
+  justify-content: space-between;
+}
+
 .logo-img {
   width: 40px; 
   margin-right: 0.7rem;
+}
+
+.logo-img_home{
+  width: 30px; 
+  margin-bottom: 4rem;
+  position: relative;
+  width: min(5rem, 12vw);
 }
 
 .logo-title {
@@ -38,6 +54,10 @@
   line-height: 0.9;
   font-size: 1.4rem;
   margin-top: 10px;
+}
+
+.logo-title_home{
+  font-size: min(5rem, 12vw)
 }
 
 .logo-title_text{
@@ -54,6 +74,10 @@
   margin-top: 2rem;
 }
 
+.navbarToggle_home{
+  margin-bottom: 5rem;;
+}
+
 .navbarToggle:focus{
   outline: none;
 }
@@ -64,6 +88,11 @@
   background: #203624;
   margin: 3px 0; 
   border-radius: 10px;
+}
+
+.navbarToggle-img_home{
+  width: min(3rem, 12vw);
+  height: min(0.4rem, 12vw);
 }
 
 .navbar-link{
