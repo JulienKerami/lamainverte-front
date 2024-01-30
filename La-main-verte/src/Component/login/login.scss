@@ -3,28 +3,28 @@ display: flex;
 justify-content: center;
 align-items: center;}
 
-.login {width: 100%;
+.login {
             height: auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding-bottom: 20px;
-            width: 50%;
+            width: 90%;
             height: 50%;
-            padding: 100px;
+            padding: 30px 0px;
             border-radius: 15px;
             border: 4px solid #dbd1c5;
             background: rgba(241, 241, 241, 0.575);
         
         p{font-size: 3rem;margin-top: 20px;}
 
-        input{font-size: 2rem;
+        input{
+            font-size: 1rem;
             border-radius: 15px;
-                width: 100%; 
-                border: none;
+            width: 80%; 
+            border: none;
             padding: 10px;
-        margin: 10px;}}
+            margin: 10px;}}
 
 .button-login {
     cursor: pointer;
@@ -45,3 +45,17 @@ align-items: center;}
     color: #89a57c;
     }
 
+.login {
+
+
+    @media (min-width: 600px) {
+        width: 50%;
+        margin : 100px auto;
+
+
+        input {
+            font-size: 2rem;
+            
+        }
+    }
+}
