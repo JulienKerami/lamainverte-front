@@ -2,7 +2,7 @@
 
 .Signin{
     padding: 0 30px;
-     margin: 0;
+     margin: 0 ;
      margin-top: 100px;
      margin-bottom: 100px;
     height: 80vh;
@@ -16,10 +16,11 @@
     h3{font-size: 2rem;
     padding-bottom: 50px;}
     form{
+        margin : auto;
         border-radius: 5px;
         border: 4px solid #dbd1c5;
         background: rgba(241, 241, 241, 0.575);
-        width: 50%;
+        width: 90%;
         height: 900px;
         display: flex;
         flex-direction: column;
@@ -27,7 +28,7 @@
         align-items: center;
     }
     input{
-        font-size: 2rem;
+        font-size: 1rem;
         border-radius: 15px;
         width: 80%; 
         border: none;
@@ -63,8 +64,12 @@
         margin : 100px auto;
 
         form {
-            max-width: 100%;
+            width: 60%;
             margin : 100px auto
+        }
+
+        input {
+            font-size: 2rem;
         }
     }
 }
