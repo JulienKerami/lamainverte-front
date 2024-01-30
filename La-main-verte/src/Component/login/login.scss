@@ -21,7 +21,24 @@ align-items: center;}
 
         input{font-size: 2rem;
             border-radius: 15px;
-                width: 50%; 
+                width: 100%; 
                 border: none;
             padding: 10px;
         margin: 10px;}}
+
+.button-login {
+    cursor: pointer;
+    color : black;
+    border: none;
+    background-image: url("bouton1.png");
+    background-size: 10rem;
+    background-position: center;
+    background-repeat: no-repeat; 
+    font-weight: 600;
+    font-size: 2rem;
+    }
+    
+    .button-login:hover {
+    color: #89a57c;
+    }
+
