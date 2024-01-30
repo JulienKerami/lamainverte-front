@@ -54,17 +54,17 @@ function Signin() {
     const NameRegex = /^[-a-zA-Zzéèà\s]+$/
     
  
-    // if (NameRegex.test(e.target[0].value) === false) {
-    //   console.log("false firstName")
-    //   validation = false
-    //   setFirstNameError(true)
-    // }
+    if (NameRegex.test(e.target[0].value) === false) {
+      console.log("false firstName")
+      validation = false
+      setFirstNameError(true)
+    }
 
-    //  if (NameRegex.test(e.target[1].value) === false) {
-    //     console.log("false LastName")
-    //    validation = false
-    //    setLastNameError(true)
-    //   }
+     if (NameRegex.test(e.target[1].value) === false) {
+        console.log("false LastName")
+       validation = false
+       setLastNameError(true)
+      }
 
   
 ////////////////////// REGEX POUR LES MOT DE PASSE ///////////////////
@@ -107,11 +107,11 @@ function Signin() {
     /////////////////////////////////////////////////
 
   
-    // if (NameRegex.test(e.target[1].value) === false) {
-    //     console.log("false LastName")
-    //    validation = false
-    //    setLastNameError(true)
-    //  }
+    if (NameRegex.test(e.target[1].value) === false) {
+        console.log("false LastName")
+       validation = false
+       setLastNameError(true)
+     }
   
      if (EmailRegEx.test(e.target[2].value) === false) {
       console.log("false Email")

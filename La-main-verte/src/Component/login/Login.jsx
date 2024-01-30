@@ -27,7 +27,7 @@ function Login(props) {
             console.log(res.data.token);
             const authentification = async () => { localStorage.setItem('name', res.data.token );
             console.log(localStorage.data);
-            navigate('/potager')}
+            navigate('/')}
             authentification()
             window.location.reload();
             return

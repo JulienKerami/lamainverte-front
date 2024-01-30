@@ -8,56 +8,20 @@ padding: 0;}
   }
 
 
-.home{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.3rem;
-  text-align: center;
-  font-family: poppins;
-}
+.home{display: flex;
+    flex-direction: column;
+align-items: center;
+color: white;
+min-height: 80vh;}
 
-.home_texte1{
-  color: #89a57c;
-  font-family: Permanent Marker;
-  max-width: 70%;
-  font-size: 2rem;
-}
+.home__title{margin: var(--margin);
+margin-top: 30px;}
 
-.home_texte2{
-  color: white;
-  max-width: 75%;
-}
+.home__paragraph{margin: var(--margin);}
 
+.home__button{margin:var(--margin);
+background: rgb(207, 206, 198);
+border-radius: 30px;
+padding: 10px 30px;}
 
-.home__inscription-button {
-  cursor: pointer;
-  color : black;
-  padding: 3rem;
-  background-image: url("/src/assets/bouton1.png");
-  background-size: 10rem;
-  background-position: center;
-  background-repeat: no-repeat; 
-  font-weight: 600;
-  font-size: 0.8rem;
-}
-
-.home__inscription-button:hover {
-  color: #89a57c;
-}
-
-.home_texte3{
-  color: #e8ddd1;
-}
-
-.icone_fiche{
-  max-width: 6rem;
-  margin-left: 1rem;
-}
-
-.icone_camera{
-  max-width: 6rem;
-}
-
-
-
+.home__subtitle{margin:var(--margin)}
