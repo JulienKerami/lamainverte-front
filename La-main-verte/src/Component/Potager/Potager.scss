@@ -1,224 +1,803 @@
-.potager-container{margin: 20px;
-position: relative;
-z-index: 0;
-display: flex;
-flex-direction: column;
-align-items: center;
-font-family: Poppins;
-min-height: 100vh;
+.potager-container {
+  margin: 20px;
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Poppins;
+  min-height: 100vh;
 }
 
-
-
 .zone-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  position: relative;
+  margin: 0 auto;
+}
+
+.zone-add-button {
+  position: relative;
+  margin: 0 auto;
+}
+
+h1 {
+  margin: 20px;
+  font-size: 2.5rem;
+  color: #89a57c;
+  font-family: Permanent Marker;
+  text-align: center;
+}
+
+h3 {
+  margin: 10px;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.zoneToAdd {
+  width: 150px;
+  height: 150px;
+  border: 2px solid #e8ddd1;
+  color: #c4b9ad;
+  border-radius: 20px;
+  margin: 10px;
+  font-size: 3rem;
+  position: relative;
+  z-index: 1;
+  background: none;
+}
+
+.EditName {
+  margin-top: 5px;
+  border-radius: 5px;
+  border: none;
+  width: 80%;
+  padding: 5px;
+  font-size: 2rem;
+}
+
+.zoneModale {
+  width: 150px;
+  height: 150px;
+  background: #e8ddd1;
+  position: absolute;
+  margin: 10px;
+  border-radius: 20px;
+  z-index: 2;
+}
+
+.ModalForm {
+  border: none;
+  margin-top: 40px;
+  border-radius: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  .sameNameMessage {
+    color: rgb(240, 99, 99);
+    font-size: 0.8rem;
+    position: absolute;
+    top: -40px;
+    width: 80%;
+    text-align: center;
+    text-shadow: none;
+  }
+}
+
+.ModalButtons {
+  display: flex;
+  margin-top: 10px;
+
+  button {
+    width: 100%;
+    padding: 5px;
+    font-size: 0.9rem;
+    margin: 2px;
+  }
+}
+
+.formInput {
+  width: 80%;
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+  font-size: 1rem;
+  padding: 5px;
+}
+
+.FamilyToChoose {
+  display: flex;
+  flex-direction: column;
+}
+
+.vegetableModale {
+  padding: 20px;
+  background: #e8ddd1;
+  border: 3px solid #a59e97;
+
+  max-width: 60%;
+  position: fixed;
+  top: 3%;
+  border-radius: 20px;
+
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 120px;
+  max-height: 90%;
+  overflow-y: scroll;
+
+  h4 {
+    font-size: 2rem;
+  }
+
+  .FamilyToChoose {
+    border: 1px solid #a2c094;
+    border-radius: 10px;
+    background: #d0d6cd;
+    margin: 10px;
+    padding: 0;
+    min-width: 150px;
+  }
+
+  .family-container {
+    height: 100%;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .validation {
+    button {
+      margin: 20px;
+    }
+  }
+
+  .family {
+    padding: 5px 10px;
+    margin: 10px;
+    background: #a2c094;
+    border-radius: 5px;
+    color: white;
+    font-size: 1.2rem;
+  }
+
+  .addVegetableForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .FamilyInfos {
+      font-size: 1.1rem;
+      margin-top: 20px;
+      border: 3px solid rgb(173, 189, 161);
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: bold;
+      p {
+        margin: 5px 0;
+      }
+    }
+
+    input {
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      width: 50%;
+    }
+    label {
+      font-size: 1rem;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .creneau {
+      display: flex;
+      input {
+        width: 50%;
+      }
+    }
+
+    button {
+      margin: 10px;
+    }
+
+    .growthTimeInputLabel {
+      height: 50%;
+      align-self: center;
+    }
+    .formButton {
+      display: flex;
+    }
+  }
+}
+
+.VegeInfoSwitch {
+  background: rgba(249, 255, 240, 0.904);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  min-height: 300px;
+  min-width: 200px;
+  padding: 20px;
+  position: fixed;
+  top: 20%;
+  text-align: center;
+
+  //  left: 50%;
+  width: 300px;
+  z-index: 5;
+  // overflow-y: hidden;
+  h3 {
+    text-align: center;
+  }
+  .tasks {
+    h5 {
+      text-align: center;
+    }
+    margin: 5px;
+    padding: 5px;
+    border: 4px solid green;
+    border-radius: 10px;
+  }
+
+  .familyInfos {
+    margin: 5px;
+    padding: 5px;
+  }
+}
+
+.NoTokenpage {
+  min-height: 100vh;
+  color: white;
+  h3 {
+    text-align: center;
+    margin-top: 100px;
+  }
+}
+
+@media (min-width: 600px) {
+  .potager-container {
+    margin: 20px;
+    position: relative;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Poppins;
+    min-height: 100vh;
+  }
+
+  .zone-container {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     position: relative;
     margin: 0 auto;
-}
-
-.zone-add-button {
-  
-    position: relative;
-    margin: 0 auto;
-}
-
-h2{margin: 20px;
-    font-size: 2rem;
-color: #89a57c;
-font-family: Permanent Marker;
-text-align: center;
-}
-
-.zoneToAdd{width: 150px;
-    height: 150px;
-border: 2px solid #e8ddd1 ;
-color:  #c4b9ad ;
-border-radius: 20px;
-margin: 10px;
-font-size: 3rem;
-position: relative;
-z-index: 1;
-background: none;}
-
-.EditName{
-    margin-top: 5px;
-border-radius: 5px;
-border: none;
-width: 80%;
-padding: 5px;
-}
-
-.zoneModale{width: 150px;
-height: 150px;
-background: #e8ddd1 ;
-position: absolute;
-margin: 10px;
-border-radius: 20px;
-z-index: 2;}
-
-.ModalForm{border: none;
-margin-top: 40px;
-border-radius: 5px;
-width: 100%;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-position: relative;
-
-    .sameNameMessage{color: rgb(240, 99, 99);
-        font-size: 0.8rem;
-        position: absolute;
-        top: -40px;
-        width: 80%;
-        text-align: center;
-        text-shadow: none;}
-}
-
-.ModalButtons{display: flex;
-    margin-top: 10px;
-
-    button{width: 100%;
-    padding: 5px;
-    font-size: 0.9rem;
-    margin: 2px;
-
-}
-}
-
-.formInput{
-width: 80%;
-border: none;
-border-radius: 5px;
-height: 30px;
-font-size: 1rem;
-padding: 5px
-}
-
-.FamilyToChoose{display: flex;
-flex-direction: column;}
-
-.vegetableModale{
-padding: 20px;
-background: #e8ddd1;
-border: 3px solid #a59e97;
-max-width: 60%;
-position: fixed;
-top: 3%;
-border-radius: 20px;
-
-z-index: 1;
-display: flex;
-flex-direction: column;
-align-items: center;
-min-height: 120px;
-max-height: 90%;
-overflow-y: hidden;
-
-.FamilyToChoose{border: 1px solid #a2c094;
-    border-radius: 10px;
-    background: #d0d6cd; ;
-    margin: 10px;
-    padding: 0;
-    width: 150px;
   }
 
+  .zone-add-button {
+    position: relative;
+    margin: 0 auto;
+  }
 
-.family-container{
-    height: 100%;
-    overflow-y: hidden;
-    display: flex;
-    flex-wrap: wrap;
-}
+  h1 {
+    margin: 20px;
+    font-size: 2.5rem;
+    color: #89a57c;
+    font-family: Permanent Marker;
+    text-align: center;
+  }
 
-.validation {
-    button{margin: 20px;}
-}
-
-.family{padding: 5px 10px;
+  h3 {
     margin: 10px;
-    background: #a2c094;
-    border-radius: 5px;
-    color: white;}
-    
-.addVegetableForm{
+    font-size: 2rem;
+    text-align: center;
+  }
 
+  .zoneToAdd {
+    width: 150px;
+    height: 150px;
+    border: 2px solid #e8ddd1;
+    color: #c4b9ad;
+    border-radius: 20px;
+    margin: 10px;
+    font-size: 3rem;
+    position: relative;
+    z-index: 1;
+    background: none;
+  }
+
+  .EditName {
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+    width: 80%;
+    padding: 5px;
+    font-size: 2rem;
+  }
+
+  .zoneModale {
+    width: 150px;
+    height: 150px;
+    background: #e8ddd1;
+    position: absolute;
+    margin: 10px;
+    border-radius: 20px;
+    z-index: 2;
+  }
+
+  .ModalForm {
+    border: none;
+    margin-top: 40px;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .sameNameMessage {
+      color: rgb(240, 99, 99);
+      font-size: 0.8rem;
+      position: absolute;
+      top: -40px;
+      width: 80%;
+      text-align: center;
+      text-shadow: none;
+    }
+  }
+
+  .ModalButtons {
+    display: flex;
+    margin-top: 10px;
+
+    button {
+      width: 100%;
+      padding: 5px;
+      font-size: 1rem;
+      margin: 2px;
+    }
+  }
+
+  .formInput {
+    width: 80%;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    font-size: 1rem;
+    padding: 5px;
+  }
+
+  .FamilyToChoose {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vegetableModale {
+    padding: 20px;
+    background: #e8ddd1;
+    border: 3px solid #a59e97;
+
+    max-width: 60%;
+    position: fixed;
+    top: 3%;
+    border-radius: 20px;
+
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    
-    .FamilyInfos{font-size: 0.8rem;
+    min-height: 120px;
+    max-height: 90%;
+    overflow-y: scroll;
+
+    h4 {
+      font-size: 2rem;
+    }
+
+    .FamilyToChoose {
+      border: 1px solid #a2c094;
+      border-radius: 10px;
+      background: #d0d6cd;
+      margin: 10px;
+      padding: 0;
+      min-width: 180px;
+    }
+
+    .family-container {
+      height: 100%;
+      overflow-y: scroll;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .validation {
+      button {
+        margin: 20px;
+      }
+    }
+
+    .family {
+      padding: 5px 10px;
+      margin: 10px;
+      background: #a2c094;
+      border-radius: 5px;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .addVegetableForm {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .FamilyInfos {
+        font-size: 1.1rem;
         margin-top: 20px;
         border: 3px solid rgb(173, 189, 161);
         padding: 10px;
         border-radius: 10px;
         font-weight: bold;
-        p{margin: 5px 0;}
+        p {
+          margin: 5px 0;
         }
+      }
 
-    input{margin: 10px;
+      input {
+        margin: 10px;
         border: none;
         border-radius: 5px;
-        padding:10px;
+        padding: 10px;
         width: 50%;
-        }
-    label{font-size: 0.9rem;
-    text-align: center;
-    margin-top: 8px;}
+      }
+      label {
+        font-size: 0.9rem;
+        text-align: center;
+        margin-top: 8px;
+      }
 
-    .creneau{
+      .creneau {
         display: flex;
-        input{width: 50%;}
+        input {
+          width: 50%;
         }
-        
-    button{margin: 10px;
-        }
+      }
 
-    .growthTimeInputLabel{height:50%;align-self: center;}
-    .formButton{display: flex;}
-}
+      button {
+        margin: 10px;
+      }
 
-
-
-}
-
-
-.VegeInfoSwitch{background: rgba(249, 255, 240, 0.904);
-backdrop-filter: blur(10px);
-border-radius: 10px;
-min-height: 300px;
-min-width: 200px;
-padding: 20px;
-position: fixed;
-top: 20% ;
-text-align: center;
-
-right: 41%;
-width: 300px;
-z-index: 5;
-overflow-y: hidden;
-h3{text-align: center;
+      .growthTimeInputLabel {
+        height: 50%;
+        align-self: center;
+      }
+      .formButton {
+        display: flex;
+      }
     }
-.tasks{
-    h5{text-align: center;}
-    margin: 5px;
-    padding: 5px;
-border: 4px solid green;
-border-radius: 10px;}
+  }
 
+  .VegeInfoSwitch {
+    background: rgba(249, 255, 240, 0.904);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    min-height: 300px;
+    min-width: 200px;
+    padding: 20px;
+    position: fixed;
+    top: 20%;
+    text-align: center;
 
-.familyInfos{margin: 5px;
-    padding: 5px;}
+    //  left: 50%;
+    width: 300px;
+    z-index: 5;
+    // overflow-y: hidden;
+    h3 {
+      text-align: center;
+    }
+    .tasks {
+      h5 {
+        text-align: center;
+      }
+      margin: 5px;
+      padding: 5px;
+      border: 4px solid green;
+      border-radius: 10px;
+    }
+
+    .familyInfos {
+      margin: 5px;
+      padding: 5px;
+    }
+  }
+
+  .NoTokenpage {
+    min-height: 100vh;
+    color: white;
+    h3 {
+      text-align: center;
+      margin-top: 100px;
+    }
+  }
 }
 
+@media (min-width: 1024px) {
+  .potager-container {
+    margin: 20px;
+    position: relative;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Poppins;
+    min-height: 100vh;
+  }
 
-.NoTokenpage{min-height:100vh ;
-color: white;
-h3{text-align: center;
-    margin-top: 100px;}}
+  .zone-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    position: relative;
+    margin: 0 auto;
+  }
 
+  .zone-add-button {
+    position: relative;
+    margin: 0 auto;
+  }
 
+  h1 {
+    margin: 20px;
+    font-size: 2rem;
+    color: #89a57c;
+    font-family: Permanent Marker;
+    text-align: center;
+  }
 
+  h3 {
+    margin: 10px;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .zoneToAdd {
+    width: 150px;
+    height: 150px;
+    border: 2px solid #e8ddd1;
+    color: #c4b9ad;
+    border-radius: 20px;
+    margin: 10px;
+    font-size: 3rem;
+    position: relative;
+    z-index: 1;
+    background: none;
+  }
+
+  .EditName {
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+    width: 80%;
+    padding: 5px;
+    font-size: 2rem;
+  }
+
+  .zoneModale {
+    width: 150px;
+    height: 150px;
+    background: #e8ddd1;
+    position: absolute;
+    margin: 10px;
+    border-radius: 20px;
+    z-index: 2;
+  }
+
+  .ModalForm {
+    border: none;
+    margin-top: 40px;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .sameNameMessage {
+      color: rgb(240, 99, 99);
+      font-size: 0.8rem;
+      position: absolute;
+      top: -40px;
+      width: 80%;
+      text-align: center;
+      text-shadow: none;
+    }
+  }
+
+  .ModalButtons {
+    display: flex;
+    margin-top: 10px;
+
+    button {
+      width: 100%;
+      padding: 5px;
+      font-size: 0.9rem;
+      margin: 2px;
+    }
+  }
+
+  .formInput {
+    width: 80%;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    font-size: 1rem;
+    padding: 5px;
+  }
+
+  .FamilyToChoose {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vegetableModale {
+    padding: 20px;
+    background: #e8ddd1;
+    border: 3px solid #a59e97;
+
+    max-width: 60%;
+    position: fixed;
+    top: 3%;
+    border-radius: 20px;
+
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 120px;
+    max-height: 90%;
+    overflow-y: scroll;
+
+    h4 {
+      font-size: 2rem;
+    }
+
+    .FamilyToChoose {
+      border: 1px solid #a2c094;
+      border-radius: 10px;
+      background: #d0d6cd;
+      margin: 10px;
+      padding: 0;
+      min-width: 200px;
+    }
+
+    .family-container {
+      height: 100%;
+      overflow-y: scroll;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .validation {
+      button {
+        margin: 20px;
+      }
+    }
+
+    .family {
+      padding: 5px 10px;
+      margin: 10px;
+      background: #a2c094;
+      border-radius: 5px;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .addVegetableForm {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .FamilyInfos {
+        font-size: 0.8rem;
+        margin-top: 20px;
+        border: 3px solid rgb(173, 189, 161);
+        padding: 10px;
+        border-radius: 10px;
+        font-weight: bold;
+        p {
+          margin: 5px 0;
+        }
+      }
+
+      input {
+        margin: 10px;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        width: 50%;
+      }
+      label {
+        font-size: 0.9rem;
+        text-align: center;
+        margin-top: 8px;
+      }
+
+      .creneau {
+        display: flex;
+        input {
+          width: 50%;
+        }
+      }
+
+      button {
+        margin: 10px;
+      }
+
+      .growthTimeInputLabel {
+        height: 50%;
+        align-self: center;
+      }
+      .formButton {
+        display: flex;
+      }
+    }
+  }
+
+  .VegeInfoSwitch {
+    background: rgba(249, 255, 240, 0.904);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    min-height: 300px;
+    min-width: 200px;
+    padding: 20px;
+    position: fixed;
+    top: 20%;
+    text-align: center;
+
+    right: 41%;
+    width: 300px;
+    z-index: 5;
+    // overflow-y: hidden;
+    h3 {
+      text-align: center;
+    }
+    .tasks {
+      h5 {
+        text-align: center;
+      }
+      margin: 5px;
+      padding: 5px;
+      border: 4px solid green;
+      border-radius: 10px;
+    }
+
+    .familyInfos {
+      margin: 5px;
+      padding: 5px;
+    }
+  }
+
+  .NoTokenpage {
+    min-height: 100vh;
+    color: white;
+    h3 {
+      text-align: center;
+      margin-top: 100px;
+    }
+  }
+}
