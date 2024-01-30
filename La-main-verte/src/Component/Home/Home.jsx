@@ -24,20 +24,18 @@ function Home(props) {
         }
 
     return (
-
         <>
         <section className='home'>
            {localStorage.name?
-           <h2 className='WelcomeUser'>Bienvenue {userInfos.lastname}</h2>:null}
-           <h2 className='home__title'>Faites pousser vos légumes en toute sérénité</h2>
-           <p className='home__paragraph'>Quand semer? Quand récolter? Comment entretenir son potager?
-            Des semis à la récolte, la main verte vous aide à chaque étape
-           </p>
 
-           {localStorage.name?null:<><Link to='/signin' className='home__button'>Inscription</Link></>}
+           <h2 className='home_texte1'>Faites pousser vos légumes en toute sérénité. {userInfos.lastname}</h2>:null}
+           <p className='home_texte2'>Quand semer ? Quand récolter ? Comment entretenir son potager ? Des semis à la récolte, la main verte vous aide à chaque étape.</p>
+           <Link to='/signin' className='home__inscription-button'>Inscription</Link>
+           <img src="/src/assets/fiche.png" alt="icone fiche" className='icone_fiche' /> 
+           <p className='home_texte3'>une to-do list personalisé</p>
+           <img src="/src/assets/camera.png" alt="icone camera" className='icone_camera' /> 
+           <p className='home_texte3'>une vue d'ensemble de votre potager</p>
 
-           <h3 className='home__subtitle'>une to-do list personalisé</h3>
-           <h3 className='home__subtitle'>une vue d'ensemble de votre potager</h3>
            </section>
         </>
     )
