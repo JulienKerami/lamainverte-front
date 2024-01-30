@@ -129,7 +129,7 @@ function Zone({nom, id, plant}) {
        {plant?<>{plant.map((e, index)=> {
         return(
             <>
-            <Vegetable key={index} variety={e.variety} plant={e} /> 
+            <Vegetable key={index} variety={e.variety} plant={e} />
             </>
           )})}</>:null}
         

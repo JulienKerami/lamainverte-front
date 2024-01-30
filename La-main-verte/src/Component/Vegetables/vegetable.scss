@@ -1,61 +1,59 @@
-@keyframes example {
-    from {opacity: 0;}
-    to {opacity: 1;}
+.vegetable {
+  box-sizing: border-box;
+  width: 150px;
+  height: 150px;
+  background: none;
+  border: 1px solid #203624;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  font-family: Permanent Marker;
+  margin: 5px;
+}
+
+.vegetableImg {
+  width: 80px;
+  padding: 5px;
+  margin: 0 auto;
+}
+
+@media (min-width: 600px) {
+  .vegetable {
+    width: 170px;
+    height: 170px;
+    font-size: 1.2rem;
+    margin: 8px;
   }
-  
 
-
-
-.vegetable{width: 100px;
-    height: 100px;
-background: none;
-border: 1px solid #203624;
-font-size: 0.7rem;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-border-radius: 15px;
-font-family: Permanent Marker;
-transition: 0.3s;
-animation-name: example;
-animation-duration: 0.5s;
-
-
-.vegetableVisuals{display: flex;
-    transition: 1s;
-
+  .vegetableImg {
+    width: 120px;
+  }
 }
 
-.progressBar{display: flex;
+@media (min-width: 1024px) {
+  .vegetable {
+    box-sizing: border-box;
+    width: 200px;
+    height: 200px;
+    background: none;
+    border: 1px solid #203624;
+    font-size: 1.5rem;
+    display: flex;
     flex-direction: column;
-    }
-margin: 10px;
-    .barSemi{background: rgb(241, 220, 22);
-        border-radius: 2px;
-        width: 10px;
-        height: 15px;
-        margin-top: 10px;
-        margin-left: 20px}
-    .barPlant{background: green;
-            width: 10px;
-            border-radius: 2px;
-            height: 15px;
-            margin-top: 10px;
-            margin-left: 20px}
-    .barHarvest{background: rgb(1, 73, 1);
-                width: 10px;
-                border-radius: 2px;
-                height: 15px;
-                margin-top: 10px;
-                margin-left: 20px}
-        
-    
-}
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    font-family: Permanent Marker;
 
+    margin: 10px;
+  }
 
-.vegetableImg{width: 60px;
+  .vegetableImg {
+    width: 150px;
     padding: 5px;
-    transition: 1s;
-
-margin: 0 auto;}
+    margin: 0 auto;
+  }
+}
