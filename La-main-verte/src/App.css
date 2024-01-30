@@ -6,6 +6,8 @@
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+
+   
 }
 
 .header {
@@ -102,6 +104,20 @@
   color: black;
 }
 
+@media (min-width: 600px) {
+  #root {
+   
+    min-height: 100vh;
+
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+
+   
+}
+}
 
 
 
