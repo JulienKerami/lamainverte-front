@@ -3,7 +3,6 @@
   line-height: 1.5;
   font-weight: 400;
 
-
   background-color: #242424;
 
   font-synthesis: none;
@@ -11,7 +10,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 
 a {
   color: #646cff;
@@ -40,8 +38,7 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  font-family: Poppins;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -52,4 +49,3 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
