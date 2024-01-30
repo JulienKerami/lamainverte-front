@@ -366,7 +366,7 @@ function Potager(props) {
           {family.map((e)=> {return(
           <>
           <div className='FamilyToChoose'>
-          <img  src={`image-graphiste/imglegumes/legume-${e.name.toLowerCase()}-200.webp`} alt="logo laMainVerte" className='vegetableImg' />
+          <img  src={`image-graphiste/imglegumes/${e.img_small}`} alt="logo laMainVerte" className='vegetableImg' />
           <button className='family' onClick={(e) => {e.preventDefault(); dispatch(switchAddFamilyModale(false)); addVegetable(e)}}>
             {e.name}
             </button>

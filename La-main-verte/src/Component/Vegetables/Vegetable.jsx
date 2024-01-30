@@ -19,7 +19,7 @@ function Vegetable({name, plant}) {
     useEffect(() => {
        
   
-        console.log(plant);
+      
         const family = vegetableFamily.find((e) => e.id === plant.family_id )
         setTimeout(()=> {
           
@@ -43,6 +43,7 @@ function Vegetable({name, plant}) {
         
       
     }, [vegetableFamily, zoneValue]);
+
 
 
     const switchModale = () => {
@@ -69,7 +70,7 @@ function Vegetable({name, plant}) {
 
            {FamilyName?<>
            <div className='vegetableVisuals'>
-            <img  src={`image-graphiste/imglegumes/legume-${FamilyName.toLowerCase()}-200.webp`} alt="logo laMainVerte" className='vegetableImg' /> 
+            <img  src={`image-graphiste/imglegumes/${plant.Family.img_small}`} alt="logo laMainVerte" className='vegetableImg' /> 
             <div className='progressBar'>
 
             {/* Affichage conditionnel de la progressBar si le légume a des semis */}
