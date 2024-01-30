@@ -18,7 +18,8 @@ function Vegetable({name, plant}) {
     
     useEffect(() => {
        
-
+  
+        console.log(plant);
         const family = vegetableFamily.find((e) => e.id === plant.family_id )
         setTimeout(()=> {
           
@@ -95,7 +96,7 @@ function Vegetable({name, plant}) {
                 </div>
            </div></> 
            :null }
-
+            <p>{FamilyName}</p>
            </div>
         </>
     )

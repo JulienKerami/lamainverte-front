@@ -67,20 +67,11 @@ function Potager(props) {
 
     //Ajoute les familles de légumes au state family lorsqu'on qu'on clique sur le + dans le composant zone
     useEffect(() => {
-     
-      
       setFamily(vegetableFamily)
     }, [vegetableSwitch])
 
 
-    useEffect(()=> {
-      // console.log(addFamilyModale, deleteZoneModale, addZoneModale);
    
-    
- 
-      
-    }, [vegetableInfosModaleSwitch])
-
     
     const GetZonesFromBDD = async () => {
        
