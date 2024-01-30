@@ -16,12 +16,13 @@ const vegetableSlice = createSlice({
    }
 , // The initial state of the slice.
    reducers : { // An object with reducer functions. Each reducer corresponds to an action that can be dispatched.
-       switchVegetableModale: (state, action) => {
+      switchAddFamilyModale: (state, action) => {
        state.switch = action.payload},
        addFamily: (state, action ) => {
         state.familyValue = action.payload
        },
        addVegetable: (state, action ) => {
+         console.log(action);
          state.vegetableValue = action.payload},
        switchVegeInfoModale: (state, action) => {
          state.vegeInfoSwitch = action.payload}
@@ -37,5 +38,5 @@ const vegetableSlice = createSlice({
 })
 
 
-export const {switchVegetableModale, addFamily, selectZoneId, switchVegeInfoModale, selectVegetable, selectFamily} = vegetableSlice.actions;
+export const {switchAddFamilyModale, addFamily, selectZoneId, switchVegeInfoModale, selectVegetable, selectFamily} = vegetableSlice.actions;
 export default vegetableSlice.reducer;

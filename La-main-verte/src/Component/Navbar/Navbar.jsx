@@ -4,9 +4,12 @@ import './Navbar.scss'
 
 const Navbar = () => {
   
+  let navigate = useNavigate()
+  
   const logout = () => {localStorage.removeItem('name')
+  navigate(`/`)
   window.location.reload();
-  navigate(`/`)}
+  }
 
     return(
 

@@ -5,6 +5,7 @@ const url = 'https://la-main-verte-back-end.onrender.com/api'
 
 
 const instance = axios.create({
+  
   baseURL: 'https://la-main-verte-back-end.onrender.com/api',
   headers: {'Authorization': 'Bearer ' + localStorage.getItem('name')}
 
@@ -13,7 +14,7 @@ const instance = axios.create({
 export async function fetchUser(userData) {
 
   try {
-    console.log(localStorage.getItem('name'));
+    console.log(userData);
  const httpResponse = await axios.post(`${url}/login`, userData);
     console.log(httpResponse);
    return httpResponse;
@@ -66,11 +67,11 @@ export async function createZone(userId, name) {
 export async function GetAllZones(userId) {
 
   let token = localStorage.getItem('name')
-  console.log(userId);
+ 
 
 try {
   const httpResponse = await instance.get('/vegetables')
-  console.log(httpResponse);
+  
   return httpResponse
   
 }
@@ -121,6 +122,7 @@ export async function getFamily () {
   }
 }
 
+
 export async function createVegetable (vegeObj){
 
   let newVegeObj = {}
@@ -138,6 +140,7 @@ catch(error)
 {return error}
 }
 
+
 export async function deleteVegetable (vegeId) {
   console.log(vegeId);
 try { const httpResponse = await instance.delete(`/vegetables/${vegeId}`)
@@ -149,10 +152,23 @@ catch (error) {
 }
 }
 
+
 export async function getTasks() {
   try { const Httpresponse = await instance.get('/tasks')
 return Httpresponse}
 
   catch(err)
   {return err}
+}
+
+
+export async function updateTask(id, obj) {
+
+  console.log(id, obj);
+  try { const Httpresponse = await instance.patch(`/tasks/${id}`, obj)
+  return Httpresponse}
+  
+    catch(err)
+    {return err}
+
 }

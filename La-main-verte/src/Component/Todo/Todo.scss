@@ -1,13 +1,83 @@
-.todo-list-container {
+.todo--container {
     margin: 20px;
     position: relative;
     z-index: 0;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+   
+
+    ul{
+      list-style: none;
+    
+        li{margin: 10px;
+        transition: 0.3s;
+          }
+
+
+        .hideTask{opacity: 0; transition: 0.3s;}
+     }
+
+
   }
 
   .toDoZone {
     margin: 10px;
   }
   
-  .task{margin-left: 20px;}
+
+
+  .semer{color: rgb(255, 150, 13);}
+  .planter{color: green;}
+  .recolter{color:  rgb(74, 94, 1)}
+  
+  .task{margin-left: 20px;
+    min-width: 90%;
+  }
+
+  .task-container{display: flex;
+  flex-direction: column;
+background: #e8ddd1;;
+width:70%;
+border-radius: 20px;
+padding: 20px;
+justify-content: center;
+align-items: center;
+font-family: Poppins;}
+
+.TaskChecker{height:20px; width: 20px;
+border-radius: 5px;
+margin-left: 10px;
+background: none;
+font-weight: bold;
+cursor: pointer;
+transition: 0.1s;}
+
+.TaskChecker:hover{color: green;
+border: 1px solid green}
+
+
+
+  /* un peu plus grand */
+  @media (max-width:600px) {
+
+  
+    .todo--container ul li{margin: 5px;}
+
+    .task-container{width: 80%;}
+
+    .title{margin: 0;
+    }
+   .task{font-size: 0.8rem;
+        margin: 0;}
+
+    li{margin: 0;
+      padding: 0;}
+      
+      
+  }
+  
+  
+  

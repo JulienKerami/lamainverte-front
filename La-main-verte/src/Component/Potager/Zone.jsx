@@ -7,12 +7,16 @@ import { vegetable } from '../Data/data';
 import Vegetable from '../Vegetables/Vegetable';
 import { deleteOneZone, modifyOneZone, } from '../Apicall/Apicall';
 import { jwtDecode } from 'jwt-decode'
-import { switchVegetableModale } from '../store/slices/vegetableSlice';
+import { switchAddFamilyModale } from '../store/slices/vegetableSlice';
+import { toggleAddZoneModale } from '../store/slices/modaleSlice';
+
 
 function Zone({nom, id, plant}) {
 
   const vegetableSwitch = useSelector((state) => state.vegetable.switch)
-  const zoneValue = useSelector((state)=> state.zones.value)      // Accès aux données redux
+  const zoneValue = useSelector((state)=> state.zones.value) 
+  const deleteZoneModale = useSelector((state) => state.modale.deleteZoneModale)
+// Accès aux données redux
   const dispatch = useDispatch()
 
   const [deleteModal, setDeleteModal] = useState(false)
@@ -82,9 +86,10 @@ function Zone({nom, id, plant}) {
     
   };
 
-  const addVegetable = (e) => {
-    dispatch(switchVegetableModale(true))
-    console.log(id);
+  const addVegetable = () => {
+    dispatch(switchAddFamilyModale(true))
+    dispatch(toggleAddZoneModale(false))
+    
     dispatch(selectZoneId(id))
 
   }
@@ -92,7 +97,7 @@ function Zone({nom, id, plant}) {
 
 
   useEffect(() => {
-    console.log(plant);
+   
   }, []);
 
 
@@ -121,10 +126,10 @@ function Zone({nom, id, plant}) {
       )}
 
       <div className='vegetable-container'>
-       {plant?<>{plant.map((e)=> {
+       {plant?<>{plant.map((e, index)=> {
         return(
             <>
-            <Vegetable name={e.variety} plant={e} />
+            <Vegetable key={index} variety={e.variety} plant={e} /> 
             </>
           )})}</>:null}
         

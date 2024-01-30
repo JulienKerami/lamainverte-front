@@ -1,6 +1,61 @@
-.vegetable{width: 30px;
-    height: 30px;
-background: green;
+@keyframes example {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+
+
+
+.vegetable{width: 100px;
+    height: 100px;
+background: none;
+border: 1px solid #203624;
 font-size: 0.7rem;
-border-radius: 5px;
-margin: 10px;}
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+border-radius: 15px;
+font-family: Permanent Marker;
+transition: 0.3s;
+animation-name: example;
+animation-duration: 0.5s;
+
+
+.vegetableVisuals{display: flex;
+    transition: 1s;
+
+}
+
+.progressBar{display: flex;
+    flex-direction: column;
+    }
+margin: 10px;
+    .barSemi{background: rgb(241, 220, 22);
+        border-radius: 2px;
+        width: 10px;
+        height: 15px;
+        margin-top: 10px;
+        margin-left: 20px}
+    .barPlant{background: green;
+            width: 10px;
+            border-radius: 2px;
+            height: 15px;
+            margin-top: 10px;
+            margin-left: 20px}
+    .barHarvest{background: rgb(1, 73, 1);
+                width: 10px;
+                border-radius: 2px;
+                height: 15px;
+                margin-top: 10px;
+                margin-left: 20px}
+        
+    
+}
+
+
+.vegetableImg{width: 60px;
+    padding: 5px;
+    transition: 1s;
+
+margin: 0 auto;}
