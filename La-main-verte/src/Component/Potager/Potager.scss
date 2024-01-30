@@ -167,7 +167,7 @@ h3 {
     button {
       cursor: pointer;
       padding: 2px;
-      background-image: url("bouton4.png");
+      background-image: url("../../assets/bouton4.png");
       background-size: 120px;
       background-color: transparent;
       background-position: center;
@@ -250,10 +250,10 @@ h3 {
         height: 50px;
       }
       button:first-child {
-        background-image: url("bouton3.png");
+        background-image: url("../../assets/bouton3.png");
       }
       button:last-child {
-        background-image: url("bouton4.png");
+        background-image: url("../../assets/bouton4.png");
       }
     }
   }
