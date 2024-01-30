@@ -47,7 +47,7 @@ function Login(props) {
 
             <input type="text" placeholder='email' />
             <input type="password" placeholder='mot de passe' />
-            <button>connexion</button>
+            <button className="button-login">connexion</button>
            </form>
            </section>
         </>
