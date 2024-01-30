@@ -86,7 +86,7 @@ function App() {
           </div>
         </div>
       </Link>
-        <button className={`navbarToggle ${pathLocation === "/" ? "navbarToggle_home" : ""}`}>
+        <button className={`navbarToggle ${pathLocation === "/" ? "navbarToggle_home" : ""}`} onClick={() => toggleNavbar()}>
           <div className={`navbarToggle-img ${pathLocation === "/" ? "navbarToggle-img_home" : ""}`}></div>
           <div className={`navbarToggle-img ${pathLocation === "/" ? "navbarToggle-img_home" : ""}`}></div>
           <div className={`navbarToggle-img ${pathLocation === "/" ? "navbarToggle-img_home" : ""}`}></div>

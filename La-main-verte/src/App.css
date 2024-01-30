@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     display: flex;
+    min-height: 100vh;
     flex-direction: column;
 }
 
@@ -18,7 +19,7 @@
 
 .header_home{
   height: 25%;
-  justify-content: center;
+  justify-content: center;padding: 40px
 }
 
 .logo {
