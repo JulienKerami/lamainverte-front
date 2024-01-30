@@ -77,7 +77,7 @@ function App() {
       <Link to='/'>
 
         <div className={`logo ${pathLocation === "/" ? "logo_home" : ""}`}>
-          <img src="/src/assets/logo.png" alt="logo laMainVerte" className={`logo-img ${pathLocation === "/" ? "logo-img_home" : ""}`}/>
+          <img src="logo.png" alt="logo laMainVerte" className={`logo-img ${pathLocation === "/" ? "logo-img_home" : ""}`}/>
           <div className={`logo-title ${pathLocation === "/" ? "logo-title_home" : ""}`}>
 
             <span>la</span>
