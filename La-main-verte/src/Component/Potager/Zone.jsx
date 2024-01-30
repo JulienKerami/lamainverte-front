@@ -122,7 +122,7 @@ function Zone({nom, id, plant}) {
         </>
       ) : (
         // Sinon, afficher le nom actuel et le bouton pour activer l'édition
-        nom?<h3 className='title' onClick={() => setNameEdit(true)}>{nom}</h3>:<h3 className='title' onClick={() => setNameEdit(true)}></h3>
+        nom?<h3 onClick={() => setNameEdit(true)}>{nom}</h3>:<h3 className='title' onClick={() => setNameEdit(true)}></h3>
       )}
 
       <div className='vegetable-container'>
