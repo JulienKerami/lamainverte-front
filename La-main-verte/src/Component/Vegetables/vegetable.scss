@@ -11,8 +11,47 @@
   align-items: center;
   border-radius: 15px;
   font-family: Permanent Marker;
+
   margin: 5px;
+
+  .vegetableVisuals{display: flex;
+    transition: 1s;
+
 }
+  
+  .progressBar{display: flex;
+    flex-direction: column;
+    justify-content: center;
+    }
+margin: 10px;
+    .barSemi{background: rgb(241, 220, 22);
+        border-radius: 5px;
+        width: 20px;
+        height: 40px;
+        margin-top: 10px;
+        }
+    .barPlant{background: green;
+            width:20px;
+            border-radius: 5px;
+            height: 40px;;
+            margin-top: 10px;
+            }
+    .barHarvest{background: rgb(1, 73, 1);
+                width:20px;
+                border-radius: 5px;
+                height: 40px;
+                margin-top: 10px;
+                }
+        
+    
+}
+
+
+  
+
+
+
+
 
 .vegetableImg {
   width: 80px;
