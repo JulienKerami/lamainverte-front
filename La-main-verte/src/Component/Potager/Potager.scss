@@ -36,10 +36,12 @@ h3 {
   text-align: center;
 }
 
-.title { color: #89a57c;
+.title {
+  color: #89a57c;
   font-family: Permanent Marker;
   max-width: 70%;
-  font-size: 2rem;}
+  font-size: 2rem;
+}
 
 .zoneToAdd {
   width: 150px;
@@ -126,7 +128,8 @@ h3 {
   background: #e8ddd1;
   border: 3px solid #a59e97;
 
-  max-width: 60%;
+  width: 150px;
+  width: 90%;
   position: fixed;
   top: 3%;
   border-radius: 20px;
@@ -162,7 +165,17 @@ h3 {
 
   .validation {
     button {
-      margin: 20px;
+      cursor: pointer;
+      padding: 2px;
+      background-image: url("bouton4.png");
+      background-size: 120px;
+      background-color: transparent;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-weight: 200;
+      font-size: 1rem;
+      width: 150px;
+      height: 50px;
     }
   }
 
@@ -223,6 +236,25 @@ h3 {
     }
     .formButton {
       display: flex;
+      button {
+        cursor: pointer;
+        padding: 2px;
+
+        background-size: 120px;
+        background-color: transparent;
+        background-position: center;
+        background-repeat: no-repeat;
+        font-weight: 400;
+        font-size: 1.2rem;
+        width: 150px;
+        height: 50px;
+      }
+      button:first-child {
+        background-image: url("bouton3.png");
+      }
+      button:last-child {
+        background-image: url("bouton4.png");
+      }
     }
   }
 }
@@ -718,7 +750,7 @@ h3 {
       justify-content: center;
 
       .FamilyInfos {
-        font-size: 0.8rem;
+        font-size: 1rem;
         margin-top: 20px;
         border: 3px solid rgb(173, 189, 161);
         padding: 10px;

@@ -1,6 +1,6 @@
 .zone {
   min-width: 150px;
-  width: 90%; /* Ajustement pour s'adapter à la largeur de l'écran mobile */
+  width: 90%;
   background: #e8ddd1;
   border-radius: 20px;
   margin: 5px;
@@ -85,7 +85,17 @@
 }
 
 .zoneToDelete {
-  margin: 5px;
+  cursor: pointer;
+  padding: 2px;
+  background-image: url("bouton4.png");
+  background-size: 100px;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-weight: 200;
+  font-size: 0.8rem;
+  width: 150px;
+  height: 50px;
 }
 
 @media (min-width: 600px) {
@@ -227,8 +237,16 @@
   }
 
   .zoneToDelete {
-    background: none;
-    border: 1px solid #203624;
-    margin: 10px;
+    cursor: pointer;
+    padding: 2px;
+    background-image: url("bouton4.png");
+    background-size: 120px;
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-weight: 200;
+    font-size: 1rem;
+    width: 180px;
+    height: 50px;
   }
 }
