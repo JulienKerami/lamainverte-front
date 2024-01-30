@@ -1,134 +1,123 @@
 #root {
    
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-
-   
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 16%; 
-  width: 100%;
-  background-color: white;
+display: flex;
+justify-content: space-between;
+align-items: center;
+height: 8rem; 
+width: 100%;
+background-color: white;
 }
 
 .header_home{
-  height: 25%;
-  justify-content: center;
-  padding: 20px
+height: min(20%, 50%);
+padding-top: 2rem;
+padding-bottom: 2rem;
 }
 
 .logo {
-  display: flex;
-  align-items: center; 
-  margin-left: 3rem;
-  margin: 20px;
+display: flex;
+align-items: center; 
+margin-left: 3rem;
+}
+
+@media screen and (max-width: 600px) {
+.logo_home{
+  margin-left:5rem;
+}
+}
+
+@media screen and (min-width: 601px) {
+.logo_home{
+  margin-left: 40vw;
+}
 }
 
 .logo_home{
-  display: flex;
-  justify-content: space-between;
+display: flex;
+justify-content: space-between;
 }
 
 .logo-img {
-  width: 40px; 
-  margin-right: 0.7rem;
+width: 40px; 
+margin-right: 0.7rem;
 }
 
 .logo-img_home{
-  width: 30px; 
-  margin-bottom: 4rem;
-  position: relative;
-  width: min(5rem, 12vw);
+width: 30px; 
+margin-bottom: 4rem;
+position: relative;
+width: min(5rem, 12vw);
 }
 
 .logo-title {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  color: #89a57c; 
-  font-weight: bold;
-  font-family: Poppins;
-  line-height: 0.9;
-  font-size: 1.4rem;
-  margin-top: 10px;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+color: #89a57c; 
+font-weight: bold;
+font-family: Poppins;
+line-height: 0.9;
+font-size: 1.4rem;
+margin-top: 10px;
 }
 
 .logo-title_home{
-  font-size: min(5rem, 12vw)
+font-size: min(5rem, 12vw)
 }
 
 .logo-title_text{
-  font-family: Permanent Marker;
+font-family: Permanent Marker;
 }
 
 .navbarToggle{
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  background: transparent;
-  border: none;
-  margin-right: 1rem;
-  margin-top: 2rem;
+cursor: pointer;
+display: flex;
+flex-direction: column;
+background: transparent;
+border: none;
+margin-right: 1rem;
+margin-top: 2rem;
+}
+
+@media only screen and (min-width: 601px) {
+.navbarToggle {
+  display: none;
+}
 }
 
 .navbarToggle_home{
-  margin-bottom: 5rem;;
+margin-bottom: 5rem;;
 }
 
 .navbarToggle:focus{
-  outline: none;
+outline: none;
 }
 
 .navbarToggle-img {
-  width: 35px;
-  height: 3px;
-  background: #203624;
-  margin: 3px 0; 
-  border-radius: 10px;
+width: 35px;
+height: 3px;
+background: #203624;
+margin: 3px 0; 
+border-radius: 10px;
 }
 
 .navbarToggle-img_home{
-  width: min(3rem, 12vw);
-  height: min(0.4rem, 12vw);
+width: min(3rem, 12vw);
+height: min(0.4rem, 12vw);
 }
 
 .navbar-link{
-  color: black;
+color: black;
 }
-
-@media (min-width: 600px) {
-  #root {
-   
-    min-height: 100vh;
-
-    margin: 0;
-    padding: 0;
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-
-   
-}
-}
-
-
-
-
-
-
-
-
-
-
-
 
 
 

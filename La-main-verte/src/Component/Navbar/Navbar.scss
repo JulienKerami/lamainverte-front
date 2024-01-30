@@ -7,14 +7,24 @@
     justify-content: space-around;
     align-items: center;
     background:#e8ddd1;
-    height: 30px;
+    height: 50px;
     font-family: poppins;
     font-weight: bold;
 }
 
 .navbar-link{
     &:hover {
-        color:  #89a57c;
+        color:  black;
       }
 }
 
+
+
+@media only screen and (min-width: 601px) {
+    .navbar-link{
+        &:hover {
+            color:  #89a57c;
+          }
+    }
+    
+  }
