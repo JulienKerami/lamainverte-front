@@ -15,6 +15,7 @@ function Vegetable({name, plant}) {
     const zoneValue = useSelector((state)=> state.zones.value)
     const dispatch = useDispatch()
 
+    
     useEffect(() => {
        
 
@@ -30,6 +31,9 @@ function Vegetable({name, plant}) {
 
             else if (family.name === "Ail de Printemps")
             {setFamilyName('ail')}
+
+            else if (family.name === "Potirron")
+            {setFamilyName('potiron')}
            
            
             else {setFamilyName(family.name.toLowerCase())}
@@ -64,7 +68,7 @@ function Vegetable({name, plant}) {
 
            {FamilyName?<>
            <div className='vegetableVisuals'>
-            <img  src={`image-graphiste/legume-${FamilyName}.png`} alt="logo laMainVerte" className='vegetableImg' /> 
+            <img  src={`image-graphiste/imglegumes/legume-${FamilyName.toLowerCase()}-200.webp`} alt="logo laMainVerte" className='vegetableImg' /> 
             <div className='progressBar'>
 
             {/* Affichage conditionnel de la progressBar si le légume a des semis */}
