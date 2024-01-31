@@ -32,7 +32,7 @@ function Home(props) {
            <p className='home_texte2'>Quand semer ? Quand récolter ? Comment entretenir son potager ? Des semis à la récolte, la main verte vous aide à chaque étape.</p>
            {!localStorage.name?<Link to='/signin' className='home__inscription-button'>Inscription</Link>:null}
            <img src="fiche.png" alt="icone fiche" className='icone_fiche' /> 
-           <p className='home_texte3'>une to-do list personalisé</p>
+           <p className='home_texte3'>une to-do list personalisée</p>
            <img src="camera.png" alt="icone camera" className='icone_camera' /> 
            <p className='home_texte3'>une vue d'ensemble de votre potager</p>
 
