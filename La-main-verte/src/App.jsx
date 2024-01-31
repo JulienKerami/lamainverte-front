@@ -6,10 +6,8 @@ import Potager from './Component/Potager/Potager';
 import './App.css';
 import SignIn from './Component/SignIn/SignIn';
 import Home from './Component/Home/Home';
-import { Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { Provider } from 'react-redux';
-import store from './Component/store/store';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';3000
+import { useDispatch } from 'react-redux';
 import { GetAllZones, getFamily, getTasks } from './Component/Apicall/Apicall';
 import { jwtDecode } from 'jwt-decode';
 import { editZone } from './Component/store/slices/zonesSlice';
@@ -20,7 +18,6 @@ function App() {
   const [isNavbarOn, setIsNavbarOn] = useState(true);
   const [showNavbarToggle, setShowNavbarToggle] = useState(window.innerWidth > 600);
   const [pathLocation, setPathLocation] = useState('');
-  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -39,7 +36,7 @@ function App() {
       const isMobile = window.innerWidth <= 600;
       setShowNavbarToggle(isMobile);
       setIsNavbarOn(isMobile ? false : true);
-      console.log("test");
+    
     };
 
     handleResize(); 
@@ -64,7 +61,7 @@ function App() {
     const token = localStorage.getItem('name');
     const decodedToken = jwtDecode(token);
     const userId = decodedToken.id;
-    console.log(localStorage.getItem('name'));
+    
     const zones = await GetAllZones(userId);
     console.log('zones: ', zones);
     dispatch(editZone(zones.data.zones));
@@ -101,7 +98,7 @@ function App() {
           </div>
         </Link>
         {showNavbarToggle && (
-          <button
+          <div
             className={`navbarToggle ${pathLocation === '/' ? 'navbarToggle_home' : ''}`}
             onClick={() => toggleNavbar()}
           >
@@ -114,7 +111,7 @@ function App() {
             <div
               className={`navbarToggle-img ${pathLocation === '/' ? 'navbarToggle-img_home' : ''}`}
             ></div>
-          </button>
+          </div>
         )}
       </header>
       {isNavbarOn && <Navbar />}

@@ -256,8 +256,7 @@ function Potager(props) {
         const userId = decodedToken.id
         const zones =  await GetAllZones(userId)       
         const zonesSorted = zones.data.zones.sort((a,b) => a.id - b.id )
-        console.log(zonesSorted);
-
+        
         dispatch(editZone(zones.data.zones))
 
         const getTask = async () => {
@@ -298,7 +297,7 @@ function Potager(props) {
      {localStorage.name?<>
 
     <main className='potager-container' onClick={(e)=> {
-      console.log(e.target.className);
+      
       if(!(e.target.className== "VegeInfoSwitch") && vegetableInfosModaleSwitch ) {dispatch(switchVegeInfoModale(false))}}}> 
  
       <h2 className='title'>Mon Potager</h2>
@@ -366,15 +365,15 @@ function Potager(props) {
       <h3>Choissisez une famille de légumes</h3>
         <div className='family-container'>
          
-          {family.map((e)=> {return(
-          <>
-          <div className='FamilyToChoose'>
+          {family.map((e, index)=> {return(
+          
+          <div key={index} className='FamilyToChoose'>
           <img  src={`image-graphiste/imglegumes/${e.img_small}`} alt="logo laMainVerte" className='vegetableImg' />
           <button className='family' onClick={(e) => {e.preventDefault(); dispatch(switchAddFamilyModale(false)); addVegetable(e)}}>
             {e.name}
             </button>
             </div>
-          </>
+          
           )})}
         </div>
           <div className='validation'>
@@ -457,8 +456,8 @@ function Potager(props) {
           {emptyNameModale?<><span className='sameNameMessage'> Au moins une lettre?</span></>:null}
           <input className='formInput'  placeholder='Nom de zone' type="text" />
           <div className='ModalButtons'>
-          <button type='submit' onClick={(e) => {e.preventDefault(); AddZoneHandle(e)}}>valider</button>
-          <button onClick={(e)=>{e.preventDefault(); dispatch(toggleAddZoneModale(false));setSameNameModale(false);setEmptyNameModale(false) }} >annuler</button>
+          <button className='button_valide' type='submit' onClick={(e) => {e.preventDefault(); AddZoneHandle(e)}}>valider</button>
+          <button className='button_cancel' onClick={(e)=>{e.preventDefault(); dispatch(toggleAddZoneModale(false));setSameNameModale(false);setEmptyNameModale(false) }} >annuler</button>
           </div>
         </form>
       

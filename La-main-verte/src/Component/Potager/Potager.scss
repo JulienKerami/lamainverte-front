@@ -100,12 +100,13 @@ h3 {
 .ModalButtons {
   display: flex;
   margin-top: 10px;
-
   button {
-    width: 100%;
-    padding: 5px;
-    font-size: 0.9rem;
-    margin: 2px;
+    cursor: pointer;
+  color : black;
+  padding: 3rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.8rem;                                                                                                                                                                                                                                                                                                                                                
   }
 }
 
@@ -117,6 +118,15 @@ h3 {
   font-size: 1rem;
   padding: 5px;
 }
+
+.button_valide{
+  border : solid green 2px
+}
+
+.button_cancel{
+  border : solid rgb(128, 36, 0) 2px
+}
+
 
 .FamilyToChoose {
   display: flex;
