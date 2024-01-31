@@ -131,7 +131,7 @@ export async function createVegetable (vegeObj){
   { newVegeObj = {...vegeObj, start_date_period_seeding: null, end_date_period_seeding: null}}
   else { newVegeObj = vegeObj}
 
-  
+  console.log(newVegeObj);
   try {const httpResponse = await instance.post("/vegetables", newVegeObj)
 return httpResponse
 }

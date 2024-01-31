@@ -8,7 +8,7 @@ import "./Potager.scss"
 
 import { GetAllZones, createZone, createVegetable, deleteVegetable, getTasks } from '../Apicall/Apicall';
 
-import { switchAddFamilyModale, switchVegeInfoModale } from '../store/slices/vegetableSlice';
+import { selectVegetable, switchAddFamilyModale, switchVegeInfoModale } from '../store/slices/vegetableSlice';
 import { Oval } from 'react-loader-spinner'
 import { toggleAddZoneModale } from '../store/slices/modaleSlice';
 import { addTask } from '../store/slices/todoSlice';
@@ -70,6 +70,10 @@ function Potager(props) {
       setFamily(vegetableFamily)
     }, [vegetableSwitch])
 
+    useEffect(() => {
+      console.log(SelectedVegetable);
+
+    }, [SelectedVegetable])
 
    
     
@@ -185,7 +189,8 @@ function Potager(props) {
     
     //fonction qui s'active lorsqu'on valide le formulaire de création de vegetable
     const SubmitVegetable = async (e) => {
-
+     
+     
       // on va chercher la famille de légume auquel correspond le nom qu'on a récupéré depuis la modale de
       // choix de famille de légumes
       const vegetable = vegetableFamily.find((element)=> element.name === oneFamily)
@@ -198,6 +203,7 @@ function Potager(props) {
         familyId: vegetable.id,
         growthTime: growthTime,
         emergence: emergenceTime,
+        comment: startDateSeeding==1 ?e.target[6].value: e.target[9].value,
         variety: e.target[0].value,
         start_date_period_seeding: startDateSeeding,
         end_date_period_seeding: endDateSeeding,
@@ -353,8 +359,9 @@ function Potager(props) {
                   <p>espacement entre les rangés: {selectedFamily.row_spacing}</p>
                   <p>espacement entre les plants: {selectedFamily.spacing}</p>
                   <p>type de sol: {selectedFamily.soil_type}</p>
+                  {SelectedVegetable.comment?<p>commentaire: {SelectedVegetable.comment}</p>:null}
           </div>
-          <button onClick={(e) => {HandleDeleteVegetable(e)}}>supprimer le plant</button>
+          <button className='deleteVegetableButton' onClick={(e) => {HandleDeleteVegetable(e)}}>supprimer le plant</button>
         </div></>:null} 
 
       </section>
