@@ -55,7 +55,8 @@ function App() {
 
   const getTask = async () => {
     const tasks = await getTasks();
-    console.log('tasks: ', tasks);
+    const sortedTasks = tasks.data
+    sortedTasks.sort((a,b) => Date.parse(new Date(a.start_date_period)) - Date.parse(new Date(b.start_date_period)) )
     dispatch(addTask(tasks.data));
   };
 
