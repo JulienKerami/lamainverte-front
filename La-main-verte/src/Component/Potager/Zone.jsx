@@ -71,7 +71,7 @@ function Zone({nom, id, plant}) {
      const userId = decodedToken.id
   
     const zoneModified = await modifyOneZone(id, newName)
-    console.log(zoneModified);
+   
     
         const NewArray = zoneValue.map(obj => {      //Création d'un nouveau tableau qui inclue la zone dont l'utilisateur a modifié le nom.
     if (obj.name === nom) {
@@ -82,8 +82,7 @@ function Zone({nom, id, plant}) {
   });
 
   dispatch(editZone(NewArray))         // remplace le tableau des zones qui est stockés dans le store par le nouveau tableau crée.
- console.log(zoneValue);
-    
+
   };
 
   const addVegetable = () => {
@@ -104,7 +103,7 @@ function Zone({nom, id, plant}) {
 
   // Rendu du composant
   return (
-    <div className='zone' id={id}>
+    <div className='zone' id={id} key={id}>
       {/* Si l'édition est active, afficher le champ de saisie et le bouton d'enregistrement */}
 
       {nameEdit ? (
@@ -128,9 +127,11 @@ function Zone({nom, id, plant}) {
       <div className='vegetable-container'>
        {plant?<>{plant.map((e, index)=> {
         return(
-            <>
-            <Vegetable key={index} variety={e.variety} plant={e} /> 
-            </>
+            
+            <div key={index}>
+            <Vegetable  variety={e.variety} plant={e} /> 
+            </div>
+            
           )})}</>:null}
         
         <button className='addVegetableButton' onClick={(e)=>{e.preventDefault(e); addVegetable(e)}}>+</button>

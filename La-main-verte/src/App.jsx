@@ -39,7 +39,7 @@ function App() {
       const isMobile = window.innerWidth <= 600;
       setShowNavbarToggle(isMobile);
       setIsNavbarOn(isMobile ? false : true);
-      console.log("test");
+    
     };
 
     handleResize(); 
@@ -64,7 +64,7 @@ function App() {
     const token = localStorage.getItem('name');
     const decodedToken = jwtDecode(token);
     const userId = decodedToken.id;
-    console.log(localStorage.getItem('name'));
+    
     const zones = await GetAllZones(userId);
     console.log('zones: ', zones);
     dispatch(editZone(zones.data.zones));

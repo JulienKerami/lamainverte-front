@@ -27,15 +27,13 @@ const Todo = () => {
     const sortedTasks = tasks.data
     
     sortedTasks.sort((a,b) => Date.parse(new Date(a.start_date_period)) - Date.parse(new Date(b.start_date_period)) )
-    console.log(sortedTasks);
+
      dispatch(addTask(tasks.data))
    }
 
   useEffect(() => { 
     // const event = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
  
-   
-    // console.log(tasks[0].start_date_period.toLocaleDateString('de-DE', options));
    FormatDate()
    
 
@@ -65,7 +63,6 @@ const Todo = () => {
     setTaskDisplay(false)
     setTaskIndexSelected(idtask)
 
-    console.log(idtask);
     const date = new Date()
     var year = date.toLocaleString("default", { year: "numeric" });
     var month = date.toLocaleString("default", { month: "2-digit" });
@@ -101,9 +98,9 @@ const Todo = () => {
       <ul className="task-container">
 
       {/* si les données family et tasks de la BDD ont bien été stockés dans redux on affiche les tasks avec le "map" sinon on affiche null */}
-       {vegetableFamily && tasks?<>{tasks.map((e)=> {return(
-          <>
-          <div className='task' >
+       {vegetableFamily && tasks?<>{tasks.map((e, index)=> {return(
+          
+          <div className='task' key={index} >
         
               {/*
                si le vegetable de la tâche a une variété on l'affiche sinon on affiche le nom de la family*/}
@@ -122,7 +119,7 @@ const Todo = () => {
           </div>
          
           
-          </>
+        
         )})}   </>:<Oval
         visible={true}
         height="80"

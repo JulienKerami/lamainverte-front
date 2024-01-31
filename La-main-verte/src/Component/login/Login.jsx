@@ -23,7 +23,6 @@ function Login(props) {
 
         if(res.status == 200) {
 
-            console.log(res);
            
             const authentification = async () => { localStorage.setItem('name', res.data.token );
          
@@ -35,7 +34,6 @@ function Login(props) {
         else ( 
             setError("email ou mot de passe invalide"))})
 
-        console.log(user);
     }
 
     

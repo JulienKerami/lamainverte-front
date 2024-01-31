@@ -14,9 +14,9 @@ const instance = axios.create({
 export async function fetchUser(userData) {
 
   try {
-    console.log(userData);
+
  const httpResponse = await axios.post(`${url}/login`, userData);
-    console.log(httpResponse);
+  
    return httpResponse;
    
 
@@ -30,7 +30,7 @@ export async function fetchUser(userData) {
 
 export async function createUser(user) {
     try {
-        console.log(user);
+    
       const httpResponse = await axios.post(`${url}/signin`, user);
       
       return httpResponse;
@@ -45,10 +45,10 @@ export async function createUser(user) {
 
 export async function createZone(userId, name) {
 
-    console.log(localStorage.getItem('name'));
+   
     try {
         let nameObj = {name: name, userId: userId}
-        console.log(nameObj);
+   
       const httpResponse = await axios.post(`${url}/zones`, nameObj, {
         'headers': {
           'Authorization': 'Bearer ' + localStorage.getItem('name')
@@ -98,7 +98,7 @@ export async function deleteOneZone(userId, zoneId) {
 
 
 export async function modifyOneZone(zoneId, name) {
-  console.log(zoneId, name);
+ 
     try{ 
       const httpResponse = await instance.patch(`/zones/${zoneId}`, {name: name})
       return httpResponse
@@ -126,7 +126,7 @@ export async function getFamily () {
 export async function createVegetable (vegeObj){
 
   let newVegeObj = {}
-  console.log(vegeObj);
+
   if(vegeObj.start_date_period_seeding === 1)
   { newVegeObj = {...vegeObj, start_date_period_seeding: null, end_date_period_seeding: null}}
   else { newVegeObj = vegeObj}
@@ -142,7 +142,7 @@ catch(error)
 
 
 export async function deleteVegetable (vegeId) {
-  console.log(vegeId);
+;
 try { const httpResponse = await instance.delete(`/vegetables/${vegeId}`)
 return httpResponse
 }
@@ -155,6 +155,7 @@ catch (error) {
 
 export async function getTasks() {
   try { const Httpresponse = await instance.get('/tasks')
+  console.log(Httpresponse);
 return Httpresponse}
 
   catch(err)
@@ -164,7 +165,7 @@ return Httpresponse}
 
 export async function updateTask(id, obj) {
 
-  console.log(id, obj);
+
   try { const Httpresponse = await instance.patch(`/tasks/${id}`, obj)
   return Httpresponse}
   
