@@ -31,14 +31,13 @@ align-items: center;}
     color : black;
     border: none;
     background: none;;
-    background-image: url("../../assets/bouton1.png");
+    background-image: url("bouton1.png");
     background-size: 10rem;
     background-position: center;
     background-repeat: no-repeat; 
     font-weight: 600;
     font-size: 1.5rem;
-    padding : 10px;
-    height: 50px;
+    padding: 3rem;
     }
     
     .button-login:hover {

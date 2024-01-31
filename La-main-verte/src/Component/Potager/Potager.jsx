@@ -457,8 +457,8 @@ function Potager(props) {
           {emptyNameModale?<><span className='sameNameMessage'> Au moins une lettre?</span></>:null}
           <input className='formInput'  placeholder='Nom de zone' type="text" />
           <div className='ModalButtons'>
-          <button type='submit' onClick={(e) => {e.preventDefault(); AddZoneHandle(e)}}>valider</button>
-          <button onClick={(e)=>{e.preventDefault(); dispatch(toggleAddZoneModale(false));setSameNameModale(false);setEmptyNameModale(false) }} >annuler</button>
+          <button className='button_valide' type='submit' onClick={(e) => {e.preventDefault(); AddZoneHandle(e)}}>valider</button>
+          <button className='button_cancel' onClick={(e)=>{e.preventDefault(); dispatch(toggleAddZoneModale(false));setSameNameModale(false);setEmptyNameModale(false) }} >annuler</button>
           </div>
         </form>
       
