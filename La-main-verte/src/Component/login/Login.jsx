@@ -15,7 +15,7 @@ function Login(props) {
         let userInfos = {email: e.target[0].value,
                         password:e.target[1].value }
 
-         console.log(userInfos);
+        
 
     const user = await fetchUser(userInfos).then((res) => {
         
@@ -24,9 +24,9 @@ function Login(props) {
         if(res.status == 200) {
 
             console.log(res);
-            console.log(res.data.token);
+           
             const authentification = async () => { localStorage.setItem('name', res.data.token );
-            console.log(localStorage.data);
+         
             navigate('/potager')}
             authentification()
             window.location.reload();
