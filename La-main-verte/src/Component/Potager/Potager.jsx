@@ -110,7 +110,7 @@ function Potager(props) {
 
       const zonecreated = await createZone( userId, name)
       console.log(zonecreated);
-      dispatch(addZone(zonecreated.data))
+      dispatch(addZone(zonecreated.data.zone))
 
     }
 
@@ -280,6 +280,7 @@ function Potager(props) {
      
      // On delete le vegetable en BDD
       const vegetableDeleted = await deleteVegetable(SelectedVegetable.id)
+      console.log(vegetableDeleted);
 
       // On appel la BDD pour updated les zones
       const token = localStorage.getItem('name')                             

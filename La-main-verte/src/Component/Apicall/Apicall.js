@@ -144,6 +144,7 @@ catch(error)
 export async function deleteVegetable (vegeId) {
 ;
 try { const httpResponse = await instance.delete(`/vegetables/${vegeId}`)
+console.log(httpResponse);
 return httpResponse
 }
 

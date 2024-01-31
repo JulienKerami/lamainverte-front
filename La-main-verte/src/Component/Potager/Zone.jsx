@@ -41,7 +41,7 @@ function Zone({nom, id, plant}) {
       const userId = decodedToken.id
 
     const zoneId = id         //on va chercher l'id de la zone, en remontant depuis le bouton jusqu'à la div principale
-    
+    console.log(zoneId);
     const zoneDeleted = await deleteOneZone(userId, zoneId )
     dispatch(removeZone(zoneId))
     setDeleteModal(false)
@@ -96,7 +96,7 @@ function Zone({nom, id, plant}) {
 
 
   useEffect(() => {
-   
+   console.log(id);
   }, []);
 
 
