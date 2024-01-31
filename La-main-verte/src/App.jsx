@@ -6,7 +6,7 @@ import Potager from './Component/Potager/Potager';
 import './App.css';
 import SignIn from './Component/SignIn/SignIn';
 import Home from './Component/Home/Home';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';3000
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { GetAllZones, getFamily, getTasks } from './Component/Apicall/Apicall';
 import { jwtDecode } from 'jwt-decode';

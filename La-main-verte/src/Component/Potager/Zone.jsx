@@ -108,16 +108,18 @@ function Zone({nom, id, plant}) {
 
       {nameEdit ? (
         <>
-          <input
-          className='EditName'
-            type="text"
-            value={newName}
-            placeholder={nom}
-            onChange={(e)=> setNewName(e.target.value)}
-          />
-          {sameNameModale?<><span className='sameNameError'>vous avez déja une zone à ce nom</span></>:null}
-          {emptyNameModale?<><span className='sameNameError'>Au moins une lettre plz?</span></>:null}
-          <button className='saveNameButton' onClick={saveName}>enregistrer</button>
+        <div className='editNameDiv'>
+            <input
+            className='EditName'
+              type="text"
+              value={newName}
+              placeholder={nom}
+              onChange={(e)=> setNewName(e.target.value)}
+            />
+            {sameNameModale?<><span className='sameNameError'>vous avez déja une zone à ce nom</span></>:null}
+            {emptyNameModale?<><span className='sameNameError'>Au moins une lettre plz?</span></>:null}
+            <button className='saveNameButton' onClick={saveName}>enregistrer</button>
+          </div>
         </>
       ) : (
         // Sinon, afficher le nom actuel et le bouton pour activer l'édition

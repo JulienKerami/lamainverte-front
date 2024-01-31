@@ -11,7 +11,15 @@
   align-items: center;
   position: relative;
   padding: 10px;
+  
 }
+
+
+
+.editNameDiv{display: flex; 
+  flex-direction: column;
+button{font-size: 1rem;}}
+
 
 .zoneToAdd {
   width: 100px;
@@ -74,9 +82,13 @@
 }
 
 .saveNameButton {
-  padding: 2px 5px;
+  border-radius: 5px;
+
+
   margin-top: 5px;
-  font-size: 0.6rem;
+ 
+  font-size: 100px
+  
 }
 
 .sameNameError {
@@ -100,6 +112,7 @@
 
 @media (min-width: 600px) {
   .zone {
+  
     min-width: 180px;
     width: 45%; /* Adaptation pour les tablettes */
     margin-top: 20px;
@@ -128,8 +141,21 @@
   }
 
   .saveNameButton {
-    font-size: 0.65rem;
+    border-radius: 5px;
+    padding: 0;
+   
+    margin-top: 5px;
+     
+    font-size: 100px
   }
+
+  .editNameDiv{display: flex; 
+    flex-direction: column;
+    
+  button{font-size: 1rem;
+  height: 20px; 
+}}
+  
 
   .sameNameError {
     font-size: 0.65rem;
@@ -225,6 +251,7 @@
 
     margin-top: 10px;
     font-size: 0.7rem;
+   
   }
 
   .sameNameError {
