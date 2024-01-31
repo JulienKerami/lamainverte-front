@@ -1,2 +1,3 @@
 User-agent: *
-Disallow: 
+Disallow: /login
+Sitemap:https://la-main-verte.vercel.app/sitemap.xml
