@@ -75,7 +75,7 @@ function Potager(props) {
     
     const GetZonesFromBDD = async () => {
        
-      const token = localStorage.getItem('name')                                  // On récupère l'ID de l'utilisateur avec JWT token
+      const token = localStorage.getItem('name')                                 
       const decodedToken = jwtDecode(token)                       
       const userId = decodedToken.id
      
@@ -255,7 +255,9 @@ function Potager(props) {
         const decodedToken = jwtDecode(token)                       
         const userId = decodedToken.id
         const zones =  await GetAllZones(userId)       
-               
+        const zonesSorted = zones.data.zones.sort((a,b) => a.id - b.id )
+        console.log(zonesSorted);
+
         dispatch(editZone(zones.data.zones))
 
         const getTask = async () => {
@@ -285,7 +287,8 @@ function Potager(props) {
       const decodedToken = jwtDecode(token)                       
       const userId = decodedToken.id
       const zones =  await GetAllZones(userId) 
-      dispatch(editZone(zones.data.zones))
+      const zonesSorted = zones.data.zones.sort((a,b) => a.id - b.id )
+      dispatch(editZone(zonesSorted))
 
     }
     

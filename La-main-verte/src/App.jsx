@@ -30,7 +30,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log('La route a changé ! en', location.pathname);
+    
     setPathLocation(location.pathname);
   }, [location]);
 
@@ -39,6 +39,7 @@ function App() {
       const isMobile = window.innerWidth <= 600;
       setShowNavbarToggle(isMobile);
       setIsNavbarOn(isMobile ? false : true);
+      console.log("test");
     };
 
     handleResize(); 
